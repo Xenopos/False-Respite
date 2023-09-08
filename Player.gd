@@ -1,0 +1,190 @@
+extends CharacterBody2D
+
+@export var SPEED = 80.0
+@export var JUMP_VELOCITY = -180.0
+
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var progressBar: ProgressBar = $ProgressBar
+
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var animationstay: bool = false
+var direction: Vector2 = Vector2.ZERO
+var onair: bool = false
+var isAttacking: bool = false
+@export var AttackCombo: int = 0
+var DashDirection: Vector2 = Vector2(0, 0)
+var canDash: bool = false
+var isDashing: bool = false
+var HealthPoints: int = 3
+var StaminaPoints: int = 100
+var IsJumping: bool = false
+var IsDashingAttack: bool = false
+var holdingSkill1: bool = false
+var timer: float = 0.0
+var fillSpeed: float = 1 / 3  # Fill up in 3 seconds
+var set_emitting  : bool  = false
+func _physics_process(delta):
+	if not is_on_floor():
+		velocity.y += gravity * delta
+		onair = true
+	else:
+		onair = false
+
+	if holdingSkill1 == true:
+		timer += 1
+		progressBar.value += 1
+		
+	elif not holdingSkill1:
+		progressBar.value = 0
+		
+	else: 
+		progressBar.value = 0
+
+		if timer >= fillSpeed:
+			holdingSkill1 = false
+			executeDashAttack()
+
+	direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	if direction:
+		velocity.x = direction.x * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()
+	update_animation()
+	update_facing_direction()
+	attack()
+	dash()
+	Skills()
+
+func update_animation():
+	if not animationstay:
+		if direction.x != 0:
+			animated_sprite.play("run")
+		elif direction.x == 0 or isAttacking:
+			animated_sprite.play("idle")
+
+func update_facing_direction():
+	if direction.x < 0:
+		animated_sprite.flip_h = false
+	elif direction.x > 0:
+		animated_sprite.flip_h = true
+func jump():
+	velocity.y = JUMP_VELOCITY
+	animationstay = true
+	$jump.play()
+	animated_sprite.play("jump")
+
+func _on_animated_sprite_2d_animation_finished():
+	if (
+		animated_sprite.animation == "upyogo"
+		or animated_sprite.animation == "dash attack"
+		or animated_sprite.animation == "jump"
+		or animated_sprite.animation == "attack"
+		or animated_sprite.animation == "attack2"
+		or animated_sprite.animation == "dash"
+		or animated_sprite.animation == "spin"
+		or animated_sprite.animation == "execute"
+	):
+		animationstay = false
+		SPEED = 80.0
+		gravity = 480
+		progressBar.value = 0
+		
+func attack():
+	if (
+		Input.is_action_just_pressed("attack")
+		and AttackCombo == 0
+		and isDashing == false
+	):
+		SPEED = 30
+		$attacksfx.play()
+		AttackCombo += 1
+		isAttacking = true
+		animated_sprite.play("attack")
+		animationstay = true
+	elif (
+		Input.is_action_just_pressed("attack")
+		and AttackCombo == 1
+		and isDashing == false
+	):
+		SPEED = 30
+		AttackCombo -= 1
+		isAttacking = true
+		animated_sprite.play("attack2")
+		animationstay = true
+		$attacksfx.play()
+	else:
+		isAttacking = false
+
+func dash():
+	if Input.is_action_pressed("ui_left"):
+		DashDirection = Vector2(-1, 0)
+	if Input.is_action_pressed("ui_right"):
+		DashDirection = Vector2(1, 0)
+	if Input.is_action_just_pressed("dash"):
+		Dodash()
+
+func Dodash():
+	$dash.play()
+	animated_sprite.play("dash")
+	velocity = DashDirection.normalized() * 800
+	animationstay = true
+	SPEED = 400
+	set_emitting = true
+	if direction.x == 0:
+		SPEED = 80
+	else:
+		SPEED = 400
+
+
+		
+
+func executeDashAttack():
+	# Place your code for executing the dash attack here
+	pass
+
+func Skills():
+	if Input.is_action_just_pressed("Skill1") and is_on_floor():
+		animated_sprite.play("dash ready")
+		animationstay = true
+		SPEED = 0
+		$charge.play()
+		holdingSkill1 = true
+		timer = 0.0
+		progressBar.value = 0
+		
+	if (
+		Input.is_action_just_released("Skill1")
+		and is_on_floor()
+		and not isAttacking
+	):
+		animated_sprite.play("dash attack")
+		$execute.play()
+		holdingSkill1 = false
+		velocity = DashDirection.normalized() * 1200
+		animationstay = true
+		$charge.stop()
+		if direction.x == 0:
+			SPEED = 80
+		else:
+			SPEED = 400
+
+	if Input.is_action_just_pressed("Skill2") and not is_on_floor():
+		animated_sprite.play("spin")
+		$spiiin.play()
+		if onair == true:
+			animationstay = true
+		if not onair:
+			animationstay = false
+
+	if Input.is_action_just_pressed("Skill3"):
+		animated_sprite.play("upyogo")
+		animationstay = true
+		SPEED = 0
+		$up.play()
+
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		jump()
+
+

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c5s6iefrh0fki"]
+
+[node name="CanvasGroup" type="CanvasGroup"]
+scale = Vector2(35.269, 2.15694)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+texture_filter = 1
+texture_repeat = 1
+offset_left = -1.5878
+offset_top = -17.1539
+offset_right = 38.4122
+offset_bottom = 22.8461
+scale = Vector2(0.120593, 1.5216)
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+max_value = 3.0
+show_percentage = false

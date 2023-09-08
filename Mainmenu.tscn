@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://yh1tcruoss61"]
+
+[ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="1_2shqn"]
+[ext_resource type="Script" path="res://Mainmenu.gd" id="1_u0vbq"]
+[ext_resource type="Texture2D" uid="uid://cwyk117i2tt6s" path="res://Mainmenu.png" id="1_v0nev"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_right = 0.882
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 120.936
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u0vbq")
+
+[node name="Mainmenu" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(783, 444)
+scale = Vector2(1.659, 1.66216)
+texture = ExtResource("1_v0nev")
+
+[node name="MarginContainer" type="MarginContainer" parent="Mainmenu"]
+offset_left = 264.0
+offset_top = 115.0
+offset_right = 430.0
+offset_bottom = 215.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Mainmenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="Mainmenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2shqn")
+theme_override_font_sizes/font_size = 19
+text = "Play
+"
+
+[node name="Quit" type="Button" parent="Mainmenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2shqn")
+theme_override_font_sizes/font_size = 19
+text = "Quit
+"
+
+[connection signal="pressed" from="Mainmenu/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Mainmenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhjmw8k5ap6jv"]
+
+[ext_resource type="PackedScene" uid="uid://c7maufabkf645" path="res://area_2d.tscn" id="1_0ct2y"]
+
+[sub_resource type="Environment" id="Environment_6fxu5"]
+background_mode = 1
+background_color = Color(1, 0.160784, 0.392157, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_2y136"]
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+process_mode = 3
+process_priority = 1
+environment = SubResource("Environment_6fxu5")
+camera_attributes = SubResource("CameraAttributesPractical_2y136")
+
+[node name="world" parent="." instance=ExtResource("1_0ct2y")]
