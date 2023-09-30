@@ -1,2 +1,4 @@
-res://Player.tscn
+res://Mainmenu.tscn
 res://Player.gd
+res://Player.tscn
+res://area_2d.tscn

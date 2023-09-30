@@ -1,3 +1,9 @@
+SubViewport
+TextureRect
+CanvasLayer
+SubViewportContainer
+TextEdit
+Node2D
 AnimatedSprite2D
 GPUParticles2D
 ProgressBar
@@ -8,11 +14,9 @@ Button
 MarginContainer
 CollisionShape2D
 Area2D
-Node2D
 Label
 AudioStreamPlayer2D
 Node
-TextEdit
 PointLight2D
 DirectionalLight2D
 CanvasGroup
@@ -21,12 +25,8 @@ AudioListener2D
 WorldEnvironment
 LightOccluder2D
 Container
-SubViewport
 CodeEdit
 Node3D
-TextureRect
 Panel
 AnimationPlayer
 RemoteTransform2D
-Camera2D
-Sprite2D

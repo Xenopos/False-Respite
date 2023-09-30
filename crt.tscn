@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://ym5a1qt3wxnc"]
+
+[ext_resource type="PackedScene" uid="uid://c7maufabkf645" path="res://area_2d.tscn" id="1_vp85f"]
+[ext_resource type="Shader" path="res://crt_exp.gdshader" id="1_xs26p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gx18j"]
+shader = ExtResource("1_xs26p")
+shader_parameter/scanline_count = 50.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a7rtc"]
+viewport_path = NodePath("SubViewport")
+
+[node name="SubViewport" type="SubViewport"]
+
+[node name="world" parent="." instance=ExtResource("1_vp85f")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_gx18j")
+offset_left = -1012.0
+offset_top = -169.0
+offset_right = 149.0
+offset_bottom = 472.0
+texture = SubResource("ViewportTexture_a7rtc")

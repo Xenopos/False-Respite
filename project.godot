@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="shizuka ply"
-run/main_scene="res://area_2d.tscn"
-config/features=PackedStringArray("4.0", "GL Compatibility")
+config/name="False Respite"
+run/main_scene="res://Mainmenu.tscn"
+config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [editor]

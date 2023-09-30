@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7maufabkf645"]
+[gd_scene load_steps=6 format=3 uid="uid://c7maufabkf645"]
 
 [ext_resource type="Texture2D" uid="uid://vvywlpf5p83y" path="res://map.png" id="1_m60d6"]
 [ext_resource type="Script" path="res://area_2d.gd" id="2_8ib23"]
 [ext_resource type="PackedScene" uid="uid://x6ykrgfako55" path="res://Player.tscn" id="2_qk1kg"]
-[ext_resource type="AudioStream" uid="uid://c7n42oapr0t36" path="res://sfx/dubbi.ogg" id="3_0q0md"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i0g6t"]
 texture = ExtResource("1_m60d6")
@@ -367,12 +366,6 @@ script = ExtResource("2_8ib23")
 
 [node name="Player" parent="." instance=ExtResource("2_qk1kg")]
 position = Vector2(-336, 131)
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_0q0md")
-volume_db = -4.837
-pitch_scale = 0.68
-autoplay = true
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 current = true
