@@ -1,5 +1,9 @@
-res://Scenes/melee_enemy.tscn
+res://Player.tscn
 res://Player.gd
 res://Shaders/outlineshader.gdshader
+res://area_2d.tscn
 res://Scenes/Mainmenu.tscn
 res://Themes/Sample_theme.tres
+res://crt_exp.gdshader
+res://addons/2d_essentials/survivability/health_component.gd
+res://Health System.gd

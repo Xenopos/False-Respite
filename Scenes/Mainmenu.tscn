@@ -1,55 +1,66 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxm6iiasbpj1f"]
+[gd_scene load_steps=6 format=3 uid="uid://bxm6iiasbpj1f"]
 
 [ext_resource type="Texture2D" uid="uid://bmajl2qnk0fvs" path="res://Visuals/UI/Main_menu.png" id="1_0q6nf"]
-[ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="1_2cagd"]
+[ext_resource type="Script" path="res://Mainmenu.gd" id="1_taysy"]
+[ext_resource type="Shader" path="res://crt_exp.gdshader" id="2_01dl1"]
 [ext_resource type="Theme" uid="uid://guq4b5ompm68" path="res://Themes/Sample_theme.tres" id="2_akema"]
 
-[node name="Node" type="Node"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6fnhw"]
+shader = ExtResource("2_01dl1")
+shader_parameter/scanline_count = 236.783
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_taysy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(2, 2)
-scale = Vector2(0.427, 0.427)
+material = SubResource("ShaderMaterial_6fnhw")
+position = Vector2(320, 180)
 texture = ExtResource("1_0q6nf")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-visible = false
-offset = Vector2(0.22, 0)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 80.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 43.0
+offset_top = -2.0
+offset_right = 243.0
+offset_bottom = 126.0
 grow_vertical = 2
+scale = Vector2(0.786088, 0.60315)
 
-[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer"]
-texture_filter = 1
+[node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_akema")
-theme_override_fonts/font = ExtResource("1_2cagd")
-theme_override_font_sizes/font_size = 19
 text = "Start"
+alignment = 0
 
-[node name="Button2" type="Button" parent="CanvasLayer/VBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2cagd")
-theme_override_font_sizes/font_size = 19
-text = "Settings	"
-
-[node name="Button4" type="Button" parent="CanvasLayer/VBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_2cagd")
-theme_override_font_sizes/font_size = 19
-text = "Leaderboards"
-
-[node name="Button3" type="Button" parent="CanvasLayer/VBoxContainer"]
-texture_filter = 1
+[node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_akema")
-theme_override_fonts/font = ExtResource("1_2cagd")
-theme_override_font_sizes/font_size = 19
+text = "Settings
+"
+alignment = 0
+
+[node name="Leaderboards" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_akema")
+text = "Leaderboard	"
+alignment = 0
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_akema")
 text = "Quit"
+alignment = 0
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

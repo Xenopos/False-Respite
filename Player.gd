@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var SPEED = 80.0
 @export var JUMP_VELOCITY = -180.0
 
+
+@onready var dash_value = 200
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var progressBar: ProgressBar = $ProgressBar
 
@@ -129,7 +131,8 @@ func dash():
 func Dodash():
 	$dash.play()
 	animated_sprite.play("dash")
-	velocity = DashDirection.normalized() * 800
+	DashDirection = direction.normalized()
+	SPEED = DashDirection * dash_value
 	animationstay = true
 	SPEED = 400
 	set_emitting = true
