@@ -32,6 +32,12 @@ GodotEssentialsSceneTransitioner="*res://addons/2d_essentials/autoload/scene_tra
 GodotEssentialsAchievements="*res://addons/2d_essentials/autoload/achievements/achievements.tscn"
 GodotEssentialsEnvironment="*res://addons/2d_essentials/autoload/dotenv/godotenv.gd"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/mode=3
+
 [editor]
 
 movie_writer/movie_file="D:/GodotEngine/yes.avi"

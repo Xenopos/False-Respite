@@ -1,3 +1,9 @@
+GridContainer
+Camera2D
+PanelContainer
+Panel
+Button
+CanvasLayer
 StateChart
 Node
 CollisionShape2D
@@ -6,7 +12,6 @@ AnimatedSprite2D
 CharacterBody2D
 SubViewport
 TextureRect
-CanvasLayer
 SubViewportContainer
 TextEdit
 Node2D
@@ -15,7 +20,6 @@ ProgressBar
 TextureProgressBar
 Control
 VBoxContainer
-Button
 MarginContainer
 Label
 AudioStreamPlayer2D
@@ -27,7 +31,3 @@ AudioListener2D
 WorldEnvironment
 LightOccluder2D
 Container
-CodeEdit
-Node3D
-Panel
-AnimationPlayer
