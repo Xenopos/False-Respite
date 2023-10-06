@@ -1,10 +1,15 @@
+StateChart
+Node
+CollisionShape2D
+Area2D
+AnimatedSprite2D
+CharacterBody2D
 SubViewport
 TextureRect
 CanvasLayer
 SubViewportContainer
 TextEdit
 Node2D
-AnimatedSprite2D
 GPUParticles2D
 ProgressBar
 TextureProgressBar
@@ -12,11 +17,8 @@ Control
 VBoxContainer
 Button
 MarginContainer
-CollisionShape2D
-Area2D
 Label
 AudioStreamPlayer2D
-Node
 PointLight2D
 DirectionalLight2D
 CanvasGroup
@@ -29,4 +31,3 @@ CodeEdit
 Node3D
 Panel
 AnimationPlayer
-RemoteTransform2D

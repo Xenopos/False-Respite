@@ -21,8 +21,9 @@ var IsJumping: bool = false
 var IsDashingAttack: bool = false
 var holdingSkill1: bool = false
 var timer: float = 0.0
-var fillSpeed: float = 1 / 3  # Fill up in 3 seconds
+var fillSpeed: float = 0.3 # Fill up in 3 seconds
 var set_emitting  : bool  = false
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -42,7 +43,7 @@ func _physics_process(delta):
 
 		if timer >= fillSpeed:
 			holdingSkill1 = false
-			executeDashAttack()
+			Skills()
 
 	direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if direction:
@@ -137,13 +138,7 @@ func Dodash():
 	else:
 		SPEED = 400
 
-
-		
-
-func executeDashAttack():
-	# Place your code for executing the dash attack here
-	pass
-
+# !!Skill1 needs to be rooted, can activate after progress value == 100 and is on floor
 func Skills():
 	if Input.is_action_just_pressed("Skill1") and is_on_floor():
 		animated_sprite.play("dash ready")
@@ -186,5 +181,4 @@ func Skills():
 
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		jump()
-
 

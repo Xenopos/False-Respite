@@ -1,4 +1,3 @@
-res://Mainmenu.tscn
+res://Scenes/melee_enemy.tscn
 res://Player.gd
-res://Player.tscn
-res://area_2d.tscn
+res://Shaders/outlineshader.gdshader

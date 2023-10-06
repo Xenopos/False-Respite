@@ -1,49 +1,48 @@
-[gd_scene load_steps=53 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=50 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_hakgi"]
-[ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://idle.png" id="2_7gcnw"]
-[ext_resource type="Texture2D" uid="uid://dgdywfimqucuw" path="res://attack.png" id="2_sjsix"]
-[ext_resource type="Texture2D" uid="uid://cipa3sl7tn3pn" path="res://jump.png" id="3_eegvr"]
-[ext_resource type="Texture2D" uid="uid://8ogrtqyeacau" path="res://dash.png" id="3_mm0ji"]
-[ext_resource type="Texture2D" uid="uid://d0dljy5hr7kfw" path="res://run.png" id="3_vh5n7"]
-[ext_resource type="Texture2D" uid="uid://ds66jmc1spcbn" path="res://dashattack.png" id="4_fqj8o"]
+[ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
+[ext_resource type="Texture2D" uid="uid://cipa3sl7tn3pn" path="res://Visuals/Animations/jump.png" id="3_eegvr"]
+[ext_resource type="Texture2D" uid="uid://8ogrtqyeacau" path="res://Visuals/Animations/dash.png" id="3_mm0ji"]
+[ext_resource type="Texture2D" uid="uid://d0dljy5hr7kfw" path="res://Visuals/Animations/run.png" id="3_vh5n7"]
+[ext_resource type="Texture2D" uid="uid://ds66jmc1spcbn" path="res://Visuals/Animations/dashattack.png" id="4_fqj8o"]
 [ext_resource type="AudioStream" uid="uid://bxxpx77x21gwc" path="res://sfx/att.ogg" id="8_4nyfg"]
-[ext_resource type="Texture2D" uid="uid://bgd44t1xkvm5b" path="res://spiiin.png" id="8_82odh"]
-[ext_resource type="Texture2D" uid="uid://cworrknv3pk1t" path="res://upyogo.png" id="9_6vdwm"]
+[ext_resource type="Texture2D" uid="uid://bgd44t1xkvm5b" path="res://Visuals/Animations/spiiin.png" id="8_82odh"]
+[ext_resource type="Texture2D" uid="uid://cworrknv3pk1t" path="res://Visuals/Animations/upyogo.png" id="9_6vdwm"]
 [ext_resource type="AudioStream" uid="uid://bfq24tfvd021i" path="res://sfx/jum.ogg" id="9_faxc4"]
 [ext_resource type="AudioStream" uid="uid://bq4x4i3owe7nq" path="res://sfx/dash.ogg" id="10_80dqr"]
-[ext_resource type="AudioStream" uid="uid://bo2c5u6r6783k" path="res://execute.wav" id="13_3nbuy"]
-[ext_resource type="AudioStream" uid="uid://uwrak6ml7ei0" path="res://spin.wav" id="14_wh54f"]
-[ext_resource type="AudioStream" uid="uid://ch5eq1crj1fc1" path="res://fly.wav" id="16_hm1w5"]
+[ext_resource type="Texture2D" uid="uid://yw51ynrvhs2x" path="res://Visuals/Animations/attack.png" id="10_s5xmi"]
+[ext_resource type="AudioStream" uid="uid://bo2c5u6r6783k" path="res://sfx/execute.wav" id="13_3nbuy"]
+[ext_resource type="AudioStream" uid="uid://uwrak6ml7ei0" path="res://sfx/spin.wav" id="14_wh54f"]
+[ext_resource type="AudioStream" uid="uid://ch5eq1crj1fc1" path="res://sfx/fly.wav" id="16_hm1w5"]
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="17_m2qia"]
-[ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://charging.wav" id="17_o0kfb"]
-[ext_resource type="Texture2D" uid="uid://c7c38bfxrit07" path="res://wow.png" id="18_2tqvj"]
+[ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://sfx/charging.wav" id="17_o0kfb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2vt5"]
 size = Vector2(5, 15)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eit85"]
-atlas = ExtResource("2_sjsix")
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mur3"]
+atlas = ExtResource("10_s5xmi")
 region = Rect2(0, 0, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5yb5e"]
-atlas = ExtResource("2_sjsix")
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bea5"]
+atlas = ExtResource("10_s5xmi")
 region = Rect2(32, 0, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pxeoy"]
-atlas = ExtResource("2_sjsix")
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsb4h"]
+atlas = ExtResource("10_s5xmi")
 region = Rect2(64, 0, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ae0j"]
-atlas = ExtResource("2_sjsix")
+[sub_resource type="AtlasTexture" id="AtlasTexture_17il7"]
+atlas = ExtResource("10_s5xmi")
 region = Rect2(96, 0, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4i10e"]
-atlas = ExtResource("2_sjsix")
+[sub_resource type="AtlasTexture" id="AtlasTexture_82ivh"]
+atlas = ExtResource("10_s5xmi")
 region = Rect2(128, 0, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wfrpq"]
-atlas = ExtResource("2_sjsix")
+[sub_resource type="AtlasTexture" id="AtlasTexture_27wp5"]
+atlas = ExtResource("10_s5xmi")
 region = Rect2(160, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_631xw"]
@@ -134,13 +133,13 @@ region = Rect2(160, 0, 32, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eit85")
+"texture": SubResource("AtlasTexture_6mur3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5yb5e")
+"texture": SubResource("AtlasTexture_3bea5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pxeoy")
+"texture": SubResource("AtlasTexture_vsb4h")
 }],
 "loop": false,
 "name": &"attack",
@@ -148,13 +147,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0ae0j")
+"texture": SubResource("AtlasTexture_17il7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4i10e")
+"texture": SubResource("AtlasTexture_82ivh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wfrpq")
+"texture": SubResource("AtlasTexture_27wp5")
 }],
 "loop": false,
 "name": &"attack2",
@@ -309,10 +308,10 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.603922, 0, 0, 1), Color(1, 1, 1, 1)]
+"values": [Color(0.603922, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s37oq"]
@@ -323,26 +322,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
 size = Vector2(15, 8)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6yxgy"]
-particles_animation = true
-particles_anim_h_frames = 3
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q2jq8"]
-emission_shape = 2
-emission_sphere_radius = 8.66
-particle_flag_disable_z = true
-spread = 0.0
-gravity = Vector3(19.971, 0, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-color = Color(1, 0.423529, 0.427451, 1)
-
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 texture_repeat = 1
-slide_on_ceiling = false
 script = ExtResource("1_hakgi")
 
 [node name="attacksfx" type="AudioStreamPlayer2D" parent="."]
@@ -390,7 +372,7 @@ remote_path = NodePath("../Camera2D")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
 sprite_frames = SubResource("SpriteFrames_jubc4")
-animation = &"attack"
+animation = &"jump"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -402,7 +384,7 @@ libraries = {
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="GlobalAttackRange" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-10.5, 0)
 shape = SubResource("RectangleShape2D_q2d0f")
 
@@ -420,16 +402,5 @@ theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("17_m2qia")
 theme_override_font_sizes/font_size = 19
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-texture_repeat = 1
-material = SubResource("CanvasItemMaterial_6yxgy")
-position = Vector2(16, 1)
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_q2jq8")
-texture = ExtResource("18_2tqvj")
-speed_scale = 3.23
-randomness = 0.45
-trail_lifetime = 0.01
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
