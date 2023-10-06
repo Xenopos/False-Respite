@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://guq4b5ompm68"]
+
+[ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="1_cfpsq"]
+
+[resource]
+Button/constants/h_separation = 13
+Button/fonts/font = ExtResource("1_cfpsq")

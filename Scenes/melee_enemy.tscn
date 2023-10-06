@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://caj8lkojakln6"]
+[gd_scene load_steps=31 format=3 uid="uid://caj8lkojakln6"]
 
 [ext_resource type="Script" path="res://Scenes/melee_enemy.gd" id="1_0hbuw"]
 [ext_resource type="Texture2D" uid="uid://cysb84tnghojp" path="res://Visuals/Spritesheets/MEnemy_basic_attack.png" id="1_axqna"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bdw163caj26rx" path="res://Visuals/Spritesheets/MEnemy_jump.png" id="3_ikgo8"]
 [ext_resource type="Texture2D" uid="uid://dd5bkig6lnpg2" path="res://Visuals/Spritesheets/MEnemy_run.png" id="4_dtblk"]
 [ext_resource type="Texture2D" uid="uid://cq2nf7lli1xdq" path="res://Visuals/Spritesheets/MEnemy_thrust.png" id="5_5wk8v"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="7_b2e2a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2yqi"]
 atlas = ExtResource("1_axqna")
@@ -209,6 +208,3 @@ shape = SubResource("RectangleShape2D_t57j2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-11.5, -0.5)
 shape = SubResource("RectangleShape2D_2ktw3")
-
-[node name="StateChart" type="Node" parent="."]
-script = ExtResource("7_b2e2a")

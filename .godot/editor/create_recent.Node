@@ -1,7 +1,10 @@
+Panel
+VBoxContainer
+Sprite2D
+MenuBar
 GridContainer
 Camera2D
 PanelContainer
-Panel
 Button
 CanvasLayer
 StateChart
@@ -19,7 +22,6 @@ GPUParticles2D
 ProgressBar
 TextureProgressBar
 Control
-VBoxContainer
 MarginContainer
 Label
 AudioStreamPlayer2D
@@ -28,6 +30,3 @@ DirectionalLight2D
 CanvasGroup
 HBoxContainer
 AudioListener2D
-WorldEnvironment
-LightOccluder2D
-Container

@@ -2,5 +2,4 @@ res://Scenes/melee_enemy.tscn
 res://Player.gd
 res://Shaders/outlineshader.gdshader
 res://Scenes/Mainmenu.tscn
-res://area_2d.tscn
-res://Player.tscn
+res://Themes/Sample_theme.tres
