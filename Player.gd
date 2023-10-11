@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var dash_value = 200
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var progressBar: ProgressBar = $ProgressBar
+@onready var timercountdown: Timer = $Timer
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var animationstay: bool = false
@@ -25,6 +26,10 @@ var holdingSkill1: bool = false
 var timer: float = 0.0
 var fillSpeed: float = 0.3 # Fill up in 3 seconds
 var set_emitting  : bool  = false
+var Allow_jump : bool = true
+
+func _ready():
+	add_to_group("Player")
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -75,7 +80,7 @@ func update_facing_direction():
 func jump():
 	velocity.y = JUMP_VELOCITY
 	animationstay = true
-	$jump.play()
+	$SFX/jump.play()
 	animated_sprite.play("jump")
 
 func _on_animated_sprite_2d_animation_finished():
@@ -99,9 +104,10 @@ func attack():
 		Input.is_action_just_pressed("attack")
 		and AttackCombo == 0
 		and isDashing == false
+
 	):
 		SPEED = 30
-		$attacksfx.play()
+		$SFX/attacksfx.play()
 		AttackCombo += 1
 		isAttacking = true
 		animated_sprite.play("attack")
@@ -116,7 +122,7 @@ func attack():
 		isAttacking = true
 		animated_sprite.play("attack2")
 		animationstay = true
-		$attacksfx.play()
+		$SFX/attacksfx.play()
 	else:
 		isAttacking = false
 
@@ -129,7 +135,7 @@ func dash():
 		Dodash()
 
 func Dodash():
-	$dash.play()
+	$SFX/dash.play()
 	animated_sprite.play("dash")
 	DashDirection = direction.normalized()
 	SPEED = DashDirection * dash_value
@@ -144,25 +150,28 @@ func Dodash():
 # !!Skill1 needs to be rooted, can activate after progress value == 100 and is on floor
 func Skills():
 	if Input.is_action_just_pressed("Skill1") and is_on_floor():
+		Allow_jump = false
 		animated_sprite.play("dash ready")
 		animationstay = true
 		SPEED = 0
-		$charge.play()
+		$SFX/charge.play()
 		holdingSkill1 = true
 		timer = 0.0
 		progressBar.value = 0
+
 		
 	if (
 		Input.is_action_just_released("Skill1")
 		and is_on_floor()
 		and not isAttacking
-	):
+		):
+		Allow_jump = true
 		animated_sprite.play("dash attack")
-		$execute.play()
+		$SFX/execute.play()
 		holdingSkill1 = false
 		velocity = DashDirection.normalized() * 1200
 		animationstay = true
-		$charge.stop()
+		$SFX/charge.stop()
 		if direction.x == 0:
 			SPEED = 80
 		else:
@@ -170,7 +179,7 @@ func Skills():
 
 	if Input.is_action_just_pressed("Skill2") and not is_on_floor():
 		animated_sprite.play("spin")
-		$spiiin.play()
+		$SFX/spiiin.play()
 		if onair == true:
 			animationstay = true
 		if not onair:
@@ -180,8 +189,8 @@ func Skills():
 		animated_sprite.play("upyogo")
 		animationstay = true
 		SPEED = 0
-		$up.play()
+		$SFX/up.play()
 
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and Allow_jump:
 		jump()
 

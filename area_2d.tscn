@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7maufabkf645"]
+[gd_scene load_steps=8 format=3 uid="uid://c7maufabkf645"]
 
 [ext_resource type="Texture2D" uid="uid://vvywlpf5p83y" path="res://Visuals/Animations/map.png" id="1_m60d6"]
 [ext_resource type="Script" path="res://area_2d.gd" id="2_8ib23"]
 [ext_resource type="PackedScene" uid="uid://x6ykrgfako55" path="res://Player.tscn" id="2_qk1kg"]
 [ext_resource type="PackedScene" uid="uid://caj8lkojakln6" path="res://Scenes/melee_enemy.tscn" id="4_4364l"]
+[ext_resource type="Texture2D" uid="uid://b0qkngn51vocc" path="res://Visuals/Backgrounds and tilemap/Parallax back.png" id="5_xrode"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i0g6t"]
 texture = ExtResource("1_m60d6")
@@ -366,12 +367,15 @@ layer_1/tile_data = PackedInt32Array(655335, 393218, 8, 655336, 393218, 8, 65533
 script = ExtResource("2_8ib23")
 
 [node name="Melee_Enemy" parent="." instance=ExtResource("4_4364l")]
-position = Vector2(-305, 123)
+position = Vector2(-319, 120)
 
 [node name="Player" parent="." instance=ExtResource("2_qk1kg")]
-position = Vector2(-300, 62)
-JUMP_VELOCITY = -180.0
-AttackCombo = 0
+position = Vector2(-392, 135)
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 current = true
+
+[node name="ParallaxBack" type="Sprite2D" parent="."]
+position = Vector2(-337, 170)
+scale = Vector2(0.646843, 0.646843)
+texture = ExtResource("5_xrode")

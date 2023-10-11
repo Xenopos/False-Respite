@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://dugivcbh2hkbp"]
+
+[ext_resource type="Texture2D" uid="uid://1c722hjx0sn5" path="res://Visuals/Backgrounds and tilemap/Pause.png" id="1_prc8n"]
+[ext_resource type="Theme" uid="uid://guq4b5ompm68" path="res://Themes/Sample_theme.tres" id="2_gyprj"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pause" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(320, 180)
+texture = ExtResource("1_prc8n")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 31.0
+offset_top = -48.0
+offset_right = 231.0
+offset_bottom = 80.0
+grow_vertical = 2
+scale = Vector2(0.786088, 0.60315)
+
+[node name="Start" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("2_gyprj")
+text = "Start"
+alignment = 0
+
+[node name="Settings" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("2_gyprj")
+text = "Settings
+"
+alignment = 0
+
+[node name="Leaderboards" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("2_gyprj")
+text = "Leaderboard	"
+alignment = 0
+
+[node name="Quit" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("2_gyprj")
+text = "Quit"
+alignment = 0

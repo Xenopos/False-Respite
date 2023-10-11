@@ -1,13 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxm6iiasbpj1f"]
+[gd_scene load_steps=4 format=3 uid="uid://bxm6iiasbpj1f"]
 
 [ext_resource type="Texture2D" uid="uid://bmajl2qnk0fvs" path="res://Visuals/UI/Main_menu.png" id="1_0q6nf"]
 [ext_resource type="Script" path="res://Mainmenu.gd" id="1_taysy"]
-[ext_resource type="Shader" path="res://crt_exp.gdshader" id="2_01dl1"]
 [ext_resource type="Theme" uid="uid://guq4b5ompm68" path="res://Themes/Sample_theme.tres" id="2_akema"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6fnhw"]
-shader = ExtResource("2_01dl1")
-shader_parameter/scanline_count = 236.783
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -20,7 +15,6 @@ script = ExtResource("1_taysy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-material = SubResource("ShaderMaterial_6fnhw")
 position = Vector2(320, 180)
 texture = ExtResource("1_0q6nf")
 
