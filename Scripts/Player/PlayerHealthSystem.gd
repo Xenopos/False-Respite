@@ -4,10 +4,8 @@ class_name healthsys
 
 @export var max_health: int = 100 
 @export var current_health: int = 100
-@export var damaged: int = 0
-@export var maxpoist: int = 100
-@export var current_poison: int = 0
-
+@export var maxpoise: int = 100
+@export var current_poise: int = 0
 @export var max_stamina: int = 100
 @export var current_stamina: int = max_stamina
 
@@ -40,5 +38,5 @@ func checkplayerdeath():
 func handle_death():
 	# Here, you would handle whatever needs to occur when the player dies.
 	# For example:
-	print("The player has died!")
+	push_warning("The player has died!")
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://caj8lkojakln6"]
+[gd_scene load_steps=34 format=3 uid="uid://caj8lkojakln6"]
 
 [ext_resource type="Texture2D" uid="uid://cysb84tnghojp" path="res://Visuals/Spritesheets/MEnemy_basic_attack.png" id="1_axqna"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/Enemy_Health.gd" id="1_hmvur"]
+[ext_resource type="Script" path="res://Scripts/EnemyMelee/Enemy_Damage_to_Player.gd" id="2_0qgip"]
 [ext_resource type="Texture2D" uid="uid://c862cu2if06l" path="res://Visuals/Spritesheets/MEnemy_idle.png" id="2_hikpk"]
 [ext_resource type="Texture2D" uid="uid://bdw163caj26rx" path="res://Visuals/Spritesheets/MEnemy_jump.png" id="3_ikgo8"]
 [ext_resource type="Texture2D" uid="uid://dd5bkig6lnpg2" path="res://Visuals/Spritesheets/MEnemy_run.png" id="4_dtblk"]
@@ -11,17 +12,47 @@
 script/source = "extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
+var patrol_points = []
+var current_target = Vector2()
+var time_since_change = 0.0
+var time_to_wait = 2.0
+var player: Node2D = null
 
-@onready var Enemy_speed = 150 
+@onready var meleeenemyanim : AnimatedSprite2D = $AnimatedSprite2D
+@onready var Enemy_speed = 50 
 @onready var direction = Vector2.ZERO
+
+func _ready():
+	patrol_points.append(Vector2(1, 5))
+	choose_random_patrol_point()
+
+func update_facing_direction_enemy():
+	if direction.x < 0:
+		meleeenemyanim.flip_h = false
+	elif direction.x > 0:
+		meleeenemyanim.flip_h = true
+	if direction.x  > 0:
+		meleeenemyanim.play(\"run\")
+
+func choose_random_patrol_point():
+	current_target = patrol_points[randi() % patrol_points.size()]
+	time_since_change = 0.0
 
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
-		
-	move_and_slide()
- 
 
+	if position.distance_to(current_target) < 5:
+		time_since_change += delta
+		if time_since_change > time_to_wait:
+			choose_random_patrol_point()
+	else:
+		direction = current_target - position
+		direction = direction.normalized()
+		velocity.x = direction.x * Enemy_speed
+		
+	update_facing_direction_enemy()
+	move_and_slide()
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2yqi"]
@@ -199,7 +230,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"skill_pierce",
-"speed": 11.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t57j2"]
@@ -207,45 +238,41 @@ size = Vector2(12, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ktw3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ly1bq"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vf0u7"]
+size = Vector2(224, 20)
 
 [node name="Melee_Enemy" type="CharacterBody2D"]
 script = SubResource("GDScript_dijxs")
 
-[node name="Enemy_Health" type="Node" parent="."]
+[node name="EnemySytem" type="Node" parent="."]
+
+[node name="Enemy_Health" type="Node" parent="EnemySytem"]
 script = ExtResource("1_hmvur")
+
+[node name="Enemy_Damage_to_Player" type="Node" parent="EnemySytem"]
+script = ExtResource("2_0qgip")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_82n88")
-animation = &"idle"
+animation = &"skill_pierce"
 autoplay = "idle"
+frame = 6
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_t57j2")
 
 [node name="AttackRange" type="Area2D" parent="."]
-visible = false
 
 [node name="Attack _Range" type="CollisionShape2D" parent="AttackRange"]
 position = Vector2(-11.5, -0.5)
 shape = SubResource("RectangleShape2D_2ktw3")
 
-[node name="DetectionRadius" type="Area2D" parent="."]
-visible = false
+[node name="SFX" type="Node" parent="."]
 
-[node name="Detection_radius" type="CollisionShape2D" parent="DetectionRadius"]
-scale = Vector2(10.8247, -0.7885)
-shape = SubResource("RectangleShape2D_ly1bq")
+[node name="detectionrange" type="Area2D" parent="."]
 
-[node name="EnemyStateMachine" type="Node" parent="."]
-
-[node name="Idle_State" type="Node" parent="EnemyStateMachine"]
-
-[node name="Attack_State" type="Node" parent="EnemyStateMachine"]
-
-[node name="Chase_State" type="Node" parent="EnemyStateMachine"]
-
-[node name="Death_State" type="Node" parent="EnemyStateMachine"]
-
-[node name="Hurt_State" type="Node" parent="EnemyStateMachine"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detectionrange"]
+position = Vector2(-21, 0)
+shape = SubResource("RectangleShape2D_vf0u7")

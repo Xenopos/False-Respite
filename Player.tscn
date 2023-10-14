@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=54 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
@@ -15,8 +15,10 @@
 [ext_resource type="AudioStream" uid="uid://bo2c5u6r6783k" path="res://sfx/execute.wav" id="13_3nbuy"]
 [ext_resource type="AudioStream" uid="uid://uwrak6ml7ei0" path="res://sfx/spin.wav" id="14_wh54f"]
 [ext_resource type="AudioStream" uid="uid://ch5eq1crj1fc1" path="res://sfx/fly.wav" id="16_hm1w5"]
+[ext_resource type="Script" path="res://Scripts/Player/Attack Range.gd" id="17_6j0n5"]
 [ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://sfx/charging.wav" id="17_o0kfb"]
-[ext_resource type="Script" path="res://Scripts/Player/Skills.gd" id="18_vfbuk"]
+[ext_resource type="Script" path="res://Scripts/Player/DamagetoEnemy.gd" id="19_jmpr5"]
+[ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="19_uhpr1"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealthSystem.gd" id="21_1012i"]
 [ext_resource type="Script" path="res://Scripts/Player/StaminaSystem.gd" id="22_65adt"]
 
@@ -322,9 +324,9 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
-size = Vector2(15, 8)
+size = Vector2(16.5, 15)
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 texture_filter = 1
 texture_repeat = 1
 script = ExtResource("1_0hjxu")
@@ -371,7 +373,6 @@ shape = SubResource("RectangleShape2D_p2vt5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
-position = Vector2(1, 2)
 sprite_frames = SubResource("SpriteFrames_jubc4")
 animation = &"jump"
 autoplay = "idle"
@@ -382,23 +383,15 @@ libraries = {
 }
 
 [node name="Attack Range" type="Area2D" parent="."]
+script = ExtResource("17_6j0n5")
 
 [node name="GlobalAttackRange" type="CollisionShape2D" parent="Attack Range"]
-position = Vector2(-10.5, 0)
+position = Vector2(-11.25, 0.5)
 shape = SubResource("RectangleShape2D_q2d0f")
 
 [node name="Skills" type="Node" parent="."]
-script = ExtResource("18_vfbuk")
 
 [node name="Cooldowntimer" type="Timer" parent="Skills"]
-
-[node name="PlayerState" type="Node" parent="."]
-
-[node name="Idle_State" type="Node" parent="PlayerState"]
-
-[node name="Run_State" type="Node" parent="PlayerState"]
-
-[node name="Death_State" type="Node" parent="PlayerState"]
 
 [node name="PlayerSystem" type="Node" parent="."]
 
@@ -408,5 +401,18 @@ script = ExtResource("21_1012i")
 [node name="StaminaSystem" type="Node" parent="PlayerSystem"]
 script = ExtResource("22_65adt")
 
+[node name="DamagetoEnemy" type="Node" parent="PlayerSystem"]
+script = ExtResource("19_jmpr5")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 48.0
+offset_top = 66.0
+offset_right = 52.0
+offset_bottom = 93.0
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="Skills" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Attack Range" to="Attack Range" method="_on_body_entered"]

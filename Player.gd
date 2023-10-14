@@ -1,5 +1,4 @@
-extends CharacterBody2D
-class_name Shizuka
+class_name Shizuka extends CharacterBody2D
 
 @export var SPEED = 80.0
 @export var JUMP_VELOCITY = -180.0
@@ -64,7 +63,7 @@ func _physics_process(delta):
 	update_facing_direction()
 	attack()
 	dash()
-	Skills()	
+	Skills()
 
 func update_animation():
 	if not animationstay:
@@ -78,23 +77,24 @@ func update_facing_direction():
 		animated_sprite.flip_h = false
 	elif direction.x > 0:
 		animated_sprite.flip_h = true
-
 func jump():
 	velocity.y = JUMP_VELOCITY
 	animationstay = true
 	$SFX/jump.play()
 	animated_sprite.play("jump")
+	if not is_on_floor():
+		animationstay = false
 
 func _on_animated_sprite_2d_animation_finished():
 	if (
 		animated_sprite.animation == "upyogo"
 		or animated_sprite.animation == "dash attack"
-		or animated_sprite.animation == "jump"
 		or animated_sprite.animation == "attack"
 		or animated_sprite.animation == "attack2"
 		or animated_sprite.animation == "dash"
 		or animated_sprite.animation == "spin"
 		or animated_sprite.animation == "execute"
+		or animated_sprite.animation == "jump"
 	):
 		animationstay = false
 		SPEED = 80.0
@@ -106,7 +106,7 @@ func attack():
 		Input.is_action_just_pressed("attack")
 		and AttackCombo == 0
 		and isDashing == false
-		):
+	):
 		SPEED = 30
 		$SFX/attacksfx.play()
 		AttackCombo += 1
@@ -138,7 +138,7 @@ func dash():
 func Dodash():
 	$SFX/dash.play()
 	animated_sprite.play("dash")
-	DashDirection = direction.normalized()
+	velocity = DashDirection.normalized() * 1200
 	SPEED = DashDirection * dash_value
 	animationstay = true
 	SPEED = 400
@@ -160,7 +160,6 @@ func Skills():
 		timer = 0.0
 		progressBar.value = 0
 
-		
 	if (
 		Input.is_action_just_released("Skill1")
 		and is_on_floor()

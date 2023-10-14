@@ -1,7 +1,13 @@
-res://Player.tscn
-res://Scripts/EnemyMelee/Chase_State.gd
-res://Scripts/EnemyMelee/EnemyStateMachine.gd
+res://area_2d.tscn
 res://Shaders/outlineshader.gdshader
 res://crt_exp.gdshader
 res://Player.gd
-res://Scripts/Player/Skills.gd
+res://Scenes/melee_enemy.tscn
+res://Scripts/EnemyMelee/Enemy_Health.gd
+res://Scripts/Player/PlayerHealthSystem.gd
+res://Player.tscn
+res://DamagetoEnemy.gd
+res://Scripts/Player/DamagetoEnemy.gd
+res://Scripts/Player/StaminaSystem.gd
+res://Scripts/EnemyMelee/Enemy_Damage_to_Player.gd
+res://Scripts/Player/Attack Range.gd

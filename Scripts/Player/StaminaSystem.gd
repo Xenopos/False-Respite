@@ -3,7 +3,7 @@ class_name staminasys
 
 @export var max_stamina: int = 100
 @export var current_stamina: int = 100
-@export var staminaregen: int = 1
+@export var staminaregen: int = 10
 @export var regen_interval: float = 1.0  # seconds between each regen tick
 
 var regen_timer = Timer.new()
