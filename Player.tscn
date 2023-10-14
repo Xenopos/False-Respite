@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=52 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
@@ -15,9 +15,10 @@
 [ext_resource type="AudioStream" uid="uid://bo2c5u6r6783k" path="res://sfx/execute.wav" id="13_3nbuy"]
 [ext_resource type="AudioStream" uid="uid://uwrak6ml7ei0" path="res://sfx/spin.wav" id="14_wh54f"]
 [ext_resource type="AudioStream" uid="uid://ch5eq1crj1fc1" path="res://sfx/fly.wav" id="16_hm1w5"]
-[ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="17_m2qia"]
 [ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://sfx/charging.wav" id="17_o0kfb"]
 [ext_resource type="Script" path="res://Scripts/Player/Skills.gd" id="18_vfbuk"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerHealthSystem.gd" id="21_1012i"]
+[ext_resource type="Script" path="res://Scripts/Player/StaminaSystem.gd" id="22_65adt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2vt5"]
 size = Vector2(5, 15)
@@ -323,7 +324,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
 size = Vector2(15, 8)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 texture_filter = 1
 texture_repeat = 1
 script = ExtResource("1_0hjxu")
@@ -370,6 +371,7 @@ shape = SubResource("RectangleShape2D_p2vt5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
+position = Vector2(1, 2)
 sprite_frames = SubResource("SpriteFrames_jubc4")
 animation = &"jump"
 autoplay = "idle"
@@ -379,42 +381,32 @@ libraries = {
 "": SubResource("AnimationLibrary_s37oq")
 }
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Attack Range" type="Area2D" parent="."]
 
-[node name="GlobalAttackRange" type="CollisionShape2D" parent="Area2D"]
+[node name="GlobalAttackRange" type="CollisionShape2D" parent="Attack Range"]
 position = Vector2(-10.5, 0)
 shape = SubResource("RectangleShape2D_q2d0f")
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-z_index = 5
-texture_filter = 1
-texture_repeat = 1
-offset_left = -13.0
-offset_top = -17.0
-offset_right = 58.0
-offset_bottom = 8.0
-scale = Vector2(0.406274, 0.270875)
-theme_override_colors/font_color = Color(0.847059, 0.886275, 0.443137, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("17_m2qia")
-theme_override_font_sizes/font_size = 19
 
 [node name="Skills" type="Node" parent="."]
 script = ExtResource("18_vfbuk")
 
-[node name="Skill1" type="Node" parent="Skills"]
+[node name="Cooldowntimer" type="Timer" parent="Skills"]
 
-[node name="Skill2" type="Node" parent="Skills"]
+[node name="PlayerState" type="Node" parent="."]
 
-[node name="Skill3" type="Node" parent="Skills"]
+[node name="Idle_State" type="Node" parent="PlayerState"]
 
-[node name="Skill" type="Node" parent="Skills"]
+[node name="Run_State" type="Node" parent="PlayerState"]
 
-[node name="PlayerStateMachine" type="Node" parent="."]
+[node name="Death_State" type="Node" parent="PlayerState"]
 
-[node name="Death_State" type="Node" parent="PlayerStateMachine"]
+[node name="PlayerSystem" type="Node" parent="."]
 
-[node name="Timer" type="Timer" parent="."]
+[node name="HealthSystem" type="Node" parent="PlayerSystem"]
+script = ExtResource("21_1012i")
+
+[node name="StaminaSystem" type="Node" parent="PlayerSystem"]
+script = ExtResource("22_65adt")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="Skills" method="_on_animated_sprite_2d_animation_finished"]

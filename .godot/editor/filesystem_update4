@@ -1,11 +1,7 @@
+res://Player.tscn
 res://Scripts/EnemyMelee/Chase_State.gd
 res://Scripts/EnemyMelee/EnemyStateMachine.gd
-res://Player.gd
-res://Themes/Sample_theme.tres
 res://Shaders/outlineshader.gdshader
 res://crt_exp.gdshader
-res://Scenes/Pause.tscn
-res://area_2d.tscn
-res://Player.tscn
-res://Scenes/Mainmenu.tscn
-res://Scenes/melee_enemy.tscn
+res://Player.gd
+res://Scripts/Player/Skills.gd

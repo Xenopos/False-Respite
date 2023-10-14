@@ -1,3 +1,9 @@
+GodotEssentialsMotion
+Node
+HealthComponent
+GodotEssentialsHealthComponent
+GodotEssentialsPlatformerMovementComponent
+GPUParticlesAttractorVectorField3D
 Button
 VBoxContainer
 MeshInstance2D
@@ -5,16 +11,13 @@ NavigationAgent2D
 NavigationRegion2D
 NavigationLink2D
 Node2D
-Node
 Camera2DPlus
 GodotEssentialsShakeCameraComponent2D
 Camera2D
 Timer
-HealthComponent
 State
 VideoStreamPlayer
 StateChart
-GodotEssentialsHealthComponent
 GodotEssentialsFiniteStateMachine
 Sprite2D
 SubViewport
@@ -27,6 +30,3 @@ CollisionShape2D
 Area2D
 AnimatedSprite2D
 CharacterBody2D
-TextureRect
-SubViewportContainer
-TextEdit

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://caj8lkojakln6"]
+[gd_scene load_steps=33 format=3 uid="uid://caj8lkojakln6"]
 
 [ext_resource type="Texture2D" uid="uid://cysb84tnghojp" path="res://Visuals/Spritesheets/MEnemy_basic_attack.png" id="1_axqna"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/Enemy_Health.gd" id="1_hmvur"]
@@ -6,12 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bdw163caj26rx" path="res://Visuals/Spritesheets/MEnemy_jump.png" id="3_ikgo8"]
 [ext_resource type="Texture2D" uid="uid://dd5bkig6lnpg2" path="res://Visuals/Spritesheets/MEnemy_run.png" id="4_dtblk"]
 [ext_resource type="Texture2D" uid="uid://cq2nf7lli1xdq" path="res://Visuals/Spritesheets/MEnemy_thrust.png" id="5_5wk8v"]
-[ext_resource type="Script" path="res://Scripts/EnemyMelee/EnemyStateMachine.gd" id="6_um4kt"]
-[ext_resource type="Script" path="res://Scripts/EnemyMelee/Attack_State.gd" id="7_1cmom"]
-[ext_resource type="Script" path="res://Scripts/EnemyMelee/Idle_State.gd" id="7_46a67"]
-[ext_resource type="Script" path="res://Scripts/EnemyMelee/Chase_State.gd" id="8_drgc0"]
-[ext_resource type="Script" path="res://Scripts/EnemyMelee/Death_State.gd" id="9_n0g36"]
-[ext_resource type="Script" path="res://Scripts/EnemyMelee/Hurt_State.gd" id="10_3wlpo"]
 
 [sub_resource type="GDScript" id="GDScript_dijxs"]
 script/source = "extends CharacterBody2D
@@ -19,7 +13,6 @@ script/source = "extends CharacterBody2D
 var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
 
 @onready var Enemy_speed = 150 
-@onready var enemy_state_machine : EnemyStateMachine = $EnemyStateMachine
 @onready var direction = Vector2.ZERO
 
 func _physics_process(delta):
@@ -232,35 +225,27 @@ autoplay = "idle"
 shape = SubResource("RectangleShape2D_t57j2")
 
 [node name="AttackRange" type="Area2D" parent="."]
+visible = false
 
 [node name="Attack _Range" type="CollisionShape2D" parent="AttackRange"]
 position = Vector2(-11.5, -0.5)
 shape = SubResource("RectangleShape2D_2ktw3")
 
 [node name="DetectionRadius" type="Area2D" parent="."]
+visible = false
 
 [node name="Detection_radius" type="CollisionShape2D" parent="DetectionRadius"]
 scale = Vector2(10.8247, -0.7885)
 shape = SubResource("RectangleShape2D_ly1bq")
 
-[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("Enemy", "current_state")]
-script = ExtResource("6_um4kt")
-Enemy = NodePath("..")
-current_state = NodePath("Chase_State")
+[node name="EnemyStateMachine" type="Node" parent="."]
 
-[node name="Idle_State" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("meleeEnemy")]
-script = ExtResource("7_46a67")
-meleeEnemy = NodePath("../..")
+[node name="Idle_State" type="Node" parent="EnemyStateMachine"]
 
 [node name="Attack_State" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("7_1cmom")
 
-[node name="Chase_State" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("meleeEnemy")]
-script = ExtResource("8_drgc0")
-meleeEnemy = NodePath("../..")
+[node name="Chase_State" type="Node" parent="EnemyStateMachine"]
 
 [node name="Death_State" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("9_n0g36")
 
 [node name="Hurt_State" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("10_3wlpo")

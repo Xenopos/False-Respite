@@ -2,7 +2,7 @@ extends Node
 
 class_name EnemyStateMachine
 
-@export var Enemy : CharacterBody2D
+@export var Player : CharacterBody2D
 @export var current_state : State
 @export var initial_state : State
 var enemystates : Dictionary  = {}

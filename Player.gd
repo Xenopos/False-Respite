@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Shizuka
 
 @export var SPEED = 80.0
 @export var JUMP_VELOCITY = -180.0
@@ -63,7 +64,7 @@ func _physics_process(delta):
 	update_facing_direction()
 	attack()
 	dash()
-	Skills()
+	Skills()	
 
 func update_animation():
 	if not animationstay:
@@ -77,6 +78,7 @@ func update_facing_direction():
 		animated_sprite.flip_h = false
 	elif direction.x > 0:
 		animated_sprite.flip_h = true
+
 func jump():
 	velocity.y = JUMP_VELOCITY
 	animationstay = true
@@ -104,8 +106,7 @@ func attack():
 		Input.is_action_just_pressed("attack")
 		and AttackCombo == 0
 		and isDashing == false
-
-	):
+		):
 		SPEED = 30
 		$SFX/attacksfx.play()
 		AttackCombo += 1
@@ -193,4 +194,3 @@ func Skills():
 
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and Allow_jump:
 		jump()
-

@@ -376,6 +376,6 @@ position = Vector2(-392, 135)
 current = true
 
 [node name="ParallaxBack" type="Sprite2D" parent="."]
-position = Vector2(-337, 170)
-scale = Vector2(0.646843, 0.646843)
+position = Vector2(-439, 109)
+scale = Vector2(0.281755, 0.281755)
 texture = ExtResource("5_xrode")
