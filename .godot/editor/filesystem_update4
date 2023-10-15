@@ -1,13 +1,11 @@
-res://area_2d.tscn
-res://Shaders/outlineshader.gdshader
-res://crt_exp.gdshader
-res://Player.gd
-res://Scenes/melee_enemy.tscn
-res://Scripts/EnemyMelee/Enemy_Health.gd
-res://Scripts/Player/PlayerHealthSystem.gd
 res://Player.tscn
-res://DamagetoEnemy.gd
-res://Scripts/Player/DamagetoEnemy.gd
-res://Scripts/Player/StaminaSystem.gd
-res://Scripts/EnemyMelee/Enemy_Damage_to_Player.gd
+res://crt_exp.gdshader
+res://Themes/Sample_theme.tres
+res://Shaders/outlineshader.gdshader
 res://Scripts/Player/Attack Range.gd
+res://area_2d.tscn
+res://Scenes/melee_enemy.tscn
+res://Scenes/Mainmenu.tscn
+res://Scripts/EnemyMelee/Enemy_Health.gd
+res://Player.gd
+res://Scripts/Player/PlayerHealthSystem.gd

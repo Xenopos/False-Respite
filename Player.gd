@@ -3,12 +3,12 @@ class_name Shizuka extends CharacterBody2D
 @export var SPEED = 80.0
 @export var JUMP_VELOCITY = -180.0
 
-
 @onready var dash_value = 200
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var progressBar: ProgressBar = $ProgressBar
 @onready var timercountdown: Timer = $Timer
 
+var lockskill : bool = true
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var animationstay: bool = false
 var direction: Vector2 = Vector2.ZERO
@@ -18,8 +18,6 @@ var isAttacking: bool = false
 var DashDirection: Vector2 = Vector2(0, 0)
 var canDash: bool = false
 var isDashing: bool = false
-var HealthPoints: int = 3
-var StaminaPoints: int = 100
 var IsJumping: bool = false
 var IsDashingAttack: bool = false
 var holdingSkill1: bool = false
@@ -27,10 +25,12 @@ var timer: float = 0.0
 var fillSpeed: float = 0.3 # Fill up in 3 seconds
 var set_emitting  : bool  = false
 var Allow_jump : bool = true
+@export var cooldown_timer: Timer
 
 func _ready():
 	add_to_group("Player")
-
+	cooldown_timer.connect("timeout", Callable(self, "_on_CooldownTimer_timeout"))
+	
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -50,7 +50,6 @@ func _physics_process(delta):
 
 		if timer >= fillSpeed:
 			holdingSkill1 = false
-			Skills()
 
 	direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if direction:
@@ -63,7 +62,8 @@ func _physics_process(delta):
 	update_facing_direction()
 	attack()
 	dash()
-	Skills()
+	Skill_activation()
+	doJump()
 
 func update_animation():
 	if not animationstay:
@@ -77,6 +77,7 @@ func update_facing_direction():
 		animated_sprite.flip_h = false
 	elif direction.x > 0:
 		animated_sprite.flip_h = true
+		
 func jump():
 	velocity.y = JUMP_VELOCITY
 	animationstay = true
@@ -99,8 +100,11 @@ func _on_animated_sprite_2d_animation_finished():
 		animationstay = false
 		SPEED = 80.0
 		gravity = 480
-		progressBar.value = 0
-		
+
+func doJump():
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and Allow_jump:
+		jump()
+
 func attack():
 	if (
 		Input.is_action_just_pressed("attack")
@@ -148,48 +152,66 @@ func Dodash():
 	else:
 		SPEED = 400
 
-# !!Skill1 needs to be rooted, can activate after progress value == 100 and is on floor
-func Skills():
-	if Input.is_action_just_pressed("Skill1") and is_on_floor():
+func Skill_activation():
+#	if not lockskill:
+		if (Input.is_action_just_pressed("Skill1") and is_on_floor() and not isAttacking):
+			skill1activate()
+		elif (Input.is_action_just_released("Skill1") and is_on_floor()):
+			skill1releaseactivate()
+		if (Input.is_action_just_pressed("Skill2") and not is_on_floor()):
+			skill2activate()
+		if (Input.is_action_just_pressed("Skill3")):
+			skill3activate()
+
+func skill1activate():
+#	if not lockskill:
+		push_warning("skill1 activated")
 		Allow_jump = false
 		animated_sprite.play("dash ready")
 		animationstay = true
 		SPEED = 0
 		$SFX/charge.play()
-		holdingSkill1 = true
-		timer = 0.0
-		progressBar.value = 0
+		start_cooldown(5.0)
 
-	if (
-		Input.is_action_just_released("Skill1")
-		and is_on_floor()
-		and not isAttacking
-		):
-		Allow_jump = true
-		animated_sprite.play("dash attack")
-		$SFX/execute.play()
-		holdingSkill1 = false
-		velocity = DashDirection.normalized() * 1200
-		animationstay = true
-		$SFX/charge.stop()
-		if direction.x == 0:
-			SPEED = 80
-		else:
-			SPEED = 400
+func skill1releaseactivate():
+	push_warning("skill1 release activated")
+	Allow_jump = true
+	animated_sprite.play("dash attack")
+	$SFX/execute.play()
+	velocity = DashDirection.normalized() * 1200
+	animationstay = true
+	$SFX/charge.stop()
+	if direction.x == 0:
+		SPEED = 80
+	else:
+		SPEED = 400
 
-	if Input.is_action_just_pressed("Skill2") and not is_on_floor():
+func skill2activate():
+#	if not lockskill:
+		push_warning("skill2 activated")
 		animated_sprite.play("spin")
 		$SFX/spiiin.play()
 		if onair == true:
 			animationstay = true
 		if not onair:
 			animationstay = false
+		start_cooldown(5.0)
 
-	if Input.is_action_just_pressed("Skill3"):
+func skill3activate():
+#	if not lockskill:
+		push_warning("skill3 activated")
 		animated_sprite.play("upyogo")
 		animationstay = true
 		SPEED = 0
 		$SFX/up.play()
+		start_cooldown(5.0)
 
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and Allow_jump:
-		jump()
+func start_cooldown(duration):
+	push_warning("Starting cooldown for {} seconds".format([duration]))
+#	lockskill = true
+	cooldown_timer.start(duration)
+
+func _on_CooldownTimer_timeout():
+	push_warning("Cooldown timer timed out")
+#	lockskill = false
+

@@ -3,11 +3,18 @@ extends Node
 class_name healthsys
 
 @export var max_health: int = 100 
-@export var current_health: int = 100
+@export var current_health: int 
 @export var maxpoise: int = 100
 @export var current_poise: int = 0
 @export var max_stamina: int = 100
 @export var current_stamina: int = max_stamina
+@export var debughealth : Label
+
+func _physics_process(_delta):
+	debugupdatehealth()
+
+func _ready():
+	current_health = max_health
 
 func set_max_health(value):
 	max_health = value
@@ -17,9 +24,6 @@ func set_health(value):
 	current_health = clamp(value, 0, max_health)
 	if current_health == 0:
 		checkplayerdeath()
-
-func _ready():
-	pass
 
 func take_damage(amount):
 	current_health -= amount
@@ -40,3 +44,5 @@ func handle_death():
 	# For example:
 	push_warning("The player has died!")
 
+func debugupdatehealth():
+	debughealth.text = str(current_health)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=53 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
@@ -17,10 +17,12 @@
 [ext_resource type="AudioStream" uid="uid://ch5eq1crj1fc1" path="res://sfx/fly.wav" id="16_hm1w5"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Range.gd" id="17_6j0n5"]
 [ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://sfx/charging.wav" id="17_o0kfb"]
-[ext_resource type="Script" path="res://Scripts/Player/DamagetoEnemy.gd" id="19_jmpr5"]
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="19_uhpr1"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealthSystem.gd" id="21_1012i"]
 [ext_resource type="Script" path="res://Scripts/Player/StaminaSystem.gd" id="22_65adt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
+size = Vector2(16.5, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2vt5"]
 size = Vector2(5, 15)
@@ -323,20 +325,38 @@ _data = {
 "hurt": SubResource("Animation_v7p0e")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
-size = Vector2(16.5, 15)
-
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer") groups=["player"]]
 texture_filter = 1
 texture_repeat = 1
 script = ExtResource("1_0hjxu")
+cooldown_timer = NodePath("Timer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 100.0
 drag_left_margin = 0.1
 drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
+
+[node name="PlayerSystem" type="Node" parent="."]
+
+[node name="HealthSystem" type="Node" parent="PlayerSystem" node_paths=PackedStringArray("debughealth")]
+script = ExtResource("21_1012i")
+debughealth = NodePath("../../UI/Skillcontainer/Debughealth")
+
+[node name="StaminaSystem" type="Node" parent="PlayerSystem"]
+script = ExtResource("22_65adt")
+
+[node name="Attack Range" type="Area2D" parent="." node_paths=PackedStringArray("debug")]
+script = ExtResource("17_6j0n5")
+debug = NodePath("../Debug")
+
+[node name="GlobalAttackRange" type="CollisionShape2D" parent="Attack Range"]
+position = Vector2(-11.25, 0.5)
+shape = SubResource("RectangleShape2D_q2d0f")
+debug_color = Color(0.988235, 0, 0.321569, 0.419608)
 
 [node name="SFX" type="Node2D" parent="."]
 
@@ -367,14 +387,17 @@ volume_db = 9.674
 stream = ExtResource("17_o0kfb")
 pitch_scale = 0.68
 
+[node name="Timer" type="Timer" parent="."]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_p2vt5")
+one_way_collision = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
 sprite_frames = SubResource("SpriteFrames_jubc4")
-animation = &"jump"
+animation = &"spin"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -382,29 +405,9 @@ libraries = {
 "": SubResource("AnimationLibrary_s37oq")
 }
 
-[node name="Attack Range" type="Area2D" parent="."]
-script = ExtResource("17_6j0n5")
-
-[node name="GlobalAttackRange" type="CollisionShape2D" parent="Attack Range"]
-position = Vector2(-11.25, 0.5)
-shape = SubResource("RectangleShape2D_q2d0f")
-
-[node name="Skills" type="Node" parent="."]
-
-[node name="Cooldowntimer" type="Timer" parent="Skills"]
-
-[node name="PlayerSystem" type="Node" parent="."]
-
-[node name="HealthSystem" type="Node" parent="PlayerSystem"]
-script = ExtResource("21_1012i")
-
-[node name="StaminaSystem" type="Node" parent="PlayerSystem"]
-script = ExtResource("22_65adt")
-
-[node name="DamagetoEnemy" type="Node" parent="PlayerSystem"]
-script = ExtResource("19_jmpr5")
-
 [node name="ProgressBar" type="ProgressBar" parent="."]
+z_index = 1000
+texture_filter = 1
 offset_left = 48.0
 offset_top = 66.0
 offset_right = 52.0
@@ -412,7 +415,71 @@ offset_bottom = 93.0
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
 
-[node name="Timer" type="Timer" parent="."]
+[node name="UI" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -149.0
+offset_top = -79.0
+offset_right = -109.0
+offset_bottom = -71.0
+scale = Vector2(0.959546, 2.13857)
+
+[node name="HealthBar" type="TextureProgressBar" parent="UI/VBoxContainer"]
+layout_mode = 2
+nine_patch_stretch = true
+tint_under = Color(0.960784, 0.733333, 1, 1)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(1, 0.733333, 0.760784, 1)
+
+[node name="Skillcontainer" type="HBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 89.0
+offset_top = 34.0
+offset_right = 105.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Button" type="Button" parent="UI/Skillcontainer"]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="UI/Skillcontainer"]
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="UI/Skillcontainer"]
+layout_mode = 2
+
+[node name="Button4" type="Button" parent="UI/Skillcontainer"]
+layout_mode = 2
+
+[node name="Button5" type="Button" parent="UI/Skillcontainer"]
+layout_mode = 2
+
+[node name="Debughealth" type="Label" parent="UI/Skillcontainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+
+[node name="Debug" type="Label" parent="."]
+offset_left = -153.0
+offset_top = -21.0
+offset_right = -113.0
+offset_bottom = 2.0
+scale = Vector2(0.55883, 0.5307)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+
 [connection signal="body_entered" from="Attack Range" to="Attack Range" method="_on_body_entered"]
+[connection signal="body_exited" from="Attack Range" to="Attack Range" method="_on_body_exited"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
