@@ -1,6 +1,7 @@
-[gd_scene load_steps=53 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=61 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
+[ext_resource type="Shader" path="res://Shaders/try.gdshader" id="1_e2bdd"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
 [ext_resource type="Texture2D" uid="uid://cipa3sl7tn3pn" path="res://Visuals/Animations/jump.png" id="3_eegvr"]
 [ext_resource type="Texture2D" uid="uid://8ogrtqyeacau" path="res://Visuals/Animations/dash.png" id="3_mm0ji"]
@@ -19,7 +20,20 @@
 [ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://sfx/charging.wav" id="17_o0kfb"]
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="19_uhpr1"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealthSystem.gd" id="21_1012i"]
+[ext_resource type="Theme" uid="uid://guq4b5ompm68" path="res://Themes/Sample_theme.tres" id="21_yxoih"]
 [ext_resource type="Script" path="res://Scripts/Player/StaminaSystem.gd" id="22_65adt"]
+[ext_resource type="Texture2D" uid="uid://dg5d8hajbdy2s" path="res://Visuals/UI/thrust.png" id="22_kgg4m"]
+[ext_resource type="Texture2D" uid="uid://cjb3lbu73favc" path="res://Visuals/UI/slashdash.png" id="23_57052"]
+[ext_resource type="Texture2D" uid="uid://dx74qtsirtlr5" path="res://Visuals/UI/spin.png" id="24_bdhpv"]
+[ext_resource type="Texture2D" uid="uid://cucd25pmn58l1" path="res://Visuals/UI/jump.png" id="25_txc33"]
+[ext_resource type="Texture2D" uid="uid://cmcrb5y0320x6" path="res://Visuals/UI/airbornepng.png" id="26_l8w8s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y0ewy"]
+shader = ExtResource("1_e2bdd")
+shader_parameter/direction = Vector2(0, 0.5)
+shader_parameter/offset = null
+shader_parameter/fade = null
+shader_parameter/strip = 4.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
 size = Vector2(16.5, 15)
@@ -328,13 +342,14 @@ _data = {
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer") groups=["player"]]
 texture_filter = 1
 texture_repeat = 1
+material = SubResource("ShaderMaterial_y0ewy")
 script = ExtResource("1_0hjxu")
 cooldown_timer = NodePath("Timer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.4, 1.4)
 position_smoothing_enabled = true
-position_smoothing_speed = 100.0
+position_smoothing_speed = 10.0
 drag_left_margin = 0.1
 drag_top_margin = 0.1
 drag_right_margin = 0.1
@@ -362,7 +377,7 @@ debug_color = Color(0.988235, 0, 0.321569, 0.419608)
 
 [node name="attacksfx" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("8_4nyfg")
-pitch_scale = 1.15
+volume_db = -3.949
 
 [node name="jump" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("9_faxc4")
@@ -408,30 +423,34 @@ libraries = {
 [node name="ProgressBar" type="ProgressBar" parent="."]
 z_index = 1000
 texture_filter = 1
-offset_left = 48.0
-offset_top = 66.0
-offset_right = 52.0
-offset_bottom = 93.0
+offset_left = 24.0
+offset_top = 65.0
+offset_right = 28.0
+offset_bottom = 92.0
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
 
 [node name="UI" type="Control" parent="."]
+z_index = 10
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 60.0
+offset_top = 44.0
+offset_right = 100.0
+offset_bottom = 84.0
+scale = Vector2(0.86, 0.86)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+[node name="HpandSpcontainer" type="VBoxContainer" parent="UI"]
 texture_filter = 1
 layout_mode = 0
 offset_left = -149.0
 offset_top = -79.0
 offset_right = -109.0
 offset_bottom = -71.0
-scale = Vector2(0.959546, 2.13857)
+scale = Vector2(1.17852, 0.49046)
 
-[node name="HealthBar" type="TextureProgressBar" parent="UI/VBoxContainer"]
+[node name="HealthBar" type="TextureProgressBar" parent="UI/HpandSpcontainer"]
 layout_mode = 2
 nine_patch_stretch = true
 tint_under = Color(0.960784, 0.733333, 1, 1)
@@ -439,37 +458,140 @@ tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(1, 0.733333, 0.760784, 1)
 
 [node name="Skillcontainer" type="HBoxContainer" parent="UI"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 89.0
-offset_top = 34.0
-offset_right = 105.0
-offset_bottom = 42.0
+layout_mode = 2
+offset_left = -36.0
+offset_top = 58.0
+offset_right = 165.0
+offset_bottom = 79.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(0.980985, 1.34508)
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
-[node name="Button" type="Button" parent="UI/Skillcontainer"]
+[node name="S1" type="Button" parent="UI/Skillcontainer"]
 layout_mode = 2
+theme = ExtResource("21_yxoih")
 
-[node name="Button2" type="Button" parent="UI/Skillcontainer"]
+[node name="Skill2" type="Button" parent="UI/Skillcontainer"]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("21_yxoih")
 
-[node name="Button3" type="Button" parent="UI/Skillcontainer"]
+[node name="Skill3" type="Button" parent="UI/Skillcontainer"]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("21_yxoih")
 
-[node name="Button4" type="Button" parent="UI/Skillcontainer"]
+[node name="Skill4" type="Button" parent="UI/Skillcontainer"]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("21_yxoih")
 
-[node name="Button5" type="Button" parent="UI/Skillcontainer"]
+[node name="Jump" type="Button" parent="UI/Skillcontainer"]
+texture_filter = 1
 layout_mode = 2
+theme = ExtResource("21_yxoih")
 
 [node name="Debughealth" type="Label" parent="UI/Skillcontainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
+
+[node name="Skillkeys" type="Control" parent="UI"]
+anchors_preset = 0
+offset_left = -25.0
+offset_top = -1.0
+offset_right = 113.0
+offset_bottom = 75.0
+
+[node name="Label" type="Label" parent="UI/Skillkeys"]
+layout_mode = 1
+offset_left = 13.0
+offset_top = 50.0
+offset_right = 25.0
+offset_bottom = 74.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+text = "Q "
+
+[node name="Label2" type="Label" parent="UI/Skillkeys"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 50.0
+offset_right = 63.0
+offset_bottom = 74.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+text = "E "
+
+[node name="Label3" type="Label" parent="UI/Skillkeys"]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 50.0
+offset_right = 107.0
+offset_bottom = 74.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+text = "F"
+
+[node name="Label4" type="Label" parent="UI/Skillkeys"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 51.0
+offset_right = 153.0
+offset_bottom = 75.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+text = " Rmb"
+
+[node name="Jump" type="Label" parent="UI/Skillkeys"]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 51.0
+offset_right = 196.0
+offset_bottom = 75.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+text = "Jump
+"
+
+[node name="Control" type="Control" parent="UI"]
+anchors_preset = 0
+offset_left = -71.0
+offset_top = -6.0
+offset_right = -31.0
+offset_bottom = 34.0
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Control"]
+texture_filter = 1
+position = Vector2(45, 77)
+texture = ExtResource("22_kgg4m")
+
+[node name="Sprite2D2" type="Sprite2D" parent="UI/Control"]
+texture_filter = 1
+position = Vector2(84, 77)
+texture = ExtResource("23_57052")
+
+[node name="Sprite2D3" type="Sprite2D" parent="UI/Control"]
+texture_filter = 1
+position = Vector2(124, 77)
+texture = ExtResource("24_bdhpv")
+
+[node name="Sprite2D4" type="Sprite2D" parent="UI/Control"]
+texture_filter = 1
+position = Vector2(201, 77)
+texture = ExtResource("25_txc33")
+
+[node name="Sprite2D5" type="Sprite2D" parent="UI/Control"]
+texture_filter = 1
+position = Vector2(163, 79)
+texture = ExtResource("26_l8w8s")
 
 [node name="Debug" type="Label" parent="."]
 offset_left = -153.0

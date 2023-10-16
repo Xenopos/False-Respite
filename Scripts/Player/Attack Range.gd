@@ -1,12 +1,14 @@
 extends Area2D
+class_name atkrange
+
 
 var playerdamagetoenemy: enemyhealth
 var menemy: meleeenemy
 var collisiondirection: Vector2
 
+
 var enemyexitedrange : bool = true
 @export var debug : Label
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,9 +16,7 @@ func _ready():
 	playerdamagetoenemy = enemyhealth.new()
 
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("attack") and not enemyexitedrange:
-		playerdamagetoenemy.take_damage(10) 
-		push_warning("enemy hitting")
+	debugperformattack()
 	collisiondirection = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if collisiondirection.x > 0:
 		scale.x = -1  # Face right
@@ -40,3 +40,8 @@ func _on_body_exited(body):
 			enemyexitedrange = true
 			debug.text = str(enemyexitedrange)
 			push_warning("enemy exited")
+
+func debugperformattack():
+	if Input.is_action_just_pressed("attack") and not enemyexitedrange:
+		playerdamagetoenemy.take_damage(10) 
+		push_warning("enemy hitting")

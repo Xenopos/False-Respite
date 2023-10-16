@@ -8,7 +8,7 @@ class_name Shizuka extends CharacterBody2D
 @onready var progressBar: ProgressBar = $ProgressBar
 @onready var timercountdown: Timer = $Timer
 
-var lockskill : bool = true
+var lockskill : bool = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var animationstay: bool = false
 var direction: Vector2 = Vector2.ZERO
@@ -148,12 +148,12 @@ func Dodash():
 	SPEED = 400
 	set_emitting = true
 	if direction.x == 0:
-		SPEED = 80
+		SPEED = 100
 	else:
-		SPEED = 400
+		SPEED = 600
 
 func Skill_activation():
-#	if not lockskill:
+	if not lockskill:
 		if (Input.is_action_just_pressed("Skill1") and is_on_floor() and not isAttacking):
 			skill1activate()
 		elif (Input.is_action_just_released("Skill1") and is_on_floor()):
@@ -164,14 +164,13 @@ func Skill_activation():
 			skill3activate()
 
 func skill1activate():
-#	if not lockskill:
+	if not lockskill:
 		push_warning("skill1 activated")
 		Allow_jump = false
 		animated_sprite.play("dash ready")
 		animationstay = true
 		SPEED = 0
 		$SFX/charge.play()
-		start_cooldown(5.0)
 
 func skill1releaseactivate():
 	push_warning("skill1 release activated")
@@ -180,6 +179,7 @@ func skill1releaseactivate():
 	$SFX/execute.play()
 	velocity = DashDirection.normalized() * 1200
 	animationstay = true
+	start_cooldown(5.0)
 	$SFX/charge.stop()
 	if direction.x == 0:
 		SPEED = 80
@@ -187,7 +187,7 @@ func skill1releaseactivate():
 		SPEED = 400
 
 func skill2activate():
-#	if not lockskill:
+	if not lockskill:
 		push_warning("skill2 activated")
 		animated_sprite.play("spin")
 		$SFX/spiiin.play()
@@ -198,7 +198,7 @@ func skill2activate():
 		start_cooldown(5.0)
 
 func skill3activate():
-#	if not lockskill:
+	if not lockskill:
 		push_warning("skill3 activated")
 		animated_sprite.play("upyogo")
 		animationstay = true
@@ -207,11 +207,11 @@ func skill3activate():
 		start_cooldown(5.0)
 
 func start_cooldown(duration):
-	push_warning("Starting cooldown for {} seconds".format([duration]))
-#	lockskill = true
+	push_warning("Starting cooldown for {} seconds", duration)
+	lockskill = true
 	cooldown_timer.start(duration)
 
 func _on_CooldownTimer_timeout():
 	push_warning("Cooldown timer timed out")
-#	lockskill = false
+	lockskill = false
 

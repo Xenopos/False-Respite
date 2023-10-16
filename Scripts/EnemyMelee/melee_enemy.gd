@@ -15,7 +15,6 @@ var player: Node2D = null
 func _ready():
 	patrol_points.append(Vector2(1, 5))
 	choose_random_patrol_point()
-
 func update_facing_direction_enemy():
 	if direction.x < 0:
 		meleeenemyanim.flip_h = false

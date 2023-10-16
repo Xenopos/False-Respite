@@ -1,18 +1,18 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1697404973
+::res://::1697457681
 area_2d.gd::GDScript::-1::1697214676::0::1::::<>TileMap<>::
-area_2d.tscn::PackedScene::7043692875405836508::1697402661::0::1::::<><>::uid://vvywlpf5p83y::::res://Visuals/Animations/map.png<>uid://x6ykrgfako55::::res://Player.tscn<>uid://caj8lkojakln6::::res://Scenes/melee_enemy.tscn<>res://crt_exp.gdshader<>uid://b0qkngn51vocc::::res://Visuals/Backgrounds and tilemap/Parallax back.png<>uid://jo6tyfweiytv::::res://BGM/bullshit.wav
+area_2d.tscn::PackedScene::7043692875405836508::1697441367::0::1::::<><>::uid://vvywlpf5p83y::::res://Visuals/Animations/map.png<>uid://x6ykrgfako55::::res://Player.tscn<>uid://caj8lkojakln6::::res://Scenes/melee_enemy.tscn<>res://crt_exp.gdshader<>uid://b0qkngn51vocc::::res://Visuals/Backgrounds and tilemap/Parallax back.png<>uid://c1u442m6b583y::::res://BGM/Distress upon the damsel demo.wav
 back.tscn::PackedScene::2897091630407258363::1696180047::0::1::::<><>::uid://c7maufabkf645
 crt.tscn::PackedScene::1711127681370045032::1696180019::0::1::::<><>::uid://c7maufabkf645
-crt_exp.gdshader::Shader::-1::1697402674::0::1::::<><>::
+crt_exp.gdshader::Shader::-1::1697441390::0::1::::<><>::
 Health System.gd::GDScript::-1::1696610754::0::1::::<>Node<>::
 icon.svg::CompressedTexture2D::3245154964638336596::1685623186::1685623194::1::::<><>::
 Mainmenu.gd::GDScript::-1::1696607029::0::1::::<>Control<>::
-Player.gd::GDScript::-1::1697365841::0::1::::Shizuka<>CharacterBody2D<>::
-Player.tscn::PackedScene::1679815082209408322::1697402661::0::1::::<><>::res://Player.gd<>uid://d0o6wt3l5qvnh::::res://Visuals/Animations/idle.png<>uid://cipa3sl7tn3pn::::res://Visuals/Animations/jump.png<>uid://8ogrtqyeacau::::res://Visuals/Animations/dash.png<>uid://d0dljy5hr7kfw::::res://Visuals/Animations/run.png<>uid://ds66jmc1spcbn::::res://Visuals/Animations/dashattack.png<>uid://bxxpx77x21gwc::::res://sfx/att.ogg<>uid://bgd44t1xkvm5b::::res://Visuals/Animations/spiiin.png<>uid://cworrknv3pk1t::::res://Visuals/Animations/upyogo.png<>uid://bfq24tfvd021i::::res://sfx/jum.ogg<>uid://bq4x4i3owe7nq::::res://sfx/dash.ogg<>uid://yw51ynrvhs2x::::res://Visuals/Animations/attack.png<>uid://bo2c5u6r6783k::::res://sfx/execute.wav<>uid://uwrak6ml7ei0::::res://sfx/spin.wav<>uid://ch5eq1crj1fc1::::res://sfx/fly.wav<>res://Scripts/Player/Attack Range.gd<>uid://hmcomoc2gp5e::::res://sfx/charging.wav<>uid://bu4ut4acw6q7n::::res://Silver.ttf<>res://Scripts/Player/PlayerHealthSystem.gd<>res://Scripts/Player/StaminaSystem.gd
+Player.gd::GDScript::-1::1697408148::0::1::::Shizuka<>CharacterBody2D<>::
+Player.tscn::PackedScene::1679815082209408322::1697440735::0::1::::<><>::res://Player.gd<>res://Shaders/try.gdshader<>uid://d0o6wt3l5qvnh::::res://Visuals/Animations/idle.png<>uid://cipa3sl7tn3pn::::res://Visuals/Animations/jump.png<>uid://8ogrtqyeacau::::res://Visuals/Animations/dash.png<>uid://d0dljy5hr7kfw::::res://Visuals/Animations/run.png<>uid://ds66jmc1spcbn::::res://Visuals/Animations/dashattack.png<>uid://bxxpx77x21gwc::::res://sfx/att.ogg<>uid://bgd44t1xkvm5b::::res://Visuals/Animations/spiiin.png<>uid://cworrknv3pk1t::::res://Visuals/Animations/upyogo.png<>uid://bfq24tfvd021i::::res://sfx/jum.ogg<>uid://bq4x4i3owe7nq::::res://sfx/dash.ogg<>uid://yw51ynrvhs2x::::res://Visuals/Animations/attack.png<>uid://bo2c5u6r6783k::::res://sfx/execute.wav<>uid://uwrak6ml7ei0::::res://sfx/spin.wav<>uid://ch5eq1crj1fc1::::res://sfx/fly.wav<>res://Scripts/Player/Attack Range.gd<>uid://hmcomoc2gp5e::::res://sfx/charging.wav<>uid://bu4ut4acw6q7n::::res://Silver.ttf<>res://Scripts/Player/PlayerHealthSystem.gd<>uid://guq4b5ompm68::::res://Themes/Sample_theme.tres<>res://Scripts/Player/StaminaSystem.gd<>uid://dg5d8hajbdy2s::::res://Visuals/UI/thrust.png<>uid://cjb3lbu73favc::::res://Visuals/UI/slashdash.png<>uid://dx74qtsirtlr5::::res://Visuals/UI/spin.png<>uid://cucd25pmn58l1::::res://Visuals/UI/jump.png<>uid://cmcrb5y0320x6::::res://Visuals/UI/airbornepng.png
 Silver.ttf::FontFile::3851314304559666981::1685811492::1685811483::1::::<><>::
 UI.tscn::PackedScene::6917562207827417096::1696183008::0::1::::<><>::
-::res://addons/::1696667802
+::res://addons/::1697440323
 ::res://addons/2d_essentials/::1696608665
 plugin.cfg::TextFile::-1::1696608665::0::1::::<><>::
 plugin.gd::GDScript::-1::1696608665::0::1::::<>EditorPlugin<>::
@@ -119,27 +119,70 @@ ring_buffer.gd::GDScript::-1::1696667803::0::1::::<>RefCounted<>::
 state_chart_debugger.gd::GDScript::-1::1696667803::0::1::::<>Control<>res://addons/godot_state_charts/utilities/state_chart_debugger.svg::
 state_chart_debugger.svg::CompressedTexture2D::3337082457498567773::1696667803::1696667803::1::::<><>::
 state_chart_debugger.tscn::PackedScene::2572857904024480472::1696667803::0::1::::<><>::res://addons/godot_state_charts/utilities/state_chart_debugger.gd
-::res://BGM/::1697338699
+::res://addons/ShaderLib/::1697440323
+::res://addons/ShaderLib/Maths/::1697440323
+::res://addons/ShaderLib/Maths/Wave/::1697440323
+NoiseSineWave.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeMathsNoiseSineWave<>VisualShaderNodeCustom<>::
+NoiseSineWave.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+SawtoothWave.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeMathsSawtoothWave<>VisualShaderNodeCustom<>::
+SquareWave.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeMathsSquareWave<>VisualShaderNodeCustom<>::
+TriangleWave.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeMathsTriangleWave<>VisualShaderNodeCustom<>::
+::res://addons/ShaderLib/Procedural/::1697440323
+CheckerBoard.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeProceduralCheckerBoard<>VisualShaderNodeCustom<>::
+CheckerBoard.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+::res://addons/ShaderLib/Procedural/Noise/::1697440323
+GradientNoise.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeProceduralGradientNoise<>VisualShaderNodeCustom<>::
+GradientNoise.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+SimpleNoise.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeProceduralSimpleNoise<>VisualShaderNodeCustom<>::
+SimpleNoise.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+Voronoi.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeProceduralVoronoi<>VisualShaderNodeCustom<>::
+Voronoi.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+::res://addons/ShaderLib/Procedural/Shapes/::1697440323
+Ellipse.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeProceduralEllipse<>VisualShaderNodeCustom<>::
+Ellipse.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+Polygon.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeProceduralPolygon<>VisualShaderNodeCustom<>::
+Polygon.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+Rectangle.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeProceduralRectangle<>VisualShaderNodeCustom<>::
+Rectangle.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+RoundedPolygon.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeProceduralRoundedPolygon<>VisualShaderNodeCustom<>::
+RoundedPolygon.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+RoundedRectangle.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeProceduralRoundedRectangle<>VisualShaderNodeCustom<>::
+RoundedRectangle.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+::res://addons/ShaderLib/UV/::1697440323
+FlipbookUV.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeUVFlipbook<>VisualShaderNodeCustom<>::
+FlipbookUV.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+RadialShearUV.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeUVRadialShear<>VisualShaderNodeCustom<>::
+RadialShearUV.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+RotateUV.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeUVRotate<>VisualShaderNodeCustom<>::
+RotateUV.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+SpherizeUV.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeUVSpherize<>VisualShaderNodeCustom<>::
+SpherizeUV.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+TilingAndOffsetUV.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeUVTilingAndOffset<>VisualShaderNodeCustom<>::
+TwirlUV.gd::GDScript::-1::1697440323::0::1::::VisualShaderNodeUVTwirl<>VisualShaderNodeCustom<>::
+TwirlUV.gdshaderinc::ShaderInclude::-1::1697440323::0::1::::<><>::
+::res://BGM/::1697426109
 bullshit.wav::AudioStreamWAV::662518307448774779::1697337516::1697337776::1::::<><>::
+Distress upon the damsel demo.wav::AudioStreamWAV::6640852875948868660::1697426106::1697426109::1::::<><>::
 untitled.mp3::AudioStreamMP3::8933684362784539994::1697338657::1697338699::1::::<><>::
-::res://Scenes/::1697402661
-Mainmenu.tscn::PackedScene::4027433554550138725::1697402661::0::1::::<><>::uid://bmajl2qnk0fvs::::res://Visuals/UI/Main_menu.png<>res://Mainmenu.gd<>uid://guq4b5ompm68::::res://Themes/Sample_theme.tres<>uid://d0jsqgrv4x68u::::res://BGM/untitled.mp3
+::res://Scenes/::1697440735
+Mainmenu.tscn::PackedScene::4027433554550138725::1697440735::0::1::::<><>::uid://bmajl2qnk0fvs::::res://Visuals/UI/Main_menu.png<>res://Mainmenu.gd<>uid://guq4b5ompm68::::res://Themes/Sample_theme.tres<>uid://d0jsqgrv4x68u::::res://BGM/untitled.mp3
 melee_enemy.gd::GDScript::-1::1696642131::0::1::::<>CharacterBody2D<>::
-melee_enemy.tscn::PackedScene::4793444618937075573::1697402661::0::1::::<><>::uid://cysb84tnghojp::::res://Visuals/Spritesheets/MEnemy_basic_attack.png<>res://Scripts/EnemyMelee/Enemy_Health.gd<>res://Scripts/EnemyMelee/melee_enemy.gd<>uid://c862cu2if06l::::res://Visuals/Spritesheets/MEnemy_idle.png<>uid://bdw163caj26rx::::res://Visuals/Spritesheets/MEnemy_jump.png<>uid://dd5bkig6lnpg2::::res://Visuals/Spritesheets/MEnemy_run.png<>uid://cq2nf7lli1xdq::::res://Visuals/Spritesheets/MEnemy_thrust.png<>res://Scripts/EnemyMelee/AttackRange.gd<>uid://bu4ut4acw6q7n::::res://Silver.ttf
+melee_enemy.tscn::PackedScene::4793444618937075573::1697440735::0::1::::<><>::uid://cysb84tnghojp::::res://Visuals/Spritesheets/MEnemy_basic_attack.png<>res://Scripts/EnemyMelee/Enemy_Health.gd<>res://Scripts/EnemyMelee/melee_enemy.gd<>uid://c862cu2if06l::::res://Visuals/Spritesheets/MEnemy_idle.png<>uid://bdw163caj26rx::::res://Visuals/Spritesheets/MEnemy_jump.png<>uid://dd5bkig6lnpg2::::res://Visuals/Spritesheets/MEnemy_run.png<>uid://cq2nf7lli1xdq::::res://Visuals/Spritesheets/MEnemy_thrust.png<>res://Scripts/EnemyMelee/AttackRange.gd<>uid://bu4ut4acw6q7n::::res://Silver.ttf
 Pause.tscn::PackedScene::8575948534924364513::1697213854::0::1::::<><>::uid://1c722hjx0sn5
+pause_button.tscn::PackedScene::7368873374498724879::1697440735::0::1::::<><>::
 ::res://Scripts/::1696680741
-::res://Scripts/EnemyMelee/::1697401909
+::res://Scripts/EnemyMelee/::1697439456
 AttackRange.gd::GDScript::-1::1697399530::0::1::::<>Area2D<>::
 Enemy_Damage_to_Player.gd::GDScript::-1::1697311140::0::1::::enemy_damage_to_player<>Node<>::
-Enemy_Health.gd::GDScript::-1::1697401909::0::1::::enemyhealth<>Node<>::
+Enemy_Health.gd::GDScript::-1::1697439456::0::1::::enemyhealth<>Node<>::
 Hurt_State.gd::GDScript::-1::1696685348::0::1::::HurtState<>State<>::
 Idle_State.gd::GDScript::-1::1696701163::0::1::::IdleState<>State<>::
-melee_enemy.gd::GDScript::-1::1697316329::0::1::::meleeenemy<>CharacterBody2D<>::
+melee_enemy.gd::GDScript::-1::1697438202::0::1::::meleeenemy<>CharacterBody2D<>::
 State.gd::GDScript::-1::1697221876::0::1::::State<>Node<>::
-::res://Scripts/Player/::1697402638
-Attack Range.gd::GDScript::-1::1697402638::0::1::::<>Area2D<>::
+::res://Scripts/Player/::1697438224
+Attack Range.gd::GDScript::-1::1697438224::0::1::::atkrange<>Area2D<>::
 DamagetoEnemy.gd::GDScript::-1::1697313737::0::1::::player_damage_to_enemy<>Node<>::
-PlayerHealthSystem.gd::GDScript::-1::1697401160::0::1::::healthsys<>Node<>::
+PlayerHealthSystem.gd::GDScript::-1::1697408179::0::1::::healthsys<>Node<>::
 Skills.gd::GDScript::-1::1697364567::0::1::::Skills<>Node<>::
 StaminaSystem.gd::GDScript::-1::1697307207::0::1::::staminasys<>Node<>::
 ::res://sfx/::1696179980
@@ -151,10 +194,11 @@ execute.wav::AudioStreamWAV::3424978800958913430::1686204016::1696179980::1::::<
 fly.wav::AudioStreamWAV::5326367415629935858::1686208813::1696179980::1::::<><>::
 jum.ogg::AudioStreamOggVorbis::2772087099402998336::1685988211::1685988216::1::::<><>::
 spin.wav::AudioStreamWAV::1450225945910618409::1686203889::1696179980::1::::<><>::
-::res://Shaders/::1697402674
-outlineshader.gdshader::Shader::-1::1697402674::0::1::::<><>::
-::res://Themes/::1697399462
-Sample_theme.tres::Theme::463443976337114343::1697399462::0::1::::<><>::uid://bu4ut4acw6q7n::::res://Silver.ttf
+::res://Shaders/::1697441390
+outlineshader.gdshader::Shader::-1::1697441390::0::1::::<><>::
+try.gdshader::Shader::-1::1697441390::0::1::::<><>::
+::res://Themes/::1697437884
+Sample_theme.tres::Theme::463443976337114343::1697437884::0::1::::<><>::uid://bu4ut4acw6q7n::::res://Silver.ttf<>uid://caoe6i4uvu1ox::::res://Visuals/UI/normal button.png<>uid://c33rrbuw1s1wb::::res://Visuals/UI/button pressed and hold.png
 ::res://Visuals/::1697017104
 ::res://Visuals/Animations/::1696686669
 attack.png::CompressedTexture2D::1731817779770236509::1696341255::1696341262::1::::<><>::
@@ -180,5 +224,13 @@ MEnemy_idle.png::CompressedTexture2D::210432733551692181::1696339233::1696339820
 MEnemy_jump.png::CompressedTexture2D::2644039000376030653::1696339233::1696339836::1::::<><>::
 MEnemy_run.png::CompressedTexture2D::7431838920426363035::1696339233::1696339863::1::::<><>::
 MEnemy_thrust.png::CompressedTexture2D::5952401013081404866::1696339729::1696339872::1::::<><>::
-::res://Visuals/UI/::1696606405
+::res://Visuals/UI/::1697427828
+airbornepng.png::CompressedTexture2D::5620271835171849289::1697427579::1697427756::1::::<><>::
+button pressed and hold.png::CompressedTexture2D::6796994198192696517::1697427828::1697427828::1::::<><>::
+jump.png::CompressedTexture2D::6180978962505086612::1697427594::1697427756::1::::<><>::
 Main_menu.png::CompressedTexture2D::3229254347469679224::1696606404::1696606405::1::::<><>::
+normal button.png::CompressedTexture2D::4802041349448873995::1697426759::1697427756::1::::<><>::
+slashdash.png::CompressedTexture2D::5408325142323954868::1697427557::1697427756::1::::<><>::
+spin.png::CompressedTexture2D::8841455934513760052::1697427495::1697427756::1::::<><>::
+thrust.png::CompressedTexture2D::7642567895780304464::1697427538::1697427756::1::::<><>::
+::res://Visuals/UI/pause menu obj/::1697427680

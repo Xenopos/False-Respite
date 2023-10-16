@@ -192,7 +192,7 @@ animations = [{
 size = Vector2(12, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ktw3"]
-size = Vector2(20, 18.5)
+size = Vector2(20, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vf0u7"]
 size = Vector2(224, 128)
@@ -205,6 +205,16 @@ script = ExtResource("1_rprsq")
 
 [node name="Enemy_Health" type="Node" parent="EnemySystem"]
 script = ExtResource("1_hmvur")
+
+[node name="Healthbar" type="Label" parent="EnemySystem/Enemy_Health"]
+offset_left = 11.0
+offset_top = -16.0
+offset_right = 51.0
+offset_bottom = 8.0001
+scale = Vector2(0.235531, 0.46957)
+theme_override_fonts/font = ExtResource("9_5waha")
+theme_override_font_sizes/font_size = 19
+horizontal_alignment = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -221,8 +231,9 @@ shape = SubResource("RectangleShape2D_t57j2")
 script = ExtResource("8_p0v7j")
 
 [node name="Attack _Range" type="CollisionShape2D" parent="AttackRange"]
-position = Vector2(-11.5, -1.25)
+position = Vector2(-11.5, 0)
 shape = SubResource("RectangleShape2D_2ktw3")
+debug_color = Color(0.988235, 0, 0.321569, 0.419608)
 
 [node name="SFX" type="Node" parent="."]
 
@@ -251,15 +262,5 @@ offset_bottom = 9.99919
 scale = Vector2(0.0761124, 0.265617)
 theme_override_fonts/font = ExtResource("9_5waha")
 theme_override_font_sizes/font_size = 19
-show_percentage = false
 
-[node name="Label" type="Label" parent="Debug_healthbar"]
-layout_mode = 0
-offset_left = -6.4395
-offset_top = -16.2866
-offset_right = 33.5605
-offset_bottom = 7.71341
-scale = Vector2(0.296655, 0.480001)
-theme_override_fonts/font = ExtResource("9_5waha")
-theme_override_font_sizes/font_size = 19
-horizontal_alignment = 1
+[connection signal="value_changed" from="Debug_healthbar/ProgressBar" to="EnemySystem/Enemy_Health" method="_on_progress_bar_value_changed"]
