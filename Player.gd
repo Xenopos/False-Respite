@@ -3,11 +3,13 @@ class_name Shizuka extends CharacterBody2D
 #------------------------------------#
 @export var SPEED = 80.0
 @export var JUMP_VELOCITY = -180.0
+@onready var playerhealth : healthsys = healthsys.new()
 #------------------------------------#
 @onready var dash_value = 200
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var timercountdown: Timer = $Timer
 @onready var skill1cd: Label = $UI/cdnotif/Skill1
+@onready var healthbar : ProgressBar = $Healthbar
 #@onready var skill2cd: Label = $UI/cdnotif/Skill2
 #@onready var skill3cd: Label = $UI/cdnotif/Skill3
 #@onready var skill4cd: Label = $UI/cdnotif/Skill4
@@ -39,7 +41,9 @@ func _ready():
 	cooldown_timer.connect("timeout", Callable(self, "_on_CooldownTimer_timeout"))
 	skill2active  = true
 	skill3active  = true
+
 func _physics_process(delta):
+	healthbar.value = playerhealth.current_health
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		onair = true
@@ -151,7 +155,7 @@ func Skill_activation():
 	if not lockskill:
 		if (Input.is_action_just_pressed("Skill1") and is_on_floor() and not isAttacking):
 			skill1activate()
-		elif (Input.is_action_just_released("Skill1") and is_on_floor()):
+		elif (Input.is_action_just_released("Skill1") and is_on_floor() and not lockskill):
 			skill1releaseactivate()
 		if (Input.is_action_just_pressed("Skill2") and not is_on_floor()):
 			skill2activate()

@@ -97,7 +97,7 @@ region = Rect2(384, 0, 64, 16)
 [sub_resource type="SpriteFrames" id="SpriteFrames_82n88"]
 animations = [{
 "frames": [{
-"duration": 5.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_y2yqi")
 }, {
 "duration": 1.0,
@@ -195,7 +195,7 @@ size = Vector2(12, 16)
 size = Vector2(20, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xq5pf"]
-size = Vector2(32.4878, 10.9756)
+size = Vector2(65.8536, 31.1707)
 
 [node name="Melee_Enemy" type="CharacterBody2D"]
 z_index = 100
@@ -204,6 +204,10 @@ position = Vector2(235, 125)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_rprsq")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="EnemySystem" type="Node" parent="."]
 
@@ -218,8 +222,6 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_82n88")
 animation = &"basic_attack"
 autoplay = "idle"
-frame = 6
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_t57j2")
@@ -238,7 +240,7 @@ debug_color = Color(0.988235, 0, 0.321569, 0.419608)
 script = ExtResource("9_yqu7y")
 
 [node name="detectattack" type="CollisionShape2D" parent="detectionrange"]
-position = Vector2(0, -4.5)
+position = Vector2(0, -27.5)
 scale = Vector2(2.27778, 2.27778)
 shape = SubResource("RectangleShape2D_xq5pf")
 debug_color = Color(0.54902, 0.403922, 1, 0.419608)
@@ -251,6 +253,8 @@ anchor_right = 0.5
 offset_bottom = 40.0
 grow_horizontal = 2
 scale = Vector2(5.74578, 2.33321)
+
+[node name="AttackCooldownTimer" type="Timer" parent="."]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_body_entered"]

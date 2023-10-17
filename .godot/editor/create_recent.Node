@@ -1,7 +1,9 @@
+AnimationPlayer
+AnimationTree
 Timer
+Label
 CollisionShape2D
 Area2D
-Label
 ProgressBar
 Panel
 ItemList
@@ -29,4 +31,3 @@ GPUParticlesAttractorVectorField3D
 MeshInstance2D
 NavigationAgent2D
 NavigationRegion2D
-NavigationLink2D

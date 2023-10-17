@@ -32,7 +32,6 @@ func _on_body_entered(body):
 		if (enemy_system and enemy_system.has_node("Enemy_Health")):
 			enemyexitedrange = false
 			debug.text = str(enemyexitedrange)
-			push_warning("enemy entered")
 
 func _on_body_exited(body):
 # Check if the body is an Enemy
@@ -41,7 +40,6 @@ func _on_body_exited(body):
 		if (enemy_system and enemy_system.has_node("Enemy_Health")):
 			enemyexitedrange = true
 			debug.text = str(enemyexitedrange)
-			push_warning("enemy exited")
 
 func debugperformattack():
 	if Input.is_action_just_pressed("attack") and not enemyexitedrange:

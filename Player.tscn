@@ -482,6 +482,15 @@ material = SubResource("ShaderMaterial_y0ewy")
 script = ExtResource("1_0hjxu")
 cooldown_timer = NodePath("Timer")
 
+[node name="Healthbar" type="ProgressBar" parent="."]
+texture_filter = 1
+offset_left = -216.0
+offset_top = -119.0
+offset_right = -63.9998
+offset_bottom = -92.0001
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.4, 1.4)
 position_smoothing_enabled = true
@@ -712,16 +721,6 @@ theme_override_font_sizes/font_size = 19
 text = "Skill Ready"
 horizontal_alignment = 1
 
-[node name="Healthbar" type="ProgressBar" parent="UI"]
-texture_filter = 1
-layout_mode = 0
-offset_left = -320.93
-offset_top = -189.535
-offset_right = -168.93
-offset_bottom = -162.535
-theme_override_fonts/font = ExtResource("19_uhpr1")
-theme_override_font_sizes/font_size = 19
-
 [node name="Label" type="Label" parent="UI"]
 layout_mode = 0
 offset_left = -90.6977
@@ -731,6 +730,10 @@ offset_bottom = -65.5349
 scale = Vector2(0.716597, 0.597274)
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [connection signal="body_entered" from="Attack Range" to="Attack Range" method="_on_body_entered"]
 [connection signal="body_exited" from="Attack Range" to="Attack Range" method="_on_body_exited"]

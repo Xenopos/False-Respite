@@ -1,14 +1,10 @@
 res://Scenes/melee_enemy.tscn
 res://Shaders/try.gdshader
 res://Themes/Sample_theme.tres
-res://crt_exp.gdshader
 res://Shaders/outlineshader.gdshader
-res://Scripts/EnemyMelee/melee_enemy.gd
-res://area_2d.tscn
+res://crt_exp.gdshader
 res://Player.tscn
-res://Scenes/Mainmenu.tscn
-res://Scenes/pause_button.tscn
-res://Scenes/Pause.tscn
-res://Scripts/EnemyMelee/AttackRange.gd
-res://Scripts/Player/Skilldamagearea.gd
+res://Scripts/Player/Attack Range.gd
+res://Scripts/EnemyMelee/melee_enemy.gd
 res://Scripts/EnemyMelee/detectionrange.gd
+res://Scripts/Player/PlayerHealthSystem.gd
