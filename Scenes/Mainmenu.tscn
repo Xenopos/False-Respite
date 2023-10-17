@@ -25,18 +25,19 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 43.0
-offset_top = -2.0
-offset_right = 243.0
-offset_bottom = 126.0
+offset_left = 57.0
+offset_top = -8.0
+offset_right = 199.0
+offset_bottom = 88.0
 grow_vertical = 2
-scale = Vector2(0.786088, 0.60315)
+scale = Vector2(1.09125, 0.810545)
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_akema")
 text = "Start"
 alignment = 0
+icon_alignment = 2
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2

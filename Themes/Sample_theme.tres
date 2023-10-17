@@ -1,6 +1,9 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://guq4b5ompm68"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://guq4b5ompm68"]
 
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="1_cfpsq"]
+[ext_resource type="Texture2D" uid="uid://dwchlt52p30ey" path="res://Visuals/UI/gnhighlighted.png" id="2_quv8g"]
+[ext_resource type="Texture2D" uid="uid://b5tf7buon3qd4" path="res://Visuals/UI/gbnormal.png" id="3_lowf3"]
+[ext_resource type="Texture2D" uid="uid://dc1em4sm78riy" path="res://Visuals/UI/gbbuttonclicked.png" id="4_ltlm6"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_oyfoi"]
 
@@ -28,15 +31,13 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2cwey"]
-texture_margin_left = 36.0
-draw_center = false
+texture = ExtResource("2_quv8g")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tgtm4"]
-texture_margin_left = 36.0
+texture = ExtResource("3_lowf3")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fnndi"]
-texture_margin_left = 36.0
-draw_center = false
+texture = ExtResource("4_ltlm6")
 
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
@@ -52,9 +53,9 @@ Button/colors/icon_hover_color = Color(1, 1, 1, 1)
 Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
 Button/colors/icon_normal_color = Color(1, 1, 1, 1)
 Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
-Button/constants/h_separation = 12
+Button/constants/h_separation = 21
 Button/constants/icon_max_width = 0
-Button/constants/outline_size = 0
+Button/constants/outline_size = -1
 Button/font_sizes/font_size = 19
 Button/fonts/font = ExtResource("1_cfpsq")
 Button/icons/button1 = SubResource("CanvasTexture_oyfoi")

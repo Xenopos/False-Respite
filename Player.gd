@@ -133,17 +133,19 @@ func dash():
 		Dodash()
 
 func Dodash():
-	$SFX/dash.play()
-	animated_sprite.play("dash")
-	velocity = DashDirection.normalized() * 1200
-	SPEED = DashDirection * dash_value
-	animationstay = true
-	SPEED = 400
-	set_emitting = true
-	if direction.x == 0:
-		SPEED = 100
-	else:
-		SPEED = 600
+	if not lockskill:
+		$SFX/dash.play()
+		animated_sprite.play("dash")
+		velocity = DashDirection.normalized() * 1200
+		SPEED = DashDirection * dash_value
+		animationstay = true
+		SPEED = 400
+		set_emitting = true
+		start_cooldown(0.8)
+		if direction.x == 0:
+			SPEED = 100
+		else:
+			SPEED = 600
 
 func Skill_activation():
 	if not lockskill:

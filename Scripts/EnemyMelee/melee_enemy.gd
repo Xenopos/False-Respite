@@ -1,45 +1,36 @@
-class_name meleeenemy extends CharacterBody2D
-
-
+extends CharacterBody2D
+class_name meleeenemy
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var patrol_points = []
-var current_target = Vector2()
-var time_since_change = 0.0
-var time_to_wait = 2.0
-var player: Node2D = null
+var player: Node2D
 
-@onready var meleeenemyanim : AnimatedSprite2D = $AnimatedSprite2D
-@onready var Enemy_speed = 10
-@onready var direction = Vector2.ZERO
-
+@onready var meleeEnemyAnim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var enemySpeed = 80
+var direction = Vector2.ZERO
 
 func _ready():
-	patrol_points.append(Vector2(1, 5))
-	choose_random_patrol_point()
+	player = get_tree().get_first_node_in_group("Player")
+	if player:
+		push_warning("Player has been found.")
+	else:
+		push_warning("Player not found.")
+
 
 func update_facing_direction_enemy():
 	if direction.x < 0:
-		meleeenemyanim.flip_h = false
+		meleeEnemyAnim.flip_h = false
 	elif direction.x > 0:
-		meleeenemyanim.flip_h = true
-	if direction.x  > 0:
-		meleeenemyanim.play("run")
+		meleeEnemyAnim.flip_h = true
 
-func choose_random_patrol_point():
-	current_target = patrol_points[randi() % patrol_points.size()]
-	time_since_change = 0.0
+	if direction.x != 0:  
+		meleeEnemyAnim.play("run")
 
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	if position.distance_to(current_target) < 5:
-		time_since_change += delta
-		if time_since_change > time_to_wait:
-			choose_random_patrol_point()
-	else:
-		direction = current_target - position
-		direction = direction.normalized()
-		velocity.x = direction.x * Enemy_speed
+	if player:
+		direction.x = 1 if player.global_position.x > global_position.x else -1
+		velocity.x = direction.x * enemySpeed
+
 	update_facing_direction_enemy()
 	move_and_slide()

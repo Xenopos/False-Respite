@@ -475,7 +475,7 @@ animations = [{
 "speed": 50.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer") groups=["Player"]]
 texture_filter = 1
 texture_repeat = 1
 material = SubResource("ShaderMaterial_y0ewy")
@@ -486,10 +486,11 @@ cooldown_timer = NodePath("Timer")
 zoom = Vector2(1.4, 1.4)
 position_smoothing_enabled = true
 position_smoothing_speed = 150.0
-drag_left_margin = 0.03
-drag_top_margin = 0.03
-drag_right_margin = 0.03
-drag_bottom_margin = 0.03
+drag_horizontal_enabled = true
+drag_left_margin = 0.01
+drag_top_margin = 0.01
+drag_right_margin = 0.01
+drag_bottom_margin = 0.01
 
 [node name="PlayerSystem" type="Node" parent="."]
 
