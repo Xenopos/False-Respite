@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=73 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Shader" path="res://Shaders/try.gdshader" id="1_e2bdd"]
@@ -24,8 +24,6 @@
 [ext_resource type="Script" path="res://Scripts/Player/StaminaSystem.gd" id="22_65adt"]
 [ext_resource type="Script" path="res://Skillcontainer.gd" id="22_lecu5"]
 [ext_resource type="Texture2D" uid="uid://bnxrxams43yf3" path="res://Visuals/UI/skill1holdorcool.png" id="23_vl7hg"]
-[ext_resource type="Theme" uid="uid://guq4b5ompm68" path="res://Themes/Sample_theme.tres" id="25_k0bfw"]
-[ext_resource type="Script" path="res://Scripts/Player/Skilldamagearea.gd" id="26_1oknk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y0ewy"]
 shader = ExtResource("1_e2bdd")
@@ -36,8 +34,6 @@ shader_parameter/strip = 4.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
 size = Vector2(16.5, 15)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pab3p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2vt5"]
 size = Vector2(5, 15)
@@ -485,7 +481,8 @@ cooldown_timer = NodePath("Timer")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.4, 1.4)
 position_smoothing_enabled = true
-position_smoothing_speed = 150.0
+position_smoothing_speed = 10.0
+drag_horizontal_enabled = true
 drag_left_margin = 0.03
 drag_top_margin = 0.03
 drag_right_margin = 0.03
@@ -493,30 +490,21 @@ drag_bottom_margin = 0.03
 
 [node name="PlayerSystem" type="Node" parent="."]
 
-[node name="HealthSystem" type="Node" parent="PlayerSystem"]
+[node name="HealthSystem" type="Node" parent="PlayerSystem" node_paths=PackedStringArray("debughealth")]
 script = ExtResource("21_1012i")
+debughealth = NodePath("../../Debug/Debughealth")
 
 [node name="StaminaSystem" type="Node" parent="PlayerSystem"]
 script = ExtResource("22_65adt")
 
 [node name="Attack Range" type="Area2D" parent="." node_paths=PackedStringArray("debug")]
-collision_mask = 2
 script = ExtResource("17_6j0n5")
-debug = NodePath("../UI/Label")
+debug = NodePath("../Debug")
 
 [node name="GlobalAttackRange" type="CollisionShape2D" parent="Attack Range"]
 position = Vector2(-11.25, 0.5)
 shape = SubResource("RectangleShape2D_q2d0f")
 debug_color = Color(0.988235, 0, 0.321569, 0.419608)
-
-[node name="Skilldamagearea" type="Area2D" parent="."]
-scale = Vector2(1.22121, 1.22121)
-collision_mask = 2
-script = ExtResource("26_1oknk")
-
-[node name="Skill2damagearea" type="CollisionShape2D" parent="Skilldamagearea"]
-shape = SubResource("RectangleShape2D_pab3p")
-debug_color = Color(0.64295, 0.523206, 0.0190725, 0.42)
 
 [node name="SFX" type="Node2D" parent="."]
 
@@ -548,22 +536,32 @@ stream = ExtResource("17_o0kfb")
 pitch_scale = 0.68
 
 [node name="Timer" type="Timer" parent="."]
-process_callback = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_p2vt5")
+one_way_collision = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
 sprite_frames = SubResource("SpriteFrames_jubc4")
-animation = &"idle"
+animation = &"spin"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_s37oq")
 }
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+z_index = 1000
+texture_filter = 1
+offset_left = 24.0
+offset_top = 65.0
+offset_right = 28.0
+offset_bottom = 92.0
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
 
 [node name="UI" type="Control" parent="."]
 z_index = 10
@@ -579,10 +577,10 @@ scale = Vector2(0.86, 0.86)
 [node name="HpandSpcontainer" type="VBoxContainer" parent="UI"]
 texture_filter = 1
 layout_mode = 0
-offset_left = -148.837
-offset_top = -79.0698
-offset_right = -108.837
-offset_bottom = -71.0698
+offset_left = -149.0
+offset_top = -79.0
+offset_right = -109.0
+offset_bottom = -71.0
 scale = Vector2(1.17852, 0.49046)
 
 [node name="HealthBar" type="TextureProgressBar" parent="UI/HpandSpcontainer"]
@@ -694,45 +692,26 @@ theme_override_font_sizes/font_size = 19
 text = "Jump
 "
 
-[node name="cdnotif" type="HBoxContainer" parent="UI"]
-layout_mode = 0
-offset_left = -36.0465
-offset_top = 31.3954
-offset_right = 65.9535
-offset_bottom = 59.3954
-scale = Vector2(0.487145, 0.487145)
-alignment = 1
+[node name="Node2D" type="Node2D" parent="UI"]
 
-[node name="Skill1" type="Label" parent="UI/cdnotif"]
+[node name="Debug" type="Label" parent="."]
+offset_left = -153.0
+offset_top = -21.0
+offset_right = -113.0
+offset_bottom = 2.0
+scale = Vector2(0.55883, 0.5307)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+
+[node name="Debughealth" type="Label" parent="Debug"]
 layout_mode = 2
-theme = ExtResource("25_k0bfw")
-theme_override_fonts/font = ExtResource("19_uhpr1")
-theme_override_font_sizes/font_size = 19
-text = "Skill Ready"
-horizontal_alignment = 1
-
-[node name="Healthbar" type="ProgressBar" parent="UI"]
-texture_filter = 1
-layout_mode = 0
-offset_left = -320.93
-offset_top = -189.535
-offset_right = -168.93
-offset_bottom = -162.535
-theme_override_fonts/font = ExtResource("19_uhpr1")
-theme_override_font_sizes/font_size = 19
-
-[node name="Label" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = -90.6977
-offset_top = -89.5349
-offset_right = -48.6977
-offset_bottom = -65.5349
-scale = Vector2(0.716597, 0.597274)
+offset_left = 368.627
+offset_top = 237.422
+offset_right = 369.627
+offset_bottom = 258.422
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
 
 [connection signal="body_entered" from="Attack Range" to="Attack Range" method="_on_body_entered"]
 [connection signal="body_exited" from="Attack Range" to="Attack Range" method="_on_body_exited"]
-[connection signal="body_entered" from="Skilldamagearea" to="Skilldamagearea" method="_on_body_entered"]
-[connection signal="body_exited" from="Skilldamagearea" to="Skilldamagearea" method="_on_body_exited"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

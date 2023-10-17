@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg5d8hajbdy2s"
-path="res://.godot/imported/thrust.png-7d6c0250c9ddd7ef3f2f66d3182f646a.ctex"
+uid="uid://bnxrxams43yf3"
+path="res://.godot/imported/skill1holdorcool.png-303d7a5fc0a56b064a0929069b694f31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Visuals/UI/thrust.png"
-dest_files=["res://.godot/imported/thrust.png-7d6c0250c9ddd7ef3f2f66d3182f646a.ctex"]
+source_file="res://Visuals/UI/skill1holdorcool.png"
+dest_files=["res://.godot/imported/skill1holdorcool.png-303d7a5fc0a56b064a0929069b694f31.ctex"]
 
 [params]
 

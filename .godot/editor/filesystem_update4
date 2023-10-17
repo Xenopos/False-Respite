@@ -3,8 +3,11 @@ res://Shaders/try.gdshader
 res://Themes/Sample_theme.tres
 res://crt_exp.gdshader
 res://Shaders/outlineshader.gdshader
+res://Scripts/Player/Skilldamagearea.gd
 res://Player.gd
-res://area_2d.tscn
 res://Scenes/melee_enemy.tscn
+res://area_2d.tscn
 res://Scenes/Mainmenu.tscn
 res://Scenes/pause_button.tscn
+res://Scripts/EnemyMelee/melee_enemy.gd
+res://Scripts/EnemyMelee/Enemy_Health.gd

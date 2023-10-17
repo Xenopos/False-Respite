@@ -12,9 +12,11 @@ var player: Node2D = null
 @onready var Enemy_speed = 10
 @onready var direction = Vector2.ZERO
 
+
 func _ready():
 	patrol_points.append(Vector2(1, 5))
 	choose_random_patrol_point()
+
 func update_facing_direction_enemy():
 	if direction.x < 0:
 		meleeenemyanim.flip_h = false
@@ -39,6 +41,5 @@ func _physics_process(delta):
 		direction = current_target - position
 		direction = direction.normalized()
 		velocity.x = direction.x * Enemy_speed
-		
 	update_facing_direction_enemy()
 	move_and_slide()

@@ -1,18 +1,25 @@
 class_name Shizuka extends CharacterBody2D
 
+#------------------------------------#
 @export var SPEED = 80.0
 @export var JUMP_VELOCITY = -180.0
-
+#------------------------------------#
 @onready var dash_value = 200
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var progressBar: ProgressBar = $ProgressBar
 @onready var timercountdown: Timer = $Timer
+@onready var skill1cd: Label = $UI/cdnotif/Skill1
+#@onready var skill2cd: Label = $UI/cdnotif/Skill2
+#@onready var skill3cd: Label = $UI/cdnotif/Skill3
+#@onready var skill4cd: Label = $UI/cdnotif/Skill4
 
+#------------------------------------#
+var skill3active = true
+var skill2active  = true
 var lockskill : bool = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var animationstay: bool = false
 var direction: Vector2 = Vector2.ZERO
-var onair: bool = false
+@onready var onair: bool = false
 var isAttacking: bool = false
 @export var AttackCombo: int = 0
 var DashDirection: Vector2 = Vector2(0, 0)
@@ -26,30 +33,18 @@ var fillSpeed: float = 0.3 # Fill up in 3 seconds
 var set_emitting  : bool  = false
 var Allow_jump : bool = true
 @export var cooldown_timer: Timer
-
+#------------------------------------#
 func _ready():
 	add_to_group("Player")
 	cooldown_timer.connect("timeout", Callable(self, "_on_CooldownTimer_timeout"))
-	
+	skill2active  = true
+	skill3active  = true
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		onair = true
 	else:
 		onair = false
-
-	if holdingSkill1 == true:
-		timer += 1
-		progressBar.value += 1
-		
-	elif not holdingSkill1:
-		progressBar.value = 0
-		
-	else: 
-		progressBar.value = 0
-
-		if timer >= fillSpeed:
-			holdingSkill1 = false
 
 	direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if direction:
@@ -83,8 +78,6 @@ func jump():
 	animationstay = true
 	$SFX/jump.play()
 	animated_sprite.play("jump")
-	if not is_on_floor():
-		animationstay = false
 
 func _on_animated_sprite_2d_animation_finished():
 	if (
@@ -165,7 +158,6 @@ func Skill_activation():
 
 func skill1activate():
 	if not lockskill:
-		push_warning("skill1 activated")
 		Allow_jump = false
 		animated_sprite.play("dash ready")
 		animationstay = true
@@ -179,7 +171,7 @@ func skill1releaseactivate():
 	$SFX/execute.play()
 	velocity = DashDirection.normalized() * 1200
 	animationstay = true
-	start_cooldown(5.0)
+	start_cooldown(1.0)
 	$SFX/charge.stop()
 	if direction.x == 0:
 		SPEED = 80
@@ -188,30 +180,38 @@ func skill1releaseactivate():
 
 func skill2activate():
 	if not lockskill:
-		push_warning("skill2 activated")
 		animated_sprite.play("spin")
 		$SFX/spiiin.play()
 		if onair == true:
 			animationstay = true
 		if not onair:
 			animationstay = false
-		start_cooldown(5.0)
+		start_cooldown(0.5)
 
 func skill3activate():
 	if not lockskill:
+		skill3active = true
 		push_warning("skill3 activated")
 		animated_sprite.play("upyogo")
 		animationstay = true
 		SPEED = 0
 		$SFX/up.play()
-		start_cooldown(5.0)
+		start_cooldown(1.0)
 
 func start_cooldown(duration):
-	push_warning("Starting cooldown for {} seconds", duration)
+	skill1cd.text = str("Skill1 not ready")
+	push_warning("Starting cooldown for seconds", duration)
 	lockskill = true
 	cooldown_timer.start(duration)
 
 func _on_CooldownTimer_timeout():
 	push_warning("Cooldown timer timed out")
 	lockskill = false
+	skill3active = false
+	skill1cd.text = str("Skill Ready")
 
+func checkspin():
+	if animated_sprite.animation == "jump":
+		skill2active = true
+	else:
+		skill2active = false

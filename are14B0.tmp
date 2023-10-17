@@ -346,8 +346,7 @@ texture = ExtResource("1_m60d6")
 16:7/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_eetfm"]
-physics_layer_0/collision_layer = 3
-physics_layer_0/collision_mask = 3
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_i0g6t")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xevuu"]
@@ -357,7 +356,7 @@ shader_parameter/scanline_count = 50.0
 [node name="Test Scene" type="TileMap"]
 texture_filter = 1
 texture_repeat = 1
-position = Vector2(986, 188)
+position = Vector2(987, 188)
 tile_set = SubResource("TileSet_eetfm")
 format = 2
 layer_0/name = "back"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://caj8lkojakln6"]
+[gd_scene load_steps=34 format=3 uid="uid://caj8lkojakln6"]
 
 [ext_resource type="Texture2D" uid="uid://cysb84tnghojp" path="res://Visuals/Spritesheets/MEnemy_basic_attack.png" id="1_axqna"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/Enemy_Health.gd" id="1_hmvur"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dd5bkig6lnpg2" path="res://Visuals/Spritesheets/MEnemy_run.png" id="4_dtblk"]
 [ext_resource type="Texture2D" uid="uid://cq2nf7lli1xdq" path="res://Visuals/Spritesheets/MEnemy_thrust.png" id="5_5wk8v"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/AttackRange.gd" id="8_p0v7j"]
-[ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="9_5waha"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2yqi"]
 atlas = ExtResource("1_axqna")
@@ -198,7 +197,10 @@ size = Vector2(20, 16)
 size = Vector2(224, 128)
 
 [node name="Melee_Enemy" type="CharacterBody2D"]
+z_index = 100
 texture_filter = 1
+position = Vector2(235, 125)
+collision_layer = 2
 script = ExtResource("1_rprsq")
 
 [node name="EnemySystem" type="Node" parent="."]
@@ -206,15 +208,7 @@ script = ExtResource("1_rprsq")
 [node name="Enemy_Health" type="Node" parent="EnemySystem"]
 script = ExtResource("1_hmvur")
 
-[node name="Healthbar" type="Label" parent="EnemySystem/Enemy_Health"]
-offset_left = 11.0
-offset_top = -16.0
-offset_right = 51.0
-offset_bottom = 8.0001
-scale = Vector2(0.235531, 0.46957)
-theme_override_fonts/font = ExtResource("9_5waha")
-theme_override_font_sizes/font_size = 19
-horizontal_alignment = 1
+[node name="Timer" type="Timer" parent="EnemySystem/Enemy_Health"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -238,7 +232,6 @@ debug_color = Color(0.988235, 0, 0.321569, 0.419608)
 [node name="SFX" type="Node" parent="."]
 
 [node name="detectionrange" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detectionrange"]
 position = Vector2(0, -56)
@@ -252,15 +245,3 @@ anchor_right = 0.5
 offset_bottom = 40.0
 grow_horizontal = 2
 scale = Vector2(5.74578, 2.33321)
-
-[node name="ProgressBar" type="ProgressBar" parent="Debug_healthbar"]
-layout_mode = 0
-offset_left = 3.13273
-offset_top = -15.0008
-offset_right = 84.1327
-offset_bottom = 9.99919
-scale = Vector2(0.0761124, 0.265617)
-theme_override_fonts/font = ExtResource("9_5waha")
-theme_override_font_sizes/font_size = 19
-
-[connection signal="value_changed" from="Debug_healthbar/ProgressBar" to="EnemySystem/Enemy_Health" method="_on_progress_bar_value_changed"]

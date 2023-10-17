@@ -1,8 +1,6 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://guq4b5ompm68"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://guq4b5ompm68"]
 
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="1_cfpsq"]
-[ext_resource type="Texture2D" uid="uid://caoe6i4uvu1ox" path="res://Visuals/UI/normal button.png" id="2_0k4ey"]
-[ext_resource type="Texture2D" uid="uid://c33rrbuw1s1wb" path="res://Visuals/UI/button pressed and hold.png" id="3_2tdn8"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_oyfoi"]
 
@@ -30,16 +28,13 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2cwey"]
-texture = ExtResource("3_2tdn8")
 texture_margin_left = 36.0
 draw_center = false
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tgtm4"]
-texture = ExtResource("2_0k4ey")
 texture_margin_left = 36.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fnndi"]
-texture = ExtResource("3_2tdn8")
 texture_margin_left = 36.0
 draw_center = false
 

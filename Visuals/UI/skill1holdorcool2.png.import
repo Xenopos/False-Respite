@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx74qtsirtlr5"
-path="res://.godot/imported/spin.png-975b7038a4e4f9d7233b8f4ad9a6f369.ctex"
+uid="uid://dwnh7fwktjtii"
+path="res://.godot/imported/skill1holdorcool2.png-80e6af71c4b2b81c421b74e96252b71e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Visuals/UI/spin.png"
-dest_files=["res://.godot/imported/spin.png-975b7038a4e4f9d7233b8f4ad9a6f369.ctex"]
+source_file="res://Visuals/UI/skill1holdorcool2.png"
+dest_files=["res://.godot/imported/skill1holdorcool2.png-80e6af71c4b2b81c421b74e96252b71e.ctex"]
 
 [params]
 

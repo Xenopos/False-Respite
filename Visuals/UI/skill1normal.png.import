@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caoe6i4uvu1ox"
-path="res://.godot/imported/normal button.png-05fadfa48ca6a3cbee115e0be5a08b52.ctex"
+uid="uid://twt6fee3jeri"
+path="res://.godot/imported/skill1normal.png-5fbe9d0ca380c57395db82ba43ec3fb1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Visuals/UI/normal button.png"
-dest_files=["res://.godot/imported/normal button.png-05fadfa48ca6a3cbee115e0be5a08b52.ctex"]
+source_file="res://Visuals/UI/skill1normal.png"
+dest_files=["res://.godot/imported/skill1normal.png-5fbe9d0ca380c57395db82ba43ec3fb1.ctex"]
 
 [params]
 
