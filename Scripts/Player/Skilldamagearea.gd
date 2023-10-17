@@ -7,7 +7,7 @@ var playerdamagetoenemycntn: enemyhealth
 var enemyexitedrange2 : bool = true
 
 func _ready():
-	shizuka = Shizuka.new()
+	shizuka = get_parent()
 	playerdamagetoenemycntn = enemyhealth.new()
 
 func _physics_process(_delta):

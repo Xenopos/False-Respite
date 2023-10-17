@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://caj8lkojakln6"]
+[gd_scene load_steps=35 format=3 uid="uid://caj8lkojakln6"]
 
 [ext_resource type="Texture2D" uid="uid://cysb84tnghojp" path="res://Visuals/Spritesheets/MEnemy_basic_attack.png" id="1_axqna"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/Enemy_Health.gd" id="1_hmvur"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dd5bkig6lnpg2" path="res://Visuals/Spritesheets/MEnemy_run.png" id="4_dtblk"]
 [ext_resource type="Texture2D" uid="uid://cq2nf7lli1xdq" path="res://Visuals/Spritesheets/MEnemy_thrust.png" id="5_5wk8v"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/AttackRange.gd" id="8_p0v7j"]
+[ext_resource type="Script" path="res://Scripts/EnemyMelee/detectionrange.gd" id="9_yqu7y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2yqi"]
 atlas = ExtResource("1_axqna")
@@ -193,8 +194,8 @@ size = Vector2(12, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ktw3"]
 size = Vector2(20, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vf0u7"]
-size = Vector2(224, 128)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xq5pf"]
+size = Vector2(32.4878, 10.9756)
 
 [node name="Melee_Enemy" type="CharacterBody2D"]
 z_index = 100
@@ -234,10 +235,13 @@ debug_color = Color(0.988235, 0, 0.321569, 0.419608)
 [node name="SFX" type="Node" parent="."]
 
 [node name="detectionrange" type="Area2D" parent="."]
+script = ExtResource("9_yqu7y")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="detectionrange"]
-position = Vector2(0, -56)
-shape = SubResource("RectangleShape2D_vf0u7")
+[node name="detectattack" type="CollisionShape2D" parent="detectionrange"]
+position = Vector2(0, -4.5)
+scale = Vector2(2.27778, 2.27778)
+shape = SubResource("RectangleShape2D_xq5pf")
+debug_color = Color(0.54902, 0.403922, 1, 0.419608)
 
 [node name="Debug_healthbar" type="Control" parent="."]
 layout_mode = 3
@@ -247,3 +251,8 @@ anchor_right = 0.5
 offset_bottom = 40.0
 grow_horizontal = 2
 scale = Vector2(5.74578, 2.33321)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_body_entered"]
+[connection signal="body_entered" from="detectionrange" to="detectionrange" method="_on_body_entered"]
+[connection signal="body_exited" from="detectionrange" to="detectionrange" method="_on_body_exited"]

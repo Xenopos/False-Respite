@@ -9,3 +9,6 @@ res://Player.tscn
 res://Scenes/Mainmenu.tscn
 res://Scenes/pause_button.tscn
 res://Scenes/Pause.tscn
+res://Scripts/EnemyMelee/AttackRange.gd
+res://Scripts/Player/Skilldamagearea.gd
+res://Scripts/EnemyMelee/detectionrange.gd
