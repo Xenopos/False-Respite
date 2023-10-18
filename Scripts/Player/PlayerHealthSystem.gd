@@ -15,7 +15,7 @@ func _physics_process(_delta):
 	pass
 
 func _ready():
-	debugupdatehealth()
+	pass  
 
 func set_max_health(value):
 	max_health = value
@@ -27,6 +27,7 @@ func set_health(value):
 		checkplayerdeath()
 
 func player_take_damage(amount):
+	push_warning("current health",current_health )
 	current_health -= amount
 	if current_health <= 0:
 		checkplayerdeath()
@@ -43,5 +44,3 @@ func checkplayerdeath():
 func handle_death():
 	push_warning("The player has died!")
 
-func debugupdatehealth():
-	debughealth.text = str(current_health)

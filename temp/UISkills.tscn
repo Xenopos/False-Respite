@@ -1,0 +1,186 @@
+[gd_scene load_steps=16 format=3 uid="uid://bxmw7cer0hljd"]
+
+[ext_resource type="Texture2D" uid="uid://twt6fee3jeri" path="res://Visuals/UI/skill1normal.png" id="1_ixqpu"]
+[ext_resource type="Texture2D" uid="uid://bnxrxams43yf3" path="res://Visuals/UI/skill1holdorcool.png" id="2_mew4d"]
+[ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="3_wccsu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4nth"]
+atlas = ExtResource("1_ixqpu")
+region = Rect2(36, 0, 36, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3v7r"]
+atlas = ExtResource("2_mew4d")
+region = Rect2(36, 0, 36, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_okn2m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4nth")
+}],
+"loop": false,
+"name": &"Skill1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3v7r")
+}],
+"loop": false,
+"name": &"Skill1hold",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy1jy"]
+atlas = ExtResource("1_ixqpu")
+region = Rect2(0, 0, 36, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnxyp"]
+atlas = ExtResource("2_mew4d")
+region = Rect2(0, 0, 36, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5q68d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vy1jy")
+}],
+"loop": false,
+"name": &"Skill2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnxyp")
+}],
+"loop": false,
+"name": &"Skill2hold",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txnrt"]
+atlas = ExtResource("1_ixqpu")
+region = Rect2(108, 0, 36, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apfxh"]
+atlas = ExtResource("2_mew4d")
+region = Rect2(108, 0, 36, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hulyw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txnrt")
+}],
+"loop": false,
+"name": &"Skill3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apfxh")
+}],
+"loop": false,
+"name": &"Skill3hold",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24ubf"]
+atlas = ExtResource("1_ixqpu")
+region = Rect2(144, 0, 36, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jsmf"]
+atlas = ExtResource("2_mew4d")
+region = Rect2(144, 0, 36, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1pm42"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24ubf")
+}],
+"loop": false,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jsmf")
+}],
+"loop": false,
+"name": &"Jumphold",
+"speed": 5.0
+}]
+
+[node name="UISkills" type="Control"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Skill1" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(405, 334)
+sprite_frames = SubResource("SpriteFrames_okn2m")
+animation = &"Skill1"
+autoplay = "Skill1"
+
+[node name="Skill2" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(444, 334)
+sprite_frames = SubResource("SpriteFrames_5q68d")
+animation = &"Skill2"
+autoplay = "Skill2"
+
+[node name="Skill3" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(483, 335)
+sprite_frames = SubResource("SpriteFrames_hulyw")
+animation = &"Skill3"
+autoplay = "Skill3"
+
+[node name="Jump" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(522, 335)
+sprite_frames = SubResource("SpriteFrames_1pm42")
+animation = &"Jump"
+autoplay = "Jump"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 416.0
+offset_top = 299.0
+offset_right = 625.0
+offset_bottom = 339.0
+rotation = -6.28319
+scale = Vector2(0.751531, 0.729064)
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wccsu")
+theme_override_font_sizes/font_size = 19
+text = "Q        "
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wccsu")
+theme_override_font_sizes/font_size = 19
+text = "E        "
+
+[node name="Label3" type="Label" parent="HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wccsu")
+theme_override_font_sizes/font_size = 19
+text = "R         "
+
+[node name="Label4" type="Label" parent="HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wccsu")
+theme_override_font_sizes/font_size = 19
+text = "Spacebar"

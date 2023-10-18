@@ -15,14 +15,14 @@ func _physics_process(_delta):
 
 func _on_body_entered(body):
 	if body.name == "Melee_Enemy":
-		var enemy_system = body.get_node("EnemySystem")
-		if (enemy_system and enemy_system.has_node("Enemy_Health")):
+		var enemy_system = body.get_node("Enemy_Health")
+		if (enemy_system):
 			enemyexitedrange2 = false
 
 func _on_body_exited(body):
 	if body.name == "Melee_Enemy":
-		var enemy_system = body.get_node("EnemySystem")
-		if (enemy_system and enemy_system.has_node("Enemy_Health")):
+		var enemy_system = body.get_node("Enemy_Health")
+		if (enemy_system):
 			enemyexitedrange2 = true
 
 func applydamage():

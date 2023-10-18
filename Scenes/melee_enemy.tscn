@@ -245,7 +245,7 @@ size = Vector2(20, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xq5pf"]
 size = Vector2(65.8536, 31.1707)
 
-[node name="Melee_Enemy" type="CharacterBody2D"]
+[node name="Melee_Enemy" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 100
 texture_filter = 1
 position = Vector2(235, 125)
@@ -253,12 +253,10 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_rprsq")
 
-[node name="EnemySystem" type="Node" parent="."]
-
-[node name="Enemy_Health" type="Node" parent="EnemySystem"]
+[node name="Enemy_Health" type="Node" parent="."]
 script = ExtResource("1_hmvur")
 
-[node name="Timer" type="Timer" parent="EnemySystem/Enemy_Health"]
+[node name="Timer" type="Timer" parent="Enemy_Health"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2

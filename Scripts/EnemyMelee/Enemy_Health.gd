@@ -4,18 +4,22 @@ class_name enemyhealth
 
 var menemycurrenthealth : int = 100
 var menemymaxpoise : int = 0
-var menemy : meleeenemy
+var enemy_parent : Node2D
 
 func _ready():
-	menemy = meleeenemy.new()
+	enemy_parent = get_tree().get_first_node_in_group("Enemy")
+	if enemy_parent:
+		push_warning("Found")
+	else:
+		push_warning("fuck you")
+			
 func _physics_process(_delta):
 	pass
 
 func enemy_check_health():
 	if menemycurrenthealth <= 0:
-		if menemy:
-			menemy.enemyisdead()
-
+		pass
+		
 func takecontinousdamage():
 	pass
 

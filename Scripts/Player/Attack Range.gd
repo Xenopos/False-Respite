@@ -28,16 +28,16 @@ func _physics_process(_delta):
 func _on_body_entered(body):
 # Check if the body is an Enemy
 	if body.name == "Melee_Enemy":
-		var enemy_system = body.get_node("EnemySystem")
-		if (enemy_system and enemy_system.has_node("Enemy_Health")):
+		var enemy_system = body.get_node("Enemy_Health")
+		if (enemy_system):
 			enemyexitedrange = false
-			debug.text = str(enemyexitedrange)
+			debug.text =str("fuck you ") + str(enemyexitedrange) 
 
 func _on_body_exited(body):
 # Check if the body is an Enemy
 	if body.name == "Melee_Enemy":
-		var enemy_system = body.get_node("EnemySystem")
-		if (enemy_system and enemy_system.has_node("Enemy_Health")):
+		var enemy_system = body.get_node("Enemy_Health")
+		if (enemy_system):
 			enemyexitedrange = true
 			debug.text = str(enemyexitedrange)
 

@@ -7,6 +7,9 @@ var player: Node2D
 signal velocity_updated(direction)
 
 
+var enemychildhealth : enemyhealth
+
+
 @onready var attackcollisionrange = $AttackRange
 @onready var meleeEnemyAnim: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -19,12 +22,12 @@ var normalattackative : bool = false
 var pierceattackactive : bool = false
 var animationlock : bool = false
 var enemyjumpvelocity : int = -200
-#dash timer and such
 
+#dash timer and such
 var dashdirection = Vector2.ZERO
 var enemyisdashing: bool = false
 var enemydash_speed: int = 1000
-
+@onready var deads : bool = false
 # Cooldown Timer and related variables
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 var isAttackOnCooldown: bool = false
@@ -36,12 +39,8 @@ func _ready():
 	detection_range_node.connect("player_lost", Callable(self, "_on_player_lost"))
 	player = get_tree().get_first_node_in_group("Player")
 	playerhealth = healthsys.new()
+	enemychildhealth = enemyhealth.new()
 
-	if player:
-		push_warning("Player has been found.")
-	else:
-		push_warning("Player not found.")
-	
 	# Connect the signals
 	attackcollisionrange.connect("player_ready_to_be_attacked", Callable(self, "enemynrmlattk"))
 	#attackcollisionrange.connect("player_no_longer_ready_to_attack", Callable(self, "_reset_attack_flag"))
@@ -77,7 +76,7 @@ func _physics_process(delta):
 	update_facing_direction_enemy()
 	move_and_slide()
 	emit_signal("velocity_updated", direction) 
-
+	enemyisdead()
 func enemynrmlattk():
 	if not isAttackOnCooldown and not hasAttacked:
 		enemySpeed = 40
@@ -119,10 +118,6 @@ func _on_AttackCooldownTimer_timeout():
 	isAttackOnCooldown = false
 	hasAttacked = false  # Reset the attack flag when cooldown ends
 
-# Reset the attack flag when the player is no longer ready to be attacked
-#func _reset_attack_flag():
-#	pass
-
 #-------------------------------------#
 func enemystartdash():
 	if direction.x < 1:
@@ -149,5 +144,7 @@ func enemyjump():
 	meleeEnemyAnim.play("jump")
 
 func enemyisdead():
-	meleeEnemyAnim.play("death")
-	animationlock = false
+	if enemychildhealth.menemycurrenthealth <= 0:
+		push_warning("death is called")
+		meleeEnemyAnim.play("death")
+		animationlock = false

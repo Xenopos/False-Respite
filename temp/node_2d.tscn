@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu1idqd4sbhtk"]
+
+[ext_resource type="Script" path="res://Node2D.gd" id="1_2ogtp"]
+
+[node name="Healthsystem" type="Node2D"]
+script = ExtResource("1_2ogtp")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 41.0
+offset_top = 64.0
+offset_right = 81.0
+offset_bottom = 87.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 52.0
+offset_top = 23.0
+offset_right = 56.0
+offset_bottom = 50.0

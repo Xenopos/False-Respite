@@ -1,8 +1,12 @@
+HBoxContainer
+Label
+VBoxContainer
+AnimatedSprite2D
+ProgressBar
 GPUParticles2D
+healthsys
 AnimationPlayer
 Timer
-Label
-ProgressBar
 Sprite2D
 AnimationTree
 CollisionShape2D
@@ -10,11 +14,8 @@ Area2D
 Panel
 ItemList
 NinePatchRect
-HBoxContainer
-AnimatedSprite2D
 Node2D
 Control
-VBoxContainer
 VSplitContainer
 FlowContainer
 BoxContainer
@@ -29,4 +30,3 @@ HealthComponent
 GodotEssentialsHealthComponent
 GodotEssentialsPlatformerMovementComponent
 GPUParticlesAttractorVectorField3D
-MeshInstance2D

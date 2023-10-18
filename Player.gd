@@ -3,20 +3,17 @@ class_name Shizuka extends CharacterBody2D
 #------------------------------------#
 @export var SPEED = 80.0
 @export var JUMP_VELOCITY = -180.0
-@onready var playerhealth : healthsys = healthsys.new()
 #------------------------------------#
 @onready var dash_value = 200
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var timercountdown: Timer = $Timer
-@onready var skill1cd: Label = $UI/cdnotif/Skill1
-@onready var healthbar : ProgressBar = $Healthbar
 @onready var dashParticles: GPUParticles2D = $DashParticles
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 #------------------------------------#
 var skill3active = true
 var skill2active  = true
 var lockskill : bool = false
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var animationstay: bool = false
 var direction: Vector2 = Vector2.ZERO
 @onready var onair: bool = false 
@@ -36,11 +33,9 @@ var Allow_jump : bool = true
 #... Other variables
 @onready var dash_speed: float = 600
 @onready var dash_duration: float = 0.1
-
+@onready var skill1cd : Label = $Label
 
 #------------------------------------#
-
-@onready var skills_icons: skillsiconcontainer = $UI/Skillcontainer
 #------------------------------------#
 func _ready():
 	add_to_group("Player")
@@ -208,7 +203,7 @@ func skill3activate():
 #-------------------------------------#
 #cooldown timers
 func start_cooldown(duration):
-	skill1cd.text = str("Skill1 not ready")
+	skill1cd.text = str("Skill not ready")
 	push_warning("Starting cooldown for seconds", duration)
 	lockskill = true
 	cooldown_timer.start(duration)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=81 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
@@ -20,10 +20,12 @@
 [ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://sfx/charging.wav" id="17_o0kfb"]
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="19_uhpr1"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealthSystem.gd" id="21_1012i"]
+[ext_resource type="Texture2D" uid="uid://twt6fee3jeri" path="res://Visuals/UI/skill1normal.png" id="22_6ryig"]
 [ext_resource type="Script" path="res://Scripts/Player/StaminaSystem.gd" id="22_65adt"]
-[ext_resource type="PackedScene" uid="uid://bxmw7cer0hljd" path="res://temp/UISkills.tscn" id="24_bwlk1"]
+[ext_resource type="Script" path="res://Skillcontainer.gd" id="22_lecu5"]
+[ext_resource type="Texture2D" uid="uid://bnxrxams43yf3" path="res://Visuals/UI/skill1holdorcool.png" id="23_vl7hg"]
+[ext_resource type="Theme" uid="uid://guq4b5ompm68" path="res://Themes/Sample_theme.tres" id="25_k0bfw"]
 [ext_resource type="Script" path="res://Scripts/Player/Skilldamagearea.gd" id="26_1oknk"]
-[ext_resource type="PackedScene" uid="uid://bu1idqd4sbhtk" path="res://temp/node_2d.tscn" id="27_mw1cl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
 size = Vector2(16.5, 15)
@@ -349,6 +351,165 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_aj2rr"]
+atlas = ExtResource("22_6ryig")
+region = Rect2(36, 0, 36, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7gnn"]
+atlas = ExtResource("23_vl7hg")
+region = Rect2(36, 0, 36, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ttwbw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aj2rr")
+}],
+"loop": false,
+"name": &"Skill1",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7gnn")
+}],
+"loop": false,
+"name": &"Skill1hold",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0fki"]
+atlas = ExtResource("22_6ryig")
+region = Rect2(108, 0, 36, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dv43o"]
+atlas = ExtResource("23_vl7hg")
+region = Rect2(108, 0, 36, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3134u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0fki")
+}],
+"loop": false,
+"name": &"Skill2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dv43o")
+}],
+"loop": true,
+"name": &"Skill2hold",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xeimu"]
+atlas = ExtResource("22_6ryig")
+region = Rect2(0, 0, 36, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6up35"]
+atlas = ExtResource("23_vl7hg")
+region = Rect2(0, 0, 36, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pom3i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xeimu")
+}],
+"loop": false,
+"name": &"Skill3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6up35")
+}],
+"loop": true,
+"name": &"Skill3hold",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqsf1"]
+atlas = ExtResource("22_6ryig")
+region = Rect2(72, 0, 36, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hohym"]
+atlas = ExtResource("23_vl7hg")
+region = Rect2(72, 0, 36, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x2e52"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lqsf1")
+}],
+"loop": true,
+"name": &"Skill4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hohym")
+}],
+"loop": true,
+"name": &"Skill4hold",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8oe7f"]
+atlas = ExtResource("22_6ryig")
+region = Rect2(144, 0, 36, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3u3bw"]
+atlas = ExtResource("23_vl7hg")
+region = Rect2(144, 0, 36, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bonca"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8oe7f")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 50.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3u3bw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3u3bw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3u3bw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3u3bw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3u3bw")
+}],
+"loop": false,
+"name": &"Jumphold",
+"speed": 1.0
+}]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_plru4"]
+emission_shape = 2
+emission_sphere_radius = 2.52
+particle_flag_disable_z = true
+direction = Vector3(1, -31.59, 0)
+spread = 23.83
+initial_velocity_max = 19.6
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.0
+scale_max = 10.0
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rfsau"]
 emission_shape = 2
 emission_sphere_radius = 5.62
@@ -371,6 +532,21 @@ texture_filter = 1
 script = ExtResource("1_0hjxu")
 cooldown_timer = NodePath("timercountdown")
 
+[node name="debughealth" type="Label" parent="."]
+offset_left = -215.0
+offset_top = -87.0
+offset_right = -150.0
+offset_bottom = -61.0
+
+[node name="Healthbar" type="ProgressBar" parent="."]
+texture_filter = 1
+offset_left = -216.0
+offset_top = -119.0
+offset_right = -63.9998
+offset_bottom = -92.0001
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.4, 1.4)
 position_smoothing_enabled = true
@@ -382,8 +558,10 @@ drag_bottom_margin = 0.01
 
 [node name="PlayerSystem" type="Node" parent="."]
 
-[node name="HealthSystem" type="Node" parent="PlayerSystem"]
+[node name="HealthSystem" type="Node" parent="PlayerSystem" node_paths=PackedStringArray("debughealth", "cameratobeshake")]
 script = ExtResource("21_1012i")
+debughealth = NodePath("../../debughealth")
+cameratobeshake = NodePath("../../Camera2D")
 
 [node name="StaminaSystem" type="Node" parent="PlayerSystem"]
 script = ExtResource("22_65adt")
@@ -391,7 +569,7 @@ script = ExtResource("22_65adt")
 [node name="Attack Range" type="Area2D" parent="." node_paths=PackedStringArray("debug")]
 collision_mask = 2
 script = ExtResource("17_6j0n5")
-debug = NodePath("../Labels")
+debug = NodePath("../UI/Label")
 
 [node name="GlobalAttackRange" type="CollisionShape2D" parent="Attack Range"]
 position = Vector2(-11.25, 0.5)
@@ -436,8 +614,6 @@ volume_db = 9.674
 stream = ExtResource("17_o0kfb")
 pitch_scale = 0.68
 
-[node name="timercountdown" type="Timer" parent="."]
-
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
 
@@ -451,39 +627,160 @@ sprite_frames = SubResource("SpriteFrames_jubc4")
 animation = &"dash"
 autoplay = "idle"
 
+[node name="UI" type="Control" parent="."]
+z_index = 10
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 44.0
+offset_right = 100.0
+offset_bottom = 84.0
+scale = Vector2(0.86, 0.86)
+
+[node name="Skillcontainer" type="HBoxContainer" parent="UI"]
+layout_mode = 2
+offset_left = -8.13953
+offset_top = 70.9302
+offset_right = -7.13953
+offset_bottom = 91.9302
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("22_lecu5")
+
+[node name="Skill1" type="AnimatedSprite2D" parent="UI/Skillcontainer"]
+sprite_frames = SubResource("SpriteFrames_ttwbw")
+animation = &"Skill1hold"
+autoplay = "Skill1"
+
+[node name="Skill2" type="AnimatedSprite2D" parent="UI/Skillcontainer"]
+position = Vector2(40.6977, 0)
+sprite_frames = SubResource("SpriteFrames_3134u")
+animation = &"Skill2"
+autoplay = "Skill2"
+
+[node name="Skill3" type="AnimatedSprite2D" parent="UI/Skillcontainer"]
+position = Vector2(82.5581, 0)
+sprite_frames = SubResource("SpriteFrames_pom3i")
+animation = &"Skill3"
+autoplay = "Skill3"
+
+[node name="Skill4" type="AnimatedSprite2D" parent="UI/Skillcontainer"]
+position = Vector2(124.419, 0)
+sprite_frames = SubResource("SpriteFrames_x2e52")
+animation = &"Skill4"
+autoplay = "Skill4"
+
+[node name="Jump" type="AnimatedSprite2D" parent="UI/Skillcontainer"]
+position = Vector2(166.279, 1.16279)
+sprite_frames = SubResource("SpriteFrames_bonca")
+animation = &"Jumphold"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="UI/Skillcontainer/Jump"]
+show_behind_parent = true
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_plru4")
+
+[node name="Skillkeys" type="Control" parent="UI"]
+anchors_preset = 0
+offset_left = -29.0698
+offset_top = -32.5581
+offset_right = 108.93
+offset_bottom = 43.4419
+scale = Vector2(1.40774, 1.40774)
+
+[node name="Label" type="Label" parent="UI/Skillkeys"]
+layout_mode = 1
+offset_left = 10.738
+offset_top = 51.2118
+offset_right = 22.738
+offset_bottom = 75.2118
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+text = "Q "
+
+[node name="Label2" type="Label" parent="UI/Skillkeys"]
+layout_mode = 0
+offset_left = 42.1258
+offset_top = 49.5598
+offset_right = 53.1258
+offset_bottom = 73.5598
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+text = "E "
+
+[node name="Label3" type="Label" parent="UI/Skillkeys"]
+layout_mode = 0
+offset_left = 72.6877
+offset_top = 50.3858
+offset_right = 88.6877
+offset_bottom = 74.3858
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+text = "F"
+
+[node name="Label4" type="Label" parent="UI/Skillkeys"]
+layout_mode = 0
+offset_left = 96.6416
+offset_top = 50.3858
+offset_right = 119.642
+offset_bottom = 74.3858
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+text = " Rmb"
+
+[node name="Jump" type="Label" parent="UI/Skillkeys"]
+layout_mode = 0
+offset_left = 129.681
+offset_top = 50.3858
+offset_right = 153.681
+offset_bottom = 74.3858
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+text = "Jump
+"
+
+[node name="cdnotif" type="HBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = -91.8605
+offset_top = -90.6977
+offset_right = 10.1395
+offset_bottom = -62.6977
+scale = Vector2(0.487145, 0.487145)
+alignment = 1
+
+[node name="Skill1" type="Label" parent="UI/cdnotif"]
+layout_mode = 2
+theme = ExtResource("25_k0bfw")
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+text = "Skill Ready"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = -313.953
+offset_top = -134.884
+offset_right = -271.953
+offset_bottom = -110.884
+scale = Vector2(0.716597, 0.597274)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+
+[node name="timercountdown" type="Timer" parent="."]
+
 [node name="DashParticles" type="GPUParticles2D" parent="."]
 position = Vector2(0, -1)
 amount = 161
 process_material = SubResource("ParticleProcessMaterial_rfsau")
 lifetime = 0.2
-
-[node name="Node2D" parent="." instance=ExtResource("27_mw1cl")]
-position = Vector2(-249, -138)
-
-[node name="Label" type="Label" parent="."]
-offset_left = -13.0
-offset_top = -31.0
-offset_right = 29.0
-offset_bottom = -7.0
-scale = Vector2(0.639251, 0.563141)
-theme_override_fonts/font = ExtResource("19_uhpr1")
-theme_override_font_sizes/font_size = 19
-horizontal_alignment = 1
-
-[node name="Labels" type="Label" parent="."]
-offset_left = 23.0
-offset_top = -8.0
-offset_right = 65.0
-offset_bottom = 16.0
-scale = Vector2(0.716597, 0.597274)
-theme_override_fonts/font = ExtResource("19_uhpr1")
-theme_override_font_sizes/font_size = 19
-
-[node name="UISkills" parent="." instance=ExtResource("24_bwlk1")]
-offset_left = -346.0
-offset_top = -228.0
-offset_right = -346.0
-offset_bottom = -228.0
 
 [connection signal="body_entered" from="Attack Range" to="Attack Range" method="_on_body_entered"]
 [connection signal="body_exited" from="Attack Range" to="Attack Range" method="_on_body_exited"]
