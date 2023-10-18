@@ -10,16 +10,12 @@ class_name skillsiconcontainer
 
 var shizuka : Shizuka
 
-func skill1updateicon():
-	if not shizuka.lockskill:
-		skill1spriteicon.play("Skill1hold")
-	else:
-		skill1spriteicon.play("Skill1")
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		jumpsprite.play("Jumphold")
-
+	else:
+		jumpsprite.play("Jump")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	shizuka = Shizuka.new()

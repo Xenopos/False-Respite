@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://caj8lkojakln6"]
+[gd_scene load_steps=42 format=3 uid="uid://caj8lkojakln6"]
 
 [ext_resource type="Texture2D" uid="uid://cysb84tnghojp" path="res://Visuals/Spritesheets/MEnemy_basic_attack.png" id="1_axqna"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/Enemy_Health.gd" id="1_hmvur"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c862cu2if06l" path="res://Visuals/Spritesheets/MEnemy_idle.png" id="2_hikpk"]
 [ext_resource type="Texture2D" uid="uid://bdw163caj26rx" path="res://Visuals/Spritesheets/MEnemy_jump.png" id="3_ikgo8"]
 [ext_resource type="Texture2D" uid="uid://dd5bkig6lnpg2" path="res://Visuals/Spritesheets/MEnemy_run.png" id="4_dtblk"]
+[ext_resource type="Texture2D" uid="uid://baxgqcocvlfj6" path="res://Visuals/Spritesheets/MEnemy_death.png" id="4_o8v7n"]
 [ext_resource type="Texture2D" uid="uid://cq2nf7lli1xdq" path="res://Visuals/Spritesheets/MEnemy_thrust.png" id="5_5wk8v"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/AttackRange.gd" id="8_p0v7j"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/detectionrange.gd" id="9_yqu7y"]
@@ -32,6 +33,30 @@ region = Rect2(128, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1fkv6"]
 atlas = ExtResource("1_axqna")
+region = Rect2(160, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lv22"]
+atlas = ExtResource("4_o8v7n")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wtu8"]
+atlas = ExtResource("4_o8v7n")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75iaa"]
+atlas = ExtResource("4_o8v7n")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqifn"]
+atlas = ExtResource("4_o8v7n")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jdsu"]
+atlas = ExtResource("4_o8v7n")
+region = Rect2(128, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyu0p"]
+atlas = ExtResource("4_o8v7n")
 region = Rect2(160, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xv8v1"]
@@ -124,6 +149,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_4lv22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wtu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75iaa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqifn")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_0jdsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyu0p")
+}],
+"loop": false,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xv8v1")
 }, {
 "duration": 1.0,
@@ -159,7 +207,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 7.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -205,10 +253,6 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_rprsq")
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="EnemySystem" type="Node" parent="."]
 
 [node name="Enemy_Health" type="Node" parent="EnemySystem"]
@@ -220,8 +264,10 @@ script = ExtResource("1_hmvur")
 z_index = 2
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_82n88")
-animation = &"basic_attack"
+animation = &"death"
 autoplay = "idle"
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_t57j2")
@@ -245,16 +291,11 @@ scale = Vector2(2.27778, 2.27778)
 shape = SubResource("RectangleShape2D_xq5pf")
 debug_color = Color(0.54902, 0.403922, 1, 0.419608)
 
-[node name="Debug_healthbar" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_bottom = 40.0
-grow_horizontal = 2
-scale = Vector2(5.74578, 2.33321)
-
 [node name="AttackCooldownTimer" type="Timer" parent="."]
+
+[node name="timercountdown" type="Timer" parent="."]
+
+[node name="StunTimer" type="Timer" parent="."]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_body_entered"]

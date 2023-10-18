@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://humorkakn3wo"]
+
+[ext_resource type="Texture2D" uid="uid://8ogrtqyeacau" path="res://Visuals/Animations/dash.png" id="1_jd4lm"]
+[ext_resource type="Script" path="res://Scripts/Player/ghost.gd" id="2_64yq5"]
+
+[node name="ghost" type="Sprite2D"]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("1_jd4lm")
+script = ExtResource("2_64yq5")

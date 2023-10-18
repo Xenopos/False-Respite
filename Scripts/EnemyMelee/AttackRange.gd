@@ -4,7 +4,7 @@ class_name atkrng
 # Signal to notify when the player is ready to be attacked
 signal player_ready_to_be_attacked
 
-var playerhealth = healthsys  # I assume 'healthsys' is a predefined class or node. If not, this will cause an error.
+var playerhealth = healthsys  
 var parentenemy = meleeenemy  # Similarly, this will cause an error if 'meleeenemy' isn't defined elsewhere.
 var playerisreadytobeattacked : bool = false
 
@@ -17,7 +17,7 @@ func _ready():
 	if parent_enemy and parent_enemy is meleeenemy:
 		parentenemy = parent_enemy
 		parentenemy.connect("velocity_updated", Callable(self, "_on_velocity_updated"))
-
+	playerhealth = healthsys.new()
 func _on_velocity_updated(direction):  # Callback when the velocity is updated
 	if direction.x == 1:
 		scale.x = -1

@@ -1,17 +1,18 @@
+GPUParticles2D
 AnimationPlayer
-AnimationTree
 Timer
 Label
+ProgressBar
+Sprite2D
+AnimationTree
 CollisionShape2D
 Area2D
-ProgressBar
 Panel
 ItemList
 NinePatchRect
 HBoxContainer
 AnimatedSprite2D
 Node2D
-Sprite2D
 Control
 VBoxContainer
 VSplitContainer
@@ -29,5 +30,3 @@ GodotEssentialsHealthComponent
 GodotEssentialsPlatformerMovementComponent
 GPUParticlesAttractorVectorField3D
 MeshInstance2D
-NavigationAgent2D
-NavigationRegion2D

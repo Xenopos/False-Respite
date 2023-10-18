@@ -10,9 +10,7 @@ class_name Shizuka extends CharacterBody2D
 @onready var timercountdown: Timer = $Timer
 @onready var skill1cd: Label = $UI/cdnotif/Skill1
 @onready var healthbar : ProgressBar = $Healthbar
-#@onready var skill2cd: Label = $UI/cdnotif/Skill2
-#@onready var skill3cd: Label = $UI/cdnotif/Skill3
-#@onready var skill4cd: Label = $UI/cdnotif/Skill4
+@onready var dashParticles: GPUParticles2D = $DashParticles
 
 #------------------------------------#
 var skill3active = true
@@ -21,7 +19,7 @@ var lockskill : bool = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var animationstay: bool = false
 var direction: Vector2 = Vector2.ZERO
-@onready var onair: bool = false
+@onready var onair: bool = false 
 var isAttacking: bool = false
 @export var AttackCombo: int = 0
 var DashDirection: Vector2 = Vector2(0, 0)
@@ -35,26 +33,35 @@ var fillSpeed: float = 0.3 # Fill up in 3 seconds
 var set_emitting  : bool  = false
 var Allow_jump : bool = true
 @export var cooldown_timer: Timer
+#... Other variables
+@onready var dash_speed: float = 600
+@onready var dash_duration: float = 0.1
+
+
+#------------------------------------#
+
+@onready var skills_icons: skillsiconcontainer = $UI/Skillcontainer
 #------------------------------------#
 func _ready():
 	add_to_group("Player")
+	timercountdown.connect("timeout", Callable(self, "_on_Timer_timeout"))
 	cooldown_timer.connect("timeout", Callable(self, "_on_CooldownTimer_timeout"))
 	skill2active  = true
 	skill3active  = true
 
 func _physics_process(delta):
-	healthbar.value = playerhealth.current_health
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		onair = true
 	else:
 		onair = false
 
-	direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	if direction:
-		velocity.x = direction.x * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+	if not isDashing:
+		direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		if direction:
+			velocity.x = direction.x * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
 	update_animation()
@@ -133,57 +140,51 @@ func dash():
 		DashDirection = Vector2(-1, 0)
 	if Input.is_action_pressed("ui_right"):
 		DashDirection = Vector2(1, 0)
-	if Input.is_action_just_pressed("dash"):
-		Dodash()
 
-func Dodash():
-	if not lockskill:
+	if Input.is_action_just_pressed("dash") and not isDashing:
+		start_dash()
+
+func start_dash():
+		dashParticles.emitting = true
+		isDashing = true
 		$SFX/dash.play()
 		animated_sprite.play("dash")
-		velocity = DashDirection.normalized() * 1200
-		SPEED = DashDirection * dash_value
+		velocity = DashDirection.normalized() * dash_speed
 		animationstay = true
-		SPEED = 400
-		set_emitting = true
-		start_cooldown(0.8)
-		if direction.x == 0:
-			SPEED = 100
-		else:
-			SPEED = 600
+		timercountdown.start(dash_duration)
 
 func Skill_activation():
 	if not lockskill:
-		if (Input.is_action_just_pressed("Skill1") and is_on_floor() and not isAttacking):
+		if (Input.is_action_just_pressed("Skill1") and is_on_floor() and not isAttacking and not isDashing):
 			skill1activate()
-		elif (Input.is_action_just_released("Skill1") and is_on_floor() and not lockskill):
+		elif (Input.is_action_just_released("Skill1") and is_on_floor() and not lockskill and not isDashing):
 			skill1releaseactivate()
-		if (Input.is_action_just_pressed("Skill2") and not is_on_floor()):
+		if (Input.is_action_just_pressed("Skill2") and not is_on_floor() and not isDashing):
 			skill2activate()
-		if (Input.is_action_just_pressed("Skill3")):
+		if (Input.is_action_just_pressed("Skill3") and not isDashing):
 			skill3activate()
 
 func skill1activate():
-	if not lockskill:
+	if not lockskill and not Allow_jump:
 		Allow_jump = false
 		animated_sprite.play("dash ready")
 		animationstay = true
 		SPEED = 0
 		$SFX/charge.play()
-
+		
 func skill1releaseactivate():
-	push_warning("skill1 release activated")
-	Allow_jump = true
-	animated_sprite.play("dash attack")
-	$SFX/execute.play()
-	velocity = DashDirection.normalized() * 1200
-	animationstay = true
-	start_cooldown(1.0)
-	$SFX/charge.stop()
-	if direction.x == 0:
-		SPEED = 80
-	else:
-		SPEED = 400
-
+	if not isDashing and not lockskill:
+		isDashing = true
+		push_warning("skill1 release activated")
+		Allow_jump = true
+		animated_sprite.play("dash attack")
+		$SFX/execute.play()
+		velocity = DashDirection.normalized() * dash_speed
+		animationstay = true
+		start_cooldown(1.0)
+		$SFX/charge.stop()
+		timercountdown.start(dash_duration)
+		
 func skill2activate():
 	if not lockskill:
 		animated_sprite.play("spin")
@@ -204,6 +205,8 @@ func skill3activate():
 		$SFX/up.play()
 		start_cooldown(1.0)
 
+#-------------------------------------#
+#cooldown timers
 func start_cooldown(duration):
 	skill1cd.text = str("Skill1 not ready")
 	push_warning("Starting cooldown for seconds", duration)
@@ -221,3 +224,8 @@ func checkspin():
 		skill2active = true
 	else:
 		skill2active = false
+
+func _on_Timer_timeout():
+	isDashing = false
+	dashParticles.emitting = false
+	SPEED = 80.0 # Resetting the speed to the default

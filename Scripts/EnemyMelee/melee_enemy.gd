@@ -6,16 +6,24 @@ var player: Node2D
 
 signal velocity_updated(direction)
 
+
+@onready var attackcollisionrange = $AttackRange
 @onready var meleeEnemyAnim: AnimatedSprite2D = $AnimatedSprite2D
+
 var enemySpeed = 70
 var direction = Vector2.ZERO
-@onready var attackcollisionrange = $AttackRange
 var foundenemy : bool = false
 var detection_range_node : Node2D
 var playerhealth : healthsys
 var normalattackative : bool = false
 var pierceattackactive : bool = false
 var animationlock : bool = false
+var enemyjumpvelocity : int = -200
+#dash timer and such
+
+var dashdirection = Vector2.ZERO
+var enemyisdashing: bool = false
+var enemydash_speed: int = 1000
 
 # Cooldown Timer and related variables
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
@@ -41,9 +49,11 @@ func _ready():
 
 func _on_player_found():
 	foundenemy = true
-
+	enemySpeed = 70
+	
 func _on_player_lost():
 	foundenemy = false
+
 	
 func update_facing_direction_enemy():
 	if direction.x < 0:
@@ -56,8 +66,7 @@ func update_facing_direction_enemy():
 			meleeEnemyAnim.play("run")
 		elif direction.x == 0:
 			meleeEnemyAnim.play("idle")
-		animationlock = true
-
+			
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -70,13 +79,13 @@ func _physics_process(delta):
 	emit_signal("velocity_updated", direction) 
 
 func enemynrmlattk():
-	if not isAttackOnCooldown and not hasAttacked :
-		enemySpeed = 50
+	if not isAttackOnCooldown and not hasAttacked:
+		enemySpeed = 40
 		meleeEnemyAnim.play("basic_attack")
-		playerhealth.player_take_damage(10) 
+		playerhealth.player_take_damage(10)
 		animationlock = true 
 		hasAttacked = true
-		start_attack_cooldown(0.9) 
+		start_attack_cooldown(1.2) 
 
 func enemypierceattk():
 	enemySpeed = 200
@@ -85,17 +94,20 @@ func enemypierceattk():
 	animationlock = true
 		
 func _on_animated_sprite_2d_animation_finished():
-	if meleeEnemyAnim.animation == "basic_attack":
+	if meleeEnemyAnim.animation == "basic_attack" or meleeEnemyAnim.animation == "jump":
 		enemySpeed = 70
 		animationlock = false
+	
 
 func enemyhasfounplayer():
 	var distance_to_player = player.global_position.distance_to(global_position)
-	if distance_to_player > 20:
+	if distance_to_player > 10:
+		enemySpeed = 70
 		direction.x = 1 if player.global_position.x > global_position.x else -1
 		velocity.x = direction.x * enemySpeed
 	else:
 		velocity.x = 0
+		direction.x = 0
 		enemynrmlattk()
 		
 # Cooldown functions
@@ -110,3 +122,32 @@ func _on_AttackCooldownTimer_timeout():
 # Reset the attack flag when the player is no longer ready to be attacked
 #func _reset_attack_flag():
 #	pass
+
+#-------------------------------------#
+func enemystartdash():
+	if direction.x < 1:
+		dashdirection = Vector2(-1, 0)
+	if direction.x > 1:
+		dashdirection = Vector2(1, 0)
+
+	if not enemyisdashing:
+		enemydash()
+
+func enemydash():
+	enemyisdashing = true
+	meleeEnemyAnim.play("jump")
+	velocity = dashdirection.normalized() * enemydash_speed
+	animationlock = true
+
+func enemydojump():
+	if is_on_floor():
+		enemyjump()
+
+func enemyjump():
+	velocity.y = enemyjumpvelocity
+	animationlock = true
+	meleeEnemyAnim.play("jump")
+
+func enemyisdead():
+	meleeEnemyAnim.play("death")
+	animationlock = false

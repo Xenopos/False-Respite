@@ -8,13 +8,14 @@ var current_health : int = 100
 @export var current_poise: int = 0
 @export var max_stamina: int = 100
 @export var current_stamina: int = max_stamina
-#@export var debughealth : Label
+@export var debughealth : Label
+@export var cameratobeshake : Camera2D
 
 func _physics_process(_delta):
-#	debugupdatehealth()
 	pass
+
 func _ready():
-	pass
+	debugupdatehealth()
 
 func set_max_health(value):
 	max_health = value
@@ -41,3 +42,6 @@ func checkplayerdeath():
 
 func handle_death():
 	push_warning("The player has died!")
+
+func debugupdatehealth():
+	debughealth.text = str(current_health)
