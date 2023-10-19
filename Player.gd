@@ -9,7 +9,9 @@ class_name Shizuka extends CharacterBody2D
 @onready var timercountdown: Timer = $Timer
 @onready var dashParticles: GPUParticles2D = $DashParticles
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+@export var skill3area : Area2D 
+@export var anysingepointdamage : Area2D
+@export var anysingepointdamager : Area2D
 #------------------------------------#
 var skill3active = true
 var skill2active  = true
@@ -30,19 +32,32 @@ var fillSpeed: float = 0.3 # Fill up in 3 seconds
 var set_emitting  : bool  = false
 var Allow_jump : bool = true
 @export var cooldown_timer: Timer
+
+#skills flags for applying damage
+
+var skill1online : bool 
+var skill2online : bool 
+var skill3online : bool 
+
+
 #... Other variables
 @onready var dash_speed: float = 600
 @onready var dash_duration: float = 0.1
 @onready var skill1cd : Label = $Label
-
+var enemyparent
 #------------------------------------#
+
 #------------------------------------#
 func _ready():
 	add_to_group("Player")
+	anysingepointdamage.connect("applydamagedash" , Callable( self, "allowedskill1toapplydamage"))
+	anysingepointdamager.connect("applydamage", Callable(self, "allowedskill2toapplydamage"))
+	skill3area.connect("applyskill3damage", Callable(self, "allowskill3toapplydamage"))
 	timercountdown.connect("timeout", Callable(self, "_on_Timer_timeout"))
 	cooldown_timer.connect("timeout", Callable(self, "_on_CooldownTimer_timeout"))
 	skill2active  = true
 	skill3active  = true
+	enemyparent = get_tree().get_first_node_in_group("enemyhealth")
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -170,9 +185,12 @@ func skill1activate():
 func skill1releaseactivate():
 	if not isDashing and not lockskill:
 		isDashing = true
-		push_warning("skill1 release activated")
+
 		Allow_jump = true
 		animated_sprite.play("dash attack")
+		if skill1online:
+			enemyparent.take_damage(10)
+			push_warning("skill1 release activated")
 		$SFX/execute.play()
 		velocity = DashDirection.normalized() * dash_speed
 		animationstay = true
@@ -181,8 +199,11 @@ func skill1releaseactivate():
 		timercountdown.start(dash_duration)
 		
 func skill2activate():
-	if not lockskill:
+	if not lockskill and Allow_jump:
 		animated_sprite.play("spin")
+		if skill2online:
+			enemyparent.take_damage(10)
+			push_warning("skill2 activated")
 		$SFX/spiiin.play()
 		if onair == true:
 			animationstay = true
@@ -193,15 +214,17 @@ func skill2activate():
 func skill3activate():
 	if not lockskill:
 		skill3active = true
-		push_warning("skill3 activated")
-		animated_sprite.play("upyogo")
-		animationstay = true
-		SPEED = 0
+		if skill3online:
+			push_warning("skill3 activated")
+			animated_sprite.play("upyogo")
+		enemyparent.take_damage(10)
+		animationstay = true  
+		SPEED = 0  
 		$SFX/up.play()
-		start_cooldown(1.0)
+		start_cooldown(1.0)  
 
 #-------------------------------------#
-#cooldown timers
+#cooldown timers  x
 func start_cooldown(duration):
 	skill1cd.text = str("Skill not ready")
 	push_warning("Starting cooldown for seconds", duration)
@@ -209,7 +232,6 @@ func start_cooldown(duration):
 	cooldown_timer.start(duration)
 
 func _on_CooldownTimer_timeout():
-	push_warning("Cooldown timer timed out")
 	lockskill = false
 	skill3active = false
 	skill1cd.text = str("Skill Ready")
@@ -224,3 +246,11 @@ func _on_Timer_timeout():
 	isDashing = false
 	dashParticles.emitting = false
 	SPEED = 80.0 # Resetting the speed to the default
+
+
+func allowedskill1toapplydamage(canapplied1: bool):
+	skill1online = canapplied1
+func allowedskill2toapplydamage(canapplied2: bool):
+	skill2online = canapplied2
+func allowskill3toapplydamage(canapplied3: bool):
+	skill3online = canapplied3

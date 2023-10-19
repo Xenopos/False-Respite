@@ -379,23 +379,18 @@ scale = Vector2(0.993461, 1.00445)
 [node name="Melee_Enemy" parent="." instance=ExtResource("4_4364l")]
 position = Vector2(-297, 90)
 
-[node name="Melee_Enemy2" parent="." instance=ExtResource("4_4364l")]
-position = Vector2(-473, 84)
-
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 current = true
 
 [node name="Node" type="Node" parent="."]
 
 [node name="ParallaxBack" type="Sprite2D" parent="Node"]
-visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_xevuu")
 position = Vector2(746, 208)
 texture = ExtResource("5_xrode")
 
 [node name="ParallaxBack2" type="Sprite2D" parent="Node"]
-visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_xevuu")
 position = Vector2(1386, 208)
@@ -403,14 +398,12 @@ texture = ExtResource("5_xrode")
 flip_h = true
 
 [node name="ParallaxBack3" type="Sprite2D" parent="Node"]
-visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_xevuu")
 position = Vector2(2026, 208)
 texture = ExtResource("5_xrode")
 
 [node name="ParallaxBack4" type="Sprite2D" parent="Node"]
-visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_xevuu")
 position = Vector2(2666, 208)
@@ -419,3 +412,4 @@ flip_h = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_mqkfj")
+pitch_scale = 0.9

@@ -2,20 +2,20 @@ extends Node
 
 class_name healthsys
 
-@export var max_health: int = 100 
+signal healthchanged
+
+@export var max_health: int = 100
 var current_health : int = 100
 @export var maxpoise: int = 100
 @export var current_poise: int = 0
 @export var max_stamina: int = 100
 @export var current_stamina: int = max_stamina
-@export var debughealth : Label
-@export var cameratobeshake : Camera2D
 
 func _physics_process(_delta):
 	pass
 
 func _ready():
-	pass  
+	pass
 
 func set_max_health(value):
 	max_health = value
@@ -27,9 +27,10 @@ func set_health(value):
 		checkplayerdeath()
 
 func player_take_damage(amount):
-	push_warning("current health",current_health )
-	current_health -= amount
-	if current_health <= 0:
+	push_warning("current health", current_health)
+	healthchanged.emit()
+	current_health = max(0, current_health - amount)
+	if current_health < 0:
 		checkplayerdeath()
 
 func heal(amount):
@@ -38,7 +39,6 @@ func heal(amount):
 
 func checkplayerdeath():
 	if current_health <= 0:
-		current_health = 0
 		handle_death()
 
 func handle_death():

@@ -25,19 +25,17 @@ func _on_velocity_updated(direction):  # Callback when the velocity is updated
 
 func _on_body_entered(body):
 	if body.name == "Player":
-		var enemy_system = body.get_node("PlayerSystem")
-		if enemy_system and enemy_system.has_node("HealthSystem"):
+		var enemy_system = body.get_node("HealthSystem")
+		if enemy_system:
 			playerisreadytobeattacked = true
 			emit_signal("player_ready_to_be_attacked")
-			print("player entered") # This is for debugging. You can remove it later.
 
 func _on_body_exited(body):
 	if body.name == "Player":
-		var enemy_system = body.get_node("PlayerSystem")
-		if enemy_system and enemy_system.has_node("HealthSystem"):
+		var enemy_system = body.get_node("HealthSystem")
+		if enemy_system:
 			playerisreadytobeattacked = false
-			emit_signal("player_no_longer_ready_to_attack")
-			print("player exited") # This is for debugging. You can remove it later.
+			emit_signal("player_ready_to_be_attacked")
 
 func _physics_process(_delta):
 	pass

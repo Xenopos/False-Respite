@@ -11,16 +11,16 @@ func _ready():
 
 func _on_body_entered(body):
 	if body.name == "Player":
-		var enemy_system = body.get_node("PlayerSystem")
-		if (enemy_system and enemy_system.has_node("HealthSystem")):
+		var enemy_system = body.get_node("HealthSystem")
+		if (enemy_system ):
 			playerhasbeenfound = true
 			emit_signal("player_found")
 			push_warning("player entered")
 
 func _on_body_exited(body):
 	if body.name == "Player":
-		var enemy_system = body.get_node("PlayerSystem")
-		if (enemy_system and enemy_system.has_node("HealthSystem")):
+		var enemy_system = body.get_node("HealthSystem")
+		if (enemy_system ):
 			playerhasbeenfound = false
 			emit_signal("player_lost")
 			push_warning("player exited")

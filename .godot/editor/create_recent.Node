@@ -1,8 +1,13 @@
+HealthComponent
+GodotEssentialsHealthComponent
+Node2D
+ProgressBar
+CanvasLayer
+CanvasGroup
 HBoxContainer
 Label
 VBoxContainer
 AnimatedSprite2D
-ProgressBar
 GPUParticles2D
 healthsys
 AnimationPlayer
@@ -14,7 +19,6 @@ Area2D
 Panel
 ItemList
 NinePatchRect
-Node2D
 Control
 VSplitContainer
 FlowContainer
@@ -26,7 +30,3 @@ TextureProgressBar
 AudioStreamPlayer2D
 Node
 GodotEssentialsMotion
-HealthComponent
-GodotEssentialsHealthComponent
-GodotEssentialsPlatformerMovementComponent
-GPUParticlesAttractorVectorField3D

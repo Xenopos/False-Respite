@@ -1,17 +1,13 @@
 extends Node
 class_name enemyhealth
 
-
 var menemycurrenthealth : int = 100
 var menemymaxpoise : int = 0
 var enemy_parent : Node2D
 
 func _ready():
 	enemy_parent = get_tree().get_first_node_in_group("Enemy")
-	if enemy_parent:
-		push_warning("Found")
-	else:
-		push_warning("fuck you")
+	pass
 			
 func _physics_process(_delta):
 	pass

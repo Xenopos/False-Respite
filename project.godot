@@ -46,7 +46,7 @@ movie_writer/disable_vsync=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/2d_essentials/plugin.cfg", "res://addons/camera_2d_plus/plugin.cfg")
+enabled=PackedStringArray("res://addons/2d_essentials/plugin.cfg")
 
 [input]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=62 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
@@ -20,10 +20,9 @@
 [ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://sfx/charging.wav" id="17_o0kfb"]
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="19_uhpr1"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealthSystem.gd" id="21_1012i"]
-[ext_resource type="Script" path="res://Scripts/Player/StaminaSystem.gd" id="22_65adt"]
 [ext_resource type="PackedScene" uid="uid://bxmw7cer0hljd" path="res://temp/UISkills.tscn" id="24_bwlk1"]
+[ext_resource type="Script" path="res://temp/ProgressBar.gd" id="24_xrs32"]
 [ext_resource type="Script" path="res://Scripts/Player/Skilldamagearea.gd" id="26_1oknk"]
-[ext_resource type="PackedScene" uid="uid://bu1idqd4sbhtk" path="res://temp/node_2d.tscn" id="27_mw1cl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
 size = Vector2(16.5, 15)
@@ -366,10 +365,16 @@ scale_min = 0.0
 scale_max = 3.0
 color = Color(1, 0.537255, 0.521569, 1)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("skill3area", "anysingepointdamage", "anysingepointdamager", "cooldown_timer") groups=["Player"]]
 texture_filter = 1
 script = ExtResource("1_0hjxu")
+skill3area = NodePath("Skilldamagearea")
+anysingepointdamage = NodePath("Attack Range")
+anysingepointdamager = NodePath("Attack Range")
 cooldown_timer = NodePath("timercountdown")
+
+[node name="HealthSystem" type="Node2D" parent="."]
+script = ExtResource("21_1012i")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.4, 1.4)
@@ -379,14 +384,6 @@ drag_left_margin = 0.01
 drag_top_margin = 0.01
 drag_right_margin = 0.01
 drag_bottom_margin = 0.01
-
-[node name="PlayerSystem" type="Node" parent="."]
-
-[node name="HealthSystem" type="Node" parent="PlayerSystem"]
-script = ExtResource("21_1012i")
-
-[node name="StaminaSystem" type="Node" parent="PlayerSystem"]
-script = ExtResource("22_65adt")
 
 [node name="Attack Range" type="Area2D" parent="." node_paths=PackedStringArray("debug")]
 collision_mask = 2
@@ -457,9 +454,6 @@ amount = 161
 process_material = SubResource("ParticleProcessMaterial_rfsau")
 lifetime = 0.2
 
-[node name="Node2D" parent="." instance=ExtResource("27_mw1cl")]
-position = Vector2(-249, -138)
-
 [node name="Label" type="Label" parent="."]
 offset_left = -13.0
 offset_top = -31.0
@@ -484,6 +478,19 @@ offset_left = -346.0
 offset_top = -228.0
 offset_right = -346.0
 offset_bottom = -228.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("health")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.5
+offset_right = 36.5
+offset_bottom = 27.0
+grow_horizontal = 2
+script = ExtResource("24_xrs32")
+health = NodePath("../../HealthSystem")
 
 [connection signal="body_entered" from="Attack Range" to="Attack Range" method="_on_body_entered"]
 [connection signal="body_exited" from="Attack Range" to="Attack Range" method="_on_body_exited"]

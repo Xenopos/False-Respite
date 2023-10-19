@@ -76,7 +76,7 @@ func _physics_process(delta):
 	update_facing_direction_enemy()
 	move_and_slide()
 	emit_signal("velocity_updated", direction) 
-	enemyisdead()
+	
 func enemynrmlattk():
 	if not isAttackOnCooldown and not hasAttacked:
 		enemySpeed = 40
@@ -144,7 +144,7 @@ func enemyjump():
 	meleeEnemyAnim.play("jump")
 
 func enemyisdead():
-	if enemychildhealth.menemycurrenthealth <= 0:
+		velocity.x = 0
 		push_warning("death is called")
 		meleeEnemyAnim.play("death")
 		animationlock = false

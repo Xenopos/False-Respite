@@ -253,7 +253,7 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_rprsq")
 
-[node name="Enemy_Health" type="Node" parent="."]
+[node name="Enemy_Health" type="Node" parent="." groups=["enemyhealth"]]
 script = ExtResource("1_hmvur")
 
 [node name="Timer" type="Timer" parent="Enemy_Health"]

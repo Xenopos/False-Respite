@@ -1,10 +1,10 @@
-res://Visuals/UI
 res://temp
+res://
+res://Scripts/Player
+res://Visuals/UI
 res://Visuals/Spritesheets
 res://Visuals/Animations
-res://Scripts/Player
 res://Scenes
-res://
 res://Scripts/EnemyMelee
 res://Shaders
 C:/Program Files/Sublime Text

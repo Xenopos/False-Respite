@@ -150,6 +150,7 @@ animation = &"Jump"
 autoplay = "Jump"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 416.0
 offset_top = 299.0
 offset_right = 625.0

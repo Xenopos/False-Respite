@@ -1,11 +1,14 @@
 extends Area2D
 class_name atkrange
-
+	
 
 var playerdamagetoenemy: enemyhealth
 var menemy: meleeenemy
 var collisiondirection: Vector2
 var shizuka : Shizuka
+
+signal applydamagedash(canapplied1)
+signal applydamage(canapplied2)
 
 var enemyexitedrange : bool = true
 @export var debug : Label
@@ -30,14 +33,18 @@ func _on_body_entered(body):
 	if body.name == "Melee_Enemy":
 		var enemy_system = body.get_node("Enemy_Health")
 		if (enemy_system):
+			applydamage.emit(true)
+			applydamagedash.emit(true)
 			enemyexitedrange = false
-			debug.text =str("fuck you ") + str(enemyexitedrange) 
+			debug.text = str("fuck you ") + str(enemyexitedrange) 
 
 func _on_body_exited(body):
 # Check if the body is an Enemy
 	if body.name == "Melee_Enemy":
 		var enemy_system = body.get_node("Enemy_Health")
 		if (enemy_system):
+			applydamage.emit(false)
+			applydamagedash.emit(false)
 			enemyexitedrange = true
 			debug.text = str(enemyexitedrange)
 
