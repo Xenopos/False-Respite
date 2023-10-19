@@ -7,4 +7,3 @@ func _ready():
 	update()
 func update():
 	value = health.current_health * 100 / 100
-	push_warning("called")

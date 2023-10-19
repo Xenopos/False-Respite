@@ -7,8 +7,6 @@ signal player_ready_to_be_attacked
 var parentenemy = meleeenemy  # Similarly, this will cause an error if 'meleeenemy' isn't defined elsewhere.
 var playerisreadytobeattacked : bool = false
 
-# Signals
-signal player_no_longer_ready_to_attack
 
 func _ready():
 	# Initialize parentenemy assuming the meleeenemy is the direct parent of this node

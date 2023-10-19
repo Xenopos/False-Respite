@@ -1,23 +1,20 @@
 extends Node
 class_name enemyhealth
 
+signal enemyrage(isenemyrage)
+
 var menemycurrenthealth : int = 100
 var menemymaxpoise : int = 0
-var enemy_parent : Node2D
 
 func _ready():
-	enemy_parent = get_tree().get_first_node_in_group("Enemy")
 	pass
 			
 func _physics_process(_delta):
 	pass
 
 func enemy_check_health():
-	if menemycurrenthealth <= 0:
-		pass
-		
-func takecontinousdamage():
-	pass
+	if menemycurrenthealth <= 20:
+		enemyrage.emit(true)
 
 func take_damage_skill1(amount: int):
 	menemycurrenthealth -= amount

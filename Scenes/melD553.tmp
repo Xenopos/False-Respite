@@ -3,13 +3,48 @@
 [ext_resource type="Texture2D" uid="uid://cysb84tnghojp" path="res://Visuals/Spritesheets/MEnemy_basic_attack.png" id="1_axqna"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/melee_enemy.gd" id="1_rprsq"]
 [ext_resource type="Texture2D" uid="uid://c862cu2if06l" path="res://Visuals/Spritesheets/MEnemy_idle.png" id="2_hikpk"]
-[ext_resource type="Script" path="res://Scripts/EnemyMelee/Enemy_Health.gd" id="2_o6idj"]
 [ext_resource type="Texture2D" uid="uid://bdw163caj26rx" path="res://Visuals/Spritesheets/MEnemy_jump.png" id="3_ikgo8"]
 [ext_resource type="Texture2D" uid="uid://dd5bkig6lnpg2" path="res://Visuals/Spritesheets/MEnemy_run.png" id="4_dtblk"]
 [ext_resource type="Texture2D" uid="uid://baxgqcocvlfj6" path="res://Visuals/Spritesheets/MEnemy_death.png" id="4_o8v7n"]
 [ext_resource type="Texture2D" uid="uid://cq2nf7lli1xdq" path="res://Visuals/Spritesheets/MEnemy_thrust.png" id="5_5wk8v"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/AttackRange.gd" id="8_p0v7j"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/detectionrange.gd" id="9_yqu7y"]
+
+[sub_resource type="GDScript" id="GDScript_bju44"]
+script/source = "extends Node
+class_name enemyhealth
+
+signal enemyrager(isenemyrage)
+
+var menemycurrenthealth : int = 100
+var menemymaxpoise : int = 0
+
+func _ready():
+	pass
+			
+func _physics_process(_delta):
+	pass
+
+func enemy_check_health():
+	if menemycurrenthealth <= 20:
+		enemyrager.emit(true)
+
+func takecontinousdamage():
+	pass
+
+func take_damage_skill1(amount: int):
+	menemycurrenthealth -= amount
+	enemy_check_health()
+
+func take_damage(amount: int):
+	push_warning(\"Enemy damage taken \", menemycurrenthealth)
+	menemycurrenthealth -= amount
+	enemy_check_health()
+
+func enemygoairborne():
+	pass
+
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2yqi"]
 atlas = ExtResource("1_axqna")
@@ -254,7 +289,9 @@ collision_mask = 2
 script = ExtResource("1_rprsq")
 
 [node name="Enemy_Health" type="Node" parent="." groups=["enemyhealth"]]
-script = ExtResource("2_o6idj")
+script = SubResource("GDScript_bju44")
+
+[node name="Timer" type="Timer" parent="Enemy_Health"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2

@@ -3,7 +3,4 @@ res://Health System.gd
 res://crt_exp.gdshader
 res://Shaders/outlineshader.gdshader
 res://Shaders/try.gdshader
-res://Player.gd
-res://Scenes/melee_enemy.tscn
-res://area_2d.tscn
-res://temp/UISkills.tscn
+res://Scripts/Player/Skilldamagearea.gd

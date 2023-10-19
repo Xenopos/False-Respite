@@ -1,3 +1,7 @@
+GPUParticles2D
+CPUParticles2D
+Label
+Timer
 HealthComponent
 GodotEssentialsHealthComponent
 Node2D
@@ -5,13 +9,10 @@ ProgressBar
 CanvasLayer
 CanvasGroup
 HBoxContainer
-Label
 VBoxContainer
 AnimatedSprite2D
-GPUParticles2D
 healthsys
 AnimationPlayer
-Timer
 Sprite2D
 AnimationTree
 CollisionShape2D
@@ -29,4 +30,3 @@ meleeenemy
 TextureProgressBar
 AudioStreamPlayer2D
 Node
-GodotEssentialsMotion

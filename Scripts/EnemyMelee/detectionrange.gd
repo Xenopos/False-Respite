@@ -15,7 +15,6 @@ func _on_body_entered(body):
 		if (enemy_system ):
 			playerhasbeenfound = true
 			emit_signal("player_found")
-			push_warning("player entered")
 
 func _on_body_exited(body):
 	if body.name == "Player":
@@ -23,7 +22,6 @@ func _on_body_exited(body):
 		if (enemy_system ):
 			playerhasbeenfound = false
 			emit_signal("player_lost")
-			push_warning("player exited")
 
 func _physics_process(_delta):
 	pass

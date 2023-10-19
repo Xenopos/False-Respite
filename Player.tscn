@@ -1,7 +1,8 @@
-[gd_scene load_steps=62 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=63 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerHealth.gd" id="2_jp5m3"]
 [ext_resource type="Texture2D" uid="uid://cipa3sl7tn3pn" path="res://Visuals/Animations/jump.png" id="3_eegvr"]
 [ext_resource type="Texture2D" uid="uid://8ogrtqyeacau" path="res://Visuals/Animations/dash.png" id="3_mm0ji"]
 [ext_resource type="Texture2D" uid="uid://d0dljy5hr7kfw" path="res://Visuals/Animations/run.png" id="3_vh5n7"]
@@ -19,7 +20,6 @@
 [ext_resource type="Script" path="res://Scripts/Player/Attack Range.gd" id="17_6j0n5"]
 [ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://sfx/charging.wav" id="17_o0kfb"]
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="19_uhpr1"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerHealthSystem.gd" id="21_1012i"]
 [ext_resource type="PackedScene" uid="uid://bxmw7cer0hljd" path="res://temp/UISkills.tscn" id="24_bwlk1"]
 [ext_resource type="Script" path="res://temp/ProgressBar.gd" id="24_xrs32"]
 [ext_resource type="Script" path="res://Scripts/Player/Skilldamagearea.gd" id="26_1oknk"]
@@ -348,14 +348,29 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f8mtg"]
+emission_shape = 2
+emission_sphere_radius = 30.74
+particle_flag_disable_z = true
+direction = Vector3(1, -360, 0)
+spread = 21.0
+initial_velocity_max = 83.8
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 3.0
+scale_max = 5.0
+color = Color(0, 0.917647, 0.678431, 1)
+hue_variation_min = -0.33
+hue_variation_max = -0.03
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rfsau"]
 emission_shape = 2
-emission_sphere_radius = 5.62
+emission_sphere_radius = 18.42
 particle_flag_disable_z = true
 direction = Vector3(180, 0, 0)
 spread = 180.0
 gravity = Vector3(0, 0, 0)
-initial_velocity_max = 56.73
+initial_velocity_max = 6.73
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 linear_accel_min = -4.26
@@ -365,21 +380,20 @@ scale_min = 0.0
 scale_max = 3.0
 color = Color(1, 0.537255, 0.521569, 1)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("skill3area", "anysingepointdamage", "anysingepointdamager", "cooldown_timer") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer", "skill3area", "anysingepointdamage", "dashcd") groups=["Player"]]
 texture_filter = 1
 script = ExtResource("1_0hjxu")
+cooldown_timer = NodePath("timercountdown")
 skill3area = NodePath("Skilldamagearea")
 anysingepointdamage = NodePath("Attack Range")
-anysingepointdamager = NodePath("Attack Range")
-cooldown_timer = NodePath("timercountdown")
+dashcd = NodePath("dashcooldown")
 
 [node name="HealthSystem" type="Node2D" parent="."]
-script = ExtResource("21_1012i")
+script = ExtResource("2_jp5m3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.4, 1.4)
 position_smoothing_enabled = true
-position_smoothing_speed = 20.0
 drag_left_margin = 0.01
 drag_top_margin = 0.01
 drag_right_margin = 0.01
@@ -433,6 +447,8 @@ volume_db = 9.674
 stream = ExtResource("17_o0kfb")
 pitch_scale = 0.68
 
+[node name="dashcooldown" type="Timer" parent="."]
+
 [node name="timercountdown" type="Timer" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
@@ -448,27 +464,33 @@ sprite_frames = SubResource("SpriteFrames_jubc4")
 animation = &"dash"
 autoplay = "idle"
 
+[node name="skill1particlesready" type="GPUParticles2D" parent="."]
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_f8mtg")
+
 [node name="DashParticles" type="GPUParticles2D" parent="."]
 position = Vector2(0, -1)
-amount = 161
+amount = 198
 process_material = SubResource("ParticleProcessMaterial_rfsau")
 lifetime = 0.2
 
 [node name="Label" type="Label" parent="."]
-offset_left = -13.0
-offset_top = -31.0
-offset_right = 29.0
-offset_bottom = -7.0
+z_index = 100
+offset_left = -21.0
+offset_top = 101.0
+offset_right = 62.0
+offset_bottom = 125.0
 scale = Vector2(0.639251, 0.563141)
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
+text = "Skills Ready"
 horizontal_alignment = 1
 
 [node name="Labels" type="Label" parent="."]
-offset_left = 23.0
-offset_top = -8.0
-offset_right = 65.0
-offset_bottom = 16.0
+offset_left = 31.0
+offset_top = -7.0
+offset_right = 73.0
+offset_bottom = 17.0
 scale = Vector2(0.716597, 0.597274)
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
@@ -482,13 +504,14 @@ offset_bottom = -228.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("health")]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -36.5
-offset_right = 36.5
-offset_bottom = 27.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -13.0
+offset_right = 116.0
+offset_bottom = 14.0
+grow_vertical = 2
+scale = Vector2(0.790274, 0.790274)
 script = ExtResource("24_xrs32")
 health = NodePath("../../HealthSystem")
 
