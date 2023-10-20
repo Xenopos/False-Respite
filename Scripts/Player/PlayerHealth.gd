@@ -21,7 +21,7 @@ func _physics_process(_delta):
 	pass
 
 func _ready():
-	displaymaxhealing.text = str("Heal " ,current_healing)
+	displaymaxhealing.text = str("Total heal: " ,current_healing)
 	enemyhp = get_tree().get_first_node_in_group("enemyhealth")
 	enemyhp.connect("restorehealthready", Callable(self, "imhigh"))
 	fadedisplay.connect("timeout", Callable(self, "displayhealoff"))
@@ -43,7 +43,7 @@ func heal(amount: int):
 	
 func imhigh():
 	displaylabelrestoredhealing.text = str("heal restored")
-	current_healing = max_healing
+	current_healing = max_healing 
 	fadedisplay.start(2.0)
 	
 func displayhealoff():

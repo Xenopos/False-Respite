@@ -562,6 +562,7 @@ theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
 
 [node name="Restoredhealing" type="Label" parent="CanvasLayer"]
+top_level = true
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5

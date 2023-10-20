@@ -35,27 +35,27 @@ scale = Vector2(1.10205, 1.00671)
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_akema")
-text = "Start"
+text = "  Start"
 alignment = 0
 icon_alignment = 2
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_akema")
-text = "Settings
+text = "  Settings
 "
 alignment = 0
 
 [node name="Leaderboards" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_akema")
-text = "Leaderboard	"
+text = "  Leaderboard	"
 alignment = 0
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_akema")
-text = "Quit"
+text = "  Quit"
 alignment = 0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

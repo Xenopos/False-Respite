@@ -333,11 +333,9 @@ func playerisnowdead():
 	animationstay = true
 	nowdead = true
 	animated_sprite.play("Death")
-	push_warning("deads none reduced to shit")
 
 #------------------------------------------#
 #healing
-
 func commithealing():
 	if Input.is_action_just_pressed("heal"):
 		skill1particles.emitting = true
