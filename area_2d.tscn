@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://caj8lkojakln6" path="res://Scenes/melee_enemy.tscn" id="4_4364l"]
 [ext_resource type="Shader" path="res://crt_exp.gdshader" id="5_20820"]
 [ext_resource type="Texture2D" uid="uid://b0qkngn51vocc" path="res://Visuals/Backgrounds and tilemap/Parallax back.png" id="5_xrode"]
-[ext_resource type="AudioStream" uid="uid://c1u442m6b583y" path="res://BGM/Distress upon the damsel demo.wav" id="6_mqkfj"]
+[ext_resource type="AudioStream" uid="uid://jo6tyfweiytv" path="res://BGM/bullshit.wav" id="6_vg3vd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i0g6t"]
 texture = ExtResource("1_m60d6")
@@ -418,5 +418,6 @@ position = Vector2(2666, 161)
 texture = ExtResource("5_xrode")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_mqkfj")
-autoplay = true
+stream = ExtResource("6_vg3vd")
+volume_db = -3.25
+pitch_scale = 0.95

@@ -170,14 +170,9 @@ func _on_animated_sprite_2d_animation_finished():
 		gravity = 480
 
 func attack():
-	if (
-		Input.is_action_just_pressed("attack")
-		and AttackCombo == 0
-		and isDashing == false
-		and not nowdead
-	):
-#		if skill3online:
-#			enemyparent.take_damage(10)
+	if (Input.is_action_just_pressed("attack") and AttackCombo == 0 and isDashing == false and not nowdead):
+		if skill3online:
+			enemyparent.take_damage(10)
 		SPEED = 30
 		$SFX/attacksfx.play()
 		AttackCombo += 1
@@ -190,8 +185,8 @@ func attack():
 		and isDashing == false
 		and not nowdead
 	):
-#		if skill3online:
-#			enemyparent.take_damage(10)
+		if skill3online:
+			enemyparent.take_damage(10)
 		SPEED = 30
 		AttackCombo -= 1
 		isAttacking = true

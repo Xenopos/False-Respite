@@ -15,3 +15,4 @@ res://Scripts/EnemyMelee/melee_enemy.gd
 res://Themes/Sample_theme.tres
 res://Scenes/Mainmenu.tscn
 res://Mainmenu.gd
+res://Scenes/Pause.tscn

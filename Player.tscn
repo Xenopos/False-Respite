@@ -474,10 +474,8 @@ shape = SubResource("RectangleShape2D_p2vt5")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
 sprite_frames = SubResource("SpriteFrames_jubc4")
-animation = &"dash attack"
+animation = &"Death"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="skill1particlesready" type="GPUParticles2D" parent="."]
 emitting = false

@@ -26,11 +26,12 @@ func set_max_health(value):
 	current_health = max_health
 
 func player_take_damage(amount: int):
-	playerkknockback.emit()
-	healthchanged.emit()
-	current_health = max(0, current_health - amount)
-	if current_health <= 0:
-		emitremovalofexistence.emit()
+	if current_health != 0:
+		playerkknockback.emit()
+		healthchanged.emit()
+		current_health = max(0, current_health - amount)
+		if current_health <= 0:
+			emitremovalofexistence.emit()
 
 func heal(amount: int):
 	if current_healing != -1:

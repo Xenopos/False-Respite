@@ -7,7 +7,6 @@ var player: Shizuka
 signal velocity_updated(direction)
 var enemychildhealth
 
-
 @onready var attackcollisionrange = $AttackRange
 @onready var meleeEnemyAnim: AnimatedSprite2D = $AnimatedSprite2D
 
