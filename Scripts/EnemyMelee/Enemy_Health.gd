@@ -4,6 +4,7 @@ class_name enemyhealth
 
 signal enemyhealthchanged
 signal enemyrage(isenemyrage)
+signal enemydeathtrigger
 
 var menemycurrenthealth : int = 100
 var menemymaxpoise : int = 0
@@ -17,6 +18,8 @@ func _physics_process(_delta):
 func enemy_check_health():
 	if menemycurrenthealth <= 20 and menemycurrenthealth >= 20 :
 		enemyrage.emit(true)
+	if menemycurrenthealth == 0:
+		enemydeathtrigger.emit()
 
 func take_damage_skill1(amount: int):
 	menemycurrenthealth -= amount

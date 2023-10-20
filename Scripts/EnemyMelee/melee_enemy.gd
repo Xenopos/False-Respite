@@ -45,7 +45,7 @@ func _ready():
 	enemychildhealth.connect("enemyrage", Callable(self, "commitwarcrime"))
 	attackcollisionrange.connect("player_ready_to_be_attacked", Callable(self, "enemynrmlattk"))
 	attack_cooldown_timer.connect("timeout", Callable(self, "_on_AttackCooldownTimer_timeout"))
-
+	enemychildhealth.connect("enemydeathtrigger", Callable(self, "enemyisdead"))
 func _on_player_found():
 	foundenemy = true
 	
@@ -79,7 +79,7 @@ func _physics_process(delta):
 	emit_signal("velocity_updated", direction) 
 	
 func enemynrmlattk():
-	if not isAttackOnCooldown and not hasAttacked:
+	if not isAttackOnCooldown and not hasAttacked and not deads:
 		enemySpeed = 40
 		meleeEnemyAnim.play("basic_attack")
 		playerhealth.player_take_damage(10)
@@ -100,11 +100,11 @@ func _on_animated_sprite_2d_animation_finished():
 
 func enemyhasfounplayer():
 	var distance_to_player = player.global_position.distance_to(global_position)
-	if distance_to_player > 10 and not enemybelow20:
+	if distance_to_player > 10 and not enemybelow20 and not deads:
 		enemySpeed = 70
 		direction.x = 1 if player.global_position.x > global_position.x else -1
 		velocity.x = direction.x * enemySpeed
-	elif distance_to_player > 20 and enemybelow20:
+	elif distance_to_player > 20 and enemybelow20 and not deads:
 		enemySpeed = 100
 		direction.x = 1 if player.global_position.x > global_position.x else -1
 		velocity.x = direction.x * enemySpeed

@@ -30,7 +30,7 @@ offset_top = -8.0
 offset_right = 199.0
 offset_bottom = 88.0
 grow_vertical = 2
-scale = Vector2(1.09125, 0.810545)
+scale = Vector2(1.10205, 1.00671)
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2

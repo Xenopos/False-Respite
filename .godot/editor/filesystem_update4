@@ -11,3 +11,7 @@ res://Scripts/Player/Attack Range.gd
 res://Scripts/EnemyMelee/Enemy_Health.gd
 res://Scripts/Player/PlayerHealth.gd
 res://Scripts/Player/Skilldamagearea.gd
+res://Scripts/EnemyMelee/melee_enemy.gd
+res://Themes/Sample_theme.tres
+res://Scenes/Mainmenu.tscn
+res://Mainmenu.gd
