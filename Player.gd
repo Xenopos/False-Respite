@@ -9,6 +9,7 @@ class_name Shizuka extends CharacterBody2D
 @onready var dashParticles: GPUParticles2D = $DashParticles
 @onready var skill1particles: GPUParticles2D = $skill1particlesready
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 #------------------------------------#
 
 var lockskill : bool = false
@@ -28,10 +29,10 @@ var Allow_jump : bool = true
 var skill1online : bool =  false
 var skill2online : bool =  false
 var skill3online : bool =  false
-
 var skill3active = true
 var skill2active  = false
 var skill1active = false
+
 #dash var
 var dash_cd : float = 0.3
 var isdashcd : bool = false

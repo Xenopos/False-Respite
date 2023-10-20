@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=68 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
@@ -20,8 +20,11 @@
 [ext_resource type="Script" path="res://Scripts/Player/Attack Range.gd" id="17_6j0n5"]
 [ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://sfx/charging.wav" id="17_o0kfb"]
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="19_uhpr1"]
+[ext_resource type="Shader" path="res://Shaders/outlineshader.gdshader" id="23_yl614"]
 [ext_resource type="PackedScene" uid="uid://bxmw7cer0hljd" path="res://temp/UISkills.tscn" id="24_bwlk1"]
-[ext_resource type="Script" path="res://temp/ProgressBar.gd" id="24_xrs32"]
+[ext_resource type="Texture2D" uid="uid://d35g0y2744mmn" path="res://Visuals/UI/healthbar.png" id="24_okkdx"]
+[ext_resource type="Script" path="res://Visuals/UI/healtbar.gd" id="25_eimpg"]
+[ext_resource type="Texture2D" uid="uid://ib0ngubwd13f" path="res://Visuals/UI/healthbarover.png" id="25_fpgvf"]
 [ext_resource type="Script" path="res://Scripts/Player/Skilldamagearea.gd" id="26_1oknk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
@@ -31,6 +34,8 @@ size = Vector2(16.5, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2vt5"]
 size = Vector2(5, 15)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_engfg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ye6e"]
 atlas = ExtResource("14_dgdb2")
@@ -380,6 +385,15 @@ scale_min = 0.0
 scale_max = 3.0
 color = Color(1, 0.537255, 0.521569, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u4arj"]
+resource_local_to_scene = true
+shader = ExtResource("23_yl614")
+shader_parameter/color = Color(0, 1, 0.694118, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer", "skill2area", "anysingepointdamage") groups=["Player"]]
 texture_filter = 1
 script = ExtResource("1_0hjxu")
@@ -473,6 +487,7 @@ shape = SubResource("RectangleShape2D_p2vt5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
+material = SubResource("ShaderMaterial_engfg")
 sprite_frames = SubResource("SpriteFrames_jubc4")
 animation = &"Death"
 autoplay = "idle"
@@ -518,16 +533,18 @@ offset_bottom = -228.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
 texture_filter = 1
-offset_left = 35.0
-offset_top = 13.0
-offset_right = 292.0
-offset_bottom = 40.0
-scale = Vector2(0.790274, 0.790274)
-theme_override_fonts/font = ExtResource("19_uhpr1")
-theme_override_font_sizes/font_size = 19
-script = ExtResource("24_xrs32")
+material = SubResource("ShaderMaterial_u4arj")
+offset_left = 36.0
+offset_top = 14.0
+offset_right = 237.0
+offset_bottom = 35.0
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("24_okkdx")
+texture_progress = ExtResource("25_fpgvf")
+script = ExtResource("25_eimpg")
 
 [connection signal="body_entered" from="Attack Range" to="Attack Range" method="_on_body_entered"]
 [connection signal="body_exited" from="Attack Range" to="Attack Range" method="_on_body_exited"]

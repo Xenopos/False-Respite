@@ -1,5 +1,7 @@
-Timer
+TextureProgressBar
 Label
+BoxContainer
+Timer
 ProgressBar
 CanvasLayer
 GPUParticles2D
@@ -23,10 +25,8 @@ NinePatchRect
 Control
 VSplitContainer
 FlowContainer
-BoxContainer
 StaticBody2D
 Button
 meleeenemy
-TextureProgressBar
 AudioStreamPlayer2D
 Node

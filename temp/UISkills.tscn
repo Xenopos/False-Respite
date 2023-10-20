@@ -187,3 +187,14 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
 text = "Spacebar"
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 140.0
+offset_top = 138.0
+offset_right = 192.0
+offset_bottom = 164.0
+theme_override_fonts/font = ExtResource("3_wccsu")
+theme_override_font_sizes/font_size = 19
+text = "Health"
