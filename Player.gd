@@ -153,8 +153,7 @@ func jump():
 
 func _on_animated_sprite_2d_animation_finished():
 	if (
-		animated_sprite.animation == "upyogo"
-		or animated_sprite.animation == "attack"
+		animated_sprite.animation == "attack"
 		or animated_sprite.animation == "attack2"
 		or animated_sprite.animation == "dash"
 		or animated_sprite.animation == "spin"
@@ -169,7 +168,12 @@ func _on_animated_sprite_2d_animation_finished():
 		skill1active = false
 		SPEED = 80.0
 		gravity = 480
-
+	if animated_sprite.animation == "upyogo":
+		if skill3online:
+			enemyparent.take_damage(10)
+		SPEED = 80.0
+		gravity = 480
+		animationstay = false
 func attack():
 	if (Input.is_action_just_pressed("attack") and AttackCombo == 0 and isDashing == false and not nowdead):
 		if skill3online:
@@ -224,6 +228,7 @@ func Skill_activation():
 			skill1on.emit(true)
 		elif (Input.is_action_just_released("Skill1") and is_on_floor() and not lockskill and not isDashing):
 			skill1releaseactivate()
+			skill1on.emit(true)
 		if (Input.is_action_just_pressed("Skill2") and not is_on_floor() and not isDashing):
 			skill2activate()
 			skill2on.emit(true)
@@ -271,8 +276,6 @@ func skill2activate():
 
 func skill3activate():
 	if not lockskill:
-		if skill3online:
-			enemyparent.take_damage(10)
 		skill3active = true
 		push_warning("skill3 activated")
 		animated_sprite.play("upyogo")
@@ -322,6 +325,7 @@ func allowedskill3toapplydamage(canapplied3: bool):
 #--------------------------------------#d
 #check if the player is dead
 func playerisnowdead():
+	velocity.x = 0
 	animationstay = true
 	nowdead = true
 	animated_sprite.play("Death")

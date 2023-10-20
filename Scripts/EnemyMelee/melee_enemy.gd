@@ -136,7 +136,7 @@ func enemydash():
 	meleeEnemyAnim.play("jump")
 	velocity = dashdirection.normalized() * enemydash_speed
 	animationlock = true
-
+	
 func enemydojump():
 	if is_on_floor():
 		enemyjump()

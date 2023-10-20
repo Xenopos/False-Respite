@@ -16,10 +16,11 @@ func _ready():
 		parentenemy.connect("velocity_updated", Callable(self, "_on_velocity_updated"))
 
 func _on_velocity_updated(direction):  # Callback when the velocity is updated
-	if direction.x == 1:
-		scale.x = -1
-	elif direction.x == -1:
-		scale.x = 1
+	if playerisreadytobeattacked:
+		if direction.x == 1:
+			scale.x = -1
+		elif direction.x == -1:
+			scale.x = 1
 
 func _on_body_entered(body):
 	if body.name == "Player":
