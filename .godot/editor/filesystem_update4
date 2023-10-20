@@ -10,3 +10,4 @@ res://Player.tscn
 res://temp/UISkills.tscn
 res://Scripts/Player/PlayerHealth.gd
 res://Scripts/Player/Attack Range.gd
+res://temp/ProgressBar.gd

@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name meleeenemy
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var player: Node2D
+var player: Shizuka
 
 signal velocity_updated(direction)
 var enemychildhealth
@@ -40,7 +40,7 @@ func _ready():
 	detection_range_node.connect("player_found",Callable( self, "_on_player_found"))
 	detection_range_node.connect("player_lost", Callable(self, "_on_player_lost"))
 	player = get_tree().get_first_node_in_group("Player")
-	playerhealth = healthsys.new()
+	playerhealth = get_tree().get_first_node_in_group("shizukahealth")
 	enemychildhealth = get_tree().get_first_node_in_group("enemyhealth")
 	enemychildhealth.connect("enemyrage", Callable(self, "commitwarcrime"))
 	attackcollisionrange.connect("player_ready_to_be_attacked", Callable(self, "enemynrmlattk"))

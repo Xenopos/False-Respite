@@ -1,8 +1,9 @@
 extends ProgressBar
 
-@export var health : healthsys
+var health : healthsys
 
 func _ready():
+	health = get_tree().get_first_node_in_group("shizukahealth")
 	health.healthchanged.connect(update)
 	update()
 func update():

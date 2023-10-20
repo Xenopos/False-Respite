@@ -388,7 +388,7 @@ skill3area = NodePath("Skilldamagearea")
 anysingepointdamage = NodePath("Attack Range")
 dashcd = NodePath("dashcooldown")
 
-[node name="HealthSystem" type="Node2D" parent="."]
+[node name="HealthSystem" type="Node2D" parent="." groups=["shizukahealth"]]
 script = ExtResource("2_jp5m3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -504,7 +504,7 @@ offset_bottom = -228.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("health")]
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -514,7 +514,6 @@ offset_bottom = 14.0
 grow_vertical = 2
 scale = Vector2(0.790274, 0.790274)
 script = ExtResource("24_xrs32")
-health = NodePath("../../HealthSystem")
 
 [connection signal="body_entered" from="Attack Range" to="Attack Range" method="_on_body_entered"]
 [connection signal="body_exited" from="Attack Range" to="Attack Range" method="_on_body_exited"]
