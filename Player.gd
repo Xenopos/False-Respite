@@ -2,7 +2,7 @@ class_name Shizuka extends CharacterBody2D
 
 #------------------------------------#
 @export var SPEED = 80.0
-@export var JUMP_VELOCITY = -180.0
+@export var JUMP_VELOCITY = -230
 
 #------------------------------------#
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -37,8 +37,8 @@ var skill1active = false
 var dash_cd : float = 0.3
 var isdashcd : bool = false
 var dash_speed: float = 600
-var dash_duration: float = 0.1
-@onready var skill1cd : Label = $Label
+var dash_duration: float = 0.15
+@onready var skill1cd : Label = $CanvasLayer/Label2
 var enemyparent : enemyhealth
 #------------------------------------#
 var nowdead : bool = false
@@ -48,7 +48,7 @@ signal skill1on(_isbuttontrigger1)
 signal skill2on(_isbuttontrigger2)
 signal skill3on(_isbuttontrigger3)
 signal jumpon(_isbuttontrigger4)
-
+signal enemyairborne
 #signals used
 @export var cooldown_timer: Timer
 @onready var shizukahealth : healthsys = $HealthSystem
@@ -117,7 +117,7 @@ func skill1(): #need stop damage condition other will spam
 		enemyparent.take_damage(10)
 		skill1active = false
 		resetskill1damage = false
-		skill1_cd_timer.start(1)
+		skill1_cd_timer.start(0.9)
 		
 func skill2():
 	if skill2online and resetskill2damage and skill2active:
@@ -176,6 +176,7 @@ func _on_animated_sprite_2d_animation_finished():
 	if animated_sprite.animation == "upyogo":
 		if skill3online:
 			enemyparent.take_damage(10)
+			enemyairborne.emit()
 		SPEED = 80.0
 		gravity = 480
 		animationstay = false

@@ -2,17 +2,14 @@ res://Player.tscn
 res://Visuals/UI/healtbar.gd
 res://Health System.gd
 res://Shaders/shaderforadamagefx.gdshader
+res://Shaders/outlineshader.gdshader
 res://crt_exp.gdshader
 res://Themes/Sample_theme.tres
-res://Shaders/outlineshader.gdshader
 res://Shaders/try.gdshader
 res://area_2d.tscn
 res://Scenes/melee_enemy.tscn
 res://temp/UISkills.tscn
 res://Scenes/Mainmenu.tscn
 res://Scenes/Pause.tscn
-res://Scripts/Player/PlayerHealth.gd
-res://Scripts/EnemyMelee/melee_enemy.gd
 res://Player.gd
-res://Scripts/Player/Skilldamagearea.gd
-res://Scripts/EnemyMelee/Enemy_Health.gd
+res://Scripts/EnemyMelee/melee_enemy.gd

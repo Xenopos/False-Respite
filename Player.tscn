@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=70 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
@@ -365,8 +365,11 @@ color = Color(0, 0.501961, 0.364706, 1)
 hue_variation_min = -0.33
 hue_variation_max = -0.03
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c7nwk"]
+resource_local_to_scene = true
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rfsau"]
-emission_shape = 2
+emission_shape = 1
 emission_sphere_radius = 18.42
 particle_flag_disable_z = true
 direction = Vector3(180, 0, 0)
@@ -380,7 +383,7 @@ linear_accel_max = -1.42
 damping_max = 1.709
 scale_min = 0.0
 scale_max = 3.0
-color = Color(1, 0.537255, 0.521569, 1)
+color = Color(1, 0.537255, 0.521569, 0.294118)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u3kns"]
 resource_local_to_scene = true
@@ -486,22 +489,14 @@ amount = 76
 process_material = SubResource("ParticleProcessMaterial_f8mtg")
 
 [node name="DashParticles" type="GPUParticles2D" parent="."]
+z_index = 3
+texture_filter = 1
+material = SubResource("ShaderMaterial_c7nwk")
 position = Vector2(0, -1)
 emitting = false
 amount = 198
 process_material = SubResource("ParticleProcessMaterial_rfsau")
 lifetime = 0.2
-
-[node name="Label" type="Label" parent="."]
-offset_left = -21.0
-offset_top = 101.0
-offset_right = 62.0
-offset_bottom = 125.0
-scale = Vector2(0.639251, 0.563141)
-theme_override_fonts/font = ExtResource("19_uhpr1")
-theme_override_font_sizes/font_size = 19
-text = "Skills Ready"
-horizontal_alignment = 1
 
 [node name="Labels" type="Label" parent="."]
 offset_left = 31.0
@@ -577,6 +572,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+top_level = true
+texture_filter = 1
+offset_left = 291.0
+offset_top = 321.0
+offset_right = 374.0
+offset_bottom = 345.0
+scale = Vector2(0.968827, 0.853478)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+text = "Skills Ready"
+horizontal_alignment = 1
 
 [node name="hitfxtimer" type="Timer" parent="."]
 

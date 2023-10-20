@@ -1,5 +1,6 @@
-GPUParticles2D
 Timer
+Node
+GPUParticles2D
 HBoxContainer
 Label
 TextureProgressBar
@@ -29,4 +30,3 @@ StaticBody2D
 Button
 meleeenemy
 AudioStreamPlayer2D
-Node

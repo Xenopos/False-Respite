@@ -242,6 +242,20 @@ animations = [{
 "loop": false,
 "name": &"skill_pierce",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyf4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyf4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyf4t")
+}],
+"loop": false,
+"name": &"stun",
+"speed": 3.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t57j2"]
@@ -251,7 +265,7 @@ size = Vector2(12, 16)
 size = Vector2(20, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xq5pf"]
-size = Vector2(65.8536, 31.1707)
+size = Vector2(118.975, 38.6341)
 
 [node name="Melee_Enemy" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 100
@@ -271,7 +285,7 @@ z_index = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_urxwf")
 sprite_frames = SubResource("SpriteFrames_82n88")
-animation = &"idle"
+animation = &"stun"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -293,7 +307,7 @@ debug_color = Color(0.988235, 0, 0.321569, 0.419608)
 script = ExtResource("9_yqu7y")
 
 [node name="detectattack" type="CollisionShape2D" parent="detectionrange"]
-position = Vector2(0, -27.5)
+position = Vector2(-0.499985, -36)
 scale = Vector2(2.27778, 2.27778)
 shape = SubResource("RectangleShape2D_xq5pf")
 debug_color = Color(0.54902, 0.403922, 1, 0.419608)
@@ -324,6 +338,12 @@ scale = Vector2(0.0464845, 0.110389)
 fill_mode = 3
 show_percentage = false
 script = ExtResource("11_camap")
+
+[node name="timers" type="Node" parent="."]
+
+[node name="stunimmunity" type="Timer" parent="timers"]
+
+[node name="stuntime" type="Timer" parent="timers"]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_body_entered"]
