@@ -2,9 +2,7 @@ extends Area2D
 class_name atkrange
 	
 
-var menemy: meleeenemy
 var collisiondirection: Vector2
-var shizuka : Shizuka
 
 signal applydamagedash(canapplied1)
 signal applydamage(canapplied3)
@@ -14,8 +12,7 @@ var enemyexitedrange : bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	menemy = meleeenemy.new()
-	shizuka = Shizuka.new()
+	pass
 	
 func _physics_process(_delta):
 	collisiondirection = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

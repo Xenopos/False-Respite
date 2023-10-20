@@ -218,9 +218,7 @@ func skill1releaseactivate():
 		isDashing = true
 		Allow_jump = true
 		animated_sprite.play("dash attack")
-		if skill1online:
-			enemyparent.take_damage(10)
-			push_warning("skill1 release activated")
+		enemyparent.take_damage(10)
 		$SFX/execute.play()
 		velocity = DashDirection.normalized() * dash_speed
 		animationstay = true
@@ -231,9 +229,8 @@ func skill1releaseactivate():
 func skill2activate():
 	if not lockskill and Allow_jump:
 		animated_sprite.play("spin")
-		if skill2online:
-			enemyparent.take_damage(10)
-			push_warning("skill2 activated")
+		enemyparent.take_damage(10)
+		push_warning("skill2 activated")
 		$SFX/spiiin.play()
 		if onair == true:
 			animationstay = true
@@ -244,9 +241,8 @@ func skill2activate():
 func skill3activate():
 	if not lockskill:
 		skill3active = true
-		if skill3online:
-			push_warning("skill3 activated")
-			enemyparent.take_damage(10)
+		push_warning("skill3 activated")
+		enemyparent.take_damage(10)
 		animated_sprite.play("upyogo")
 		animationstay = true  
 		SPEED = 0  
