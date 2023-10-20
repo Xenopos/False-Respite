@@ -20,6 +20,7 @@ func _ready():
 	player.connect("skill2on", Callable(self,("_skill2activebutton")))
 	player.connect("skill3on", Callable(self,("_skill3activebutton")))
 	player.connect("jumpon", Callable(self,("_jumpactivebutton")))
+	
 func _physics_process(_delta):
 	if triggerskill1button:
 		Skill1.play("Skill1hold")

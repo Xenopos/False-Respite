@@ -18,7 +18,6 @@ func enemy_check_health():
 
 func take_damage_skill1(amount: int):
 	menemycurrenthealth -= amount
-	enemy_check_health()
 
 func take_damage(amount: int):
 	push_warning("Enemy damage taken ", menemycurrenthealth)

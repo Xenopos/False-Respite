@@ -1,6 +1,12 @@
-res://Player.tscn
+res://Scenes/melee_enemy.tscn
 res://Health System.gd
 res://crt_exp.gdshader
 res://Shaders/outlineshader.gdshader
 res://Shaders/try.gdshader
-res://Scripts/Player/Skilldamagearea.gd
+res://Scripts/EnemyMelee/melee_enemy.gd
+res://area_2d.tscn
+res://Player.gd
+res://Player.tscn
+res://temp/UISkills.tscn
+res://Scripts/Player/PlayerHealth.gd
+res://Scripts/Player/Attack Range.gd

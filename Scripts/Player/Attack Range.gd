@@ -2,7 +2,6 @@ extends Area2D
 class_name atkrange
 	
 
-var playerdamagetoenemy: enemyhealth
 var menemy: meleeenemy
 var collisiondirection: Vector2
 var shizuka : Shizuka
@@ -16,11 +15,9 @@ var enemyexitedrange : bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	menemy = meleeenemy.new()
-	playerdamagetoenemy = enemyhealth.new()
 	shizuka = Shizuka.new()
 	
 func _physics_process(_delta):
-	debugperformattack()
 	collisiondirection = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if collisiondirection.x > 0:
 		scale.x = -1  # Face right
@@ -45,7 +42,4 @@ func _on_body_exited(body):
 			enemyexitedrange = true
 			debug.text = str(enemyexitedrange)
 
-func debugperformattack():
-	if Input.is_action_just_pressed("attack") and not enemyexitedrange:
-		playerdamagetoenemy.take_damage(10) 
 

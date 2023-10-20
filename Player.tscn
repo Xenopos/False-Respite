@@ -394,6 +394,7 @@ script = ExtResource("2_jp5m3")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.4, 1.4)
 position_smoothing_enabled = true
+position_smoothing_speed = 50.0
 drag_left_margin = 0.01
 drag_top_margin = 0.01
 drag_right_margin = 0.01

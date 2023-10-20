@@ -15,7 +15,7 @@ var skill2active  = true
 var lockskill : bool = false
 var animationstay: bool = false
 var direction: Vector2 = Vector2.ZERO
-@onready var onair: bool = false 
+var onair: bool = false 
 var isAttacking: bool = false
 @export var AttackCombo: int = 0
 var DashDirection: Vector2 = Vector2(0, 0)
@@ -31,10 +31,10 @@ var skill2online : bool =  false
 var skill3online : bool =  false
 
 #dash var
-@onready var dash_cd : float = 0.3
-@onready var isdashcd : bool = false
-@onready var dash_speed: float = 600
-@onready var dash_duration: float = 0.1
+var dash_cd : float = 0.3
+var isdashcd : bool = false
+var dash_speed: float = 600
+var dash_duration: float = 0.1
 @onready var skill1cd : Label = $Label
 var enemyparent : enemyhealth
 #------------------------------------#
@@ -59,7 +59,7 @@ func _ready():
 	add_to_group("Player")
 	dashParticles.emitting = false
 	#onreadysignals
-	shizukahealth.connect("emitdeadstoplayer", Callable(self, "playerisnowdead"))
+	shizukahealth.connect("emitremovalofexistence", Callable(self, "playerisnowdead"))
 	dashcd.connect("timeout", Callable(self, "dashcooldownd"))
 	
 	anysingepointdamage.connect("applydamagedash" , Callable( self, "allowedskill1toapplydamage"))
@@ -143,6 +143,8 @@ func attack():
 		and isDashing == false
 		and not nowdead
 	):
+		if skill3online:
+			enemyparent.take_damage(10)
 		SPEED = 30
 		$SFX/attacksfx.play()
 		AttackCombo += 1
@@ -155,6 +157,8 @@ func attack():
 		and isDashing == false
 		and not nowdead
 	):
+		if skill3online:
+			enemyparent.take_damage(10)
 		SPEED = 30
 		AttackCombo -= 1
 		isAttacking = true

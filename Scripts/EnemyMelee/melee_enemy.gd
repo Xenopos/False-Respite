@@ -28,12 +28,12 @@ var enemybelow20 : bool = false
 var dashdirection = Vector2.ZERO
 var enemyisdashing: bool = false
 var enemydash_speed: int = 1000
-@onready var deads : bool = false
+var deads : bool = false
 
 # Cooldown Timer and related variables
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 var isAttackOnCooldown: bool = false
-var hasAttacked : bool = false  # New variable to ensure enemynrmlattk is called only once
+var hasAttacked : bool = false  
 
 func _ready():
 	detection_range_node = get_node("detectionrange")
@@ -100,13 +100,12 @@ func _on_animated_sprite_2d_animation_finished():
 
 func enemyhasfounplayer():
 	var distance_to_player = player.global_position.distance_to(global_position)
-	if distance_to_player > 10 :
+	if distance_to_player > 10 and not enemybelow20:
 		enemySpeed = 70
 		direction.x = 1 if player.global_position.x > global_position.x else -1
 		velocity.x = direction.x * enemySpeed
 	elif distance_to_player > 20 and enemybelow20:
-		push_warning("called")
-		enemySpeed = 200
+		enemySpeed = 100
 		direction.x = 1 if player.global_position.x > global_position.x else -1
 		velocity.x = direction.x * enemySpeed
 	else:
