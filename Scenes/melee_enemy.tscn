@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://caj8lkojakln6"]
+[gd_scene load_steps=43 format=3 uid="uid://caj8lkojakln6"]
 
 [ext_resource type="Texture2D" uid="uid://cysb84tnghojp" path="res://Visuals/Spritesheets/MEnemy_basic_attack.png" id="1_axqna"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/melee_enemy.gd" id="1_rprsq"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cq2nf7lli1xdq" path="res://Visuals/Spritesheets/MEnemy_thrust.png" id="5_5wk8v"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/AttackRange.gd" id="8_p0v7j"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/detectionrange.gd" id="9_yqu7y"]
+[ext_resource type="Script" path="res://Scripts/EnemyMelee/enemyhealthbar.gd" id="11_camap"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2yqi"]
 atlas = ExtResource("1_axqna")
@@ -260,10 +261,8 @@ script = ExtResource("2_o6idj")
 z_index = 2
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_82n88")
-animation = &"death"
+animation = &"basic_attack"
 autoplay = "idle"
-frame = 5
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_t57j2")
@@ -294,6 +293,25 @@ debug_color = Color(0.54902, 0.403922, 1, 0.419608)
 [node name="StunTimer" type="Timer" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = -15.0
+offset_right = 71.0
+offset_bottom = 193.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.0464845, 0.110389)
+fill_mode = 3
+show_percentage = false
+script = ExtResource("11_camap")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_body_entered"]

@@ -4,12 +4,10 @@ class_name skill2damagearea
 
 signal applyskill2damage(canapplied2)
 
-var shizuka : Shizuka
 var enemyexitedrange2 : bool = true
 
 func _ready():
-	shizuka = get_parent()
-
+	pass
 func _physics_process(_delta):
 	pass
 

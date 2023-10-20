@@ -1,6 +1,8 @@
 extends Node
 class_name enemyhealth
 
+
+signal enemyhealthchanged
 signal enemyrage(isenemyrage)
 
 var menemycurrenthealth : int = 100
@@ -13,7 +15,7 @@ func _physics_process(_delta):
 	pass
 
 func enemy_check_health():
-	if menemycurrenthealth <= 20:
+	if menemycurrenthealth <= 20 and menemycurrenthealth >= 20 :
 		enemyrage.emit(true)
 
 func take_damage_skill1(amount: int):
@@ -23,7 +25,8 @@ func take_damage(amount: int):
 	push_warning("Enemy damage taken ", menemycurrenthealth)
 	menemycurrenthealth -= amount
 	enemy_check_health()
-
+	enemyhealthchanged.emit()
+	
 func enemygoairborne():
 	pass
 

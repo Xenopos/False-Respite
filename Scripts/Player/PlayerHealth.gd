@@ -4,6 +4,8 @@ class_name healthsys
 
 signal healthchanged
 signal emitremovalofexistence
+signal playerkknockback
+
 
 var max_health: int = 100
 var max_healing: int = 3
@@ -22,6 +24,7 @@ func set_max_health(value):
 	current_health = max_health
 
 func player_take_damage(amount: int):
+	playerkknockback.emit()
 	healthchanged.emit()
 	current_health = max(0, current_health - amount)
 	if current_health <= 0:
@@ -31,8 +34,6 @@ func heal(amount):
 	max_healing -= 3
 	current_health += amount
 	current_health = min(current_health, max_health)
-
-
 
 
 

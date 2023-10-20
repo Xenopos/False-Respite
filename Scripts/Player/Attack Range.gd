@@ -12,7 +12,7 @@ var enemyexitedrange : bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	debug.text = str(enemyexitedrange) 
 	
 func _physics_process(_delta):
 	collisiondirection = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

@@ -380,12 +380,11 @@ scale_min = 0.0
 scale_max = 3.0
 color = Color(1, 0.537255, 0.521569, 1)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer", "skill2area", "anysingepointdamage") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer", "skill2area") groups=["Player"]]
 texture_filter = 1
 script = ExtResource("1_0hjxu")
 cooldown_timer = NodePath("timercountdown")
 skill2area = NodePath("Skilldamagearea")
-anysingepointdamage = NodePath("Attack Range")
 
 [node name="HealthSystem" type="Node2D" parent="." groups=["shizukahealth"]]
 script = ExtResource("2_jp5m3")
@@ -399,10 +398,9 @@ drag_top_margin = 0.01
 drag_right_margin = 0.01
 drag_bottom_margin = 0.01
 
-[node name="Attack Range" type="Area2D" parent="." node_paths=PackedStringArray("debug")]
+[node name="Attack Range" type="Area2D" parent="."]
 collision_mask = 2
 script = ExtResource("17_6j0n5")
-debug = NodePath("../Labels")
 
 [node name="GlobalAttackRange" type="CollisionShape2D" parent="Attack Range"]
 position = Vector2(-11.25, 0.5)
@@ -447,8 +445,6 @@ volume_db = 9.674
 stream = ExtResource("17_o0kfb")
 pitch_scale = 0.68
 
-[node name="skill2_cd_timer" type="Timer" parent="."]
-
 [node name="dashcooldown" type="Timer" parent="."]
 
 [node name="timercountdown" type="Timer" parent="."]
@@ -467,13 +463,11 @@ animation = &"dash"
 autoplay = "idle"
 
 [node name="skill1particlesready" type="GPUParticles2D" parent="."]
-emitting = false
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_f8mtg")
 
 [node name="DashParticles" type="GPUParticles2D" parent="."]
 position = Vector2(0, -1)
-emitting = false
 amount = 198
 process_material = SubResource("ParticleProcessMaterial_rfsau")
 lifetime = 0.2

@@ -11,7 +11,7 @@ class_name Shizuka extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 #------------------------------------#
 var skill3active = true
-var skill2active  = true
+var skill2active  = false
 var lockskill : bool = false
 var animationstay: bool = false
 var direction: Vector2 = Vector2.ZERO
@@ -50,26 +50,29 @@ signal jumpon(_isbuttontrigger4)
 @export var cooldown_timer: Timer
 @onready var shizukahealth : healthsys = $HealthSystem
 @onready var timercountdown: Timer = $Timer
-@export var skill3area : Area2D 
+@export var skill2area : Area2D 
 @export var anysingepointdamage : Area2D
-@export var dashcd : Timer 
+@onready var dashcd : Timer = $dashcooldown
+
+#skills timer sets for applying damage
+@onready var skill2_cd_timer: Timer = $skill2_cd_timer
+var resetskill2damage: bool = true
 
 func _ready():
 	skill1particles.emitting = false
 	add_to_group("Player")
 	dashParticles.emitting = false
+	shizukahealth.connect("playerkknockback", Callable(self, "applyknockbacktoshishi"))
 	#onreadysignals
 	shizukahealth.connect("emitremovalofexistence", Callable(self, "playerisnowdead"))
 	dashcd.connect("timeout", Callable(self, "dashcooldownd"))
-	
+	skill2_cd_timer.connect("timeout", Callable(self, "_on_skill2_cd_timer_timeout"))
 	anysingepointdamage.connect("applydamagedash" , Callable( self, "allowedskill1toapplydamage"))
 	anysingepointdamage.connect("applydamage", Callable(self, "allowedskill3toapplydamage"))
-	skill3area.connect("applyskill2damage", Callable(self, "allowskill2toapplydamage"))
+	skill2area.connect("applyskill2damage", Callable(self, "allowskill2toapplydamage"))
 	
 	timercountdown.connect("timeout", Callable(self, "_on_Timer_timeout"))
 	cooldown_timer.connect("timeout", Callable(self, "_on_CooldownTimer_timeout"))
-	skill2active  = true
-	skill3active  = true
 	#getparent
 	enemyparent = get_tree().get_first_node_in_group("enemyhealth")
 
@@ -95,6 +98,18 @@ func _physics_process(delta):
 	dash()
 	Skill_activation()
 	doJump()
+	skill2()
+
+func skill2():
+	if skill2online and resetskill2damage and skill2active:
+		enemyparent.take_damage(10)
+		resetskill2damage = false
+		skill2active = false  # Deactivate the skill
+		skill2_cd_timer.start(0.3)  # Start the cooldown
+
+func _on_skill2_cd_timer_timeout():
+	push_warning("called")
+	resetskill2damage = true  # Reactivate the skill once the cooldown ends
 
 func update_animation():
 	if not animationstay and not nowdead:
@@ -143,8 +158,8 @@ func attack():
 		and isDashing == false
 		and not nowdead
 	):
-		if skill3online:
-			enemyparent.take_damage(10)
+#		if skill3online:
+#			enemyparent.take_damage(10)
 		SPEED = 30
 		$SFX/attacksfx.play()
 		AttackCombo += 1
@@ -157,8 +172,8 @@ func attack():
 		and isDashing == false
 		and not nowdead
 	):
-		if skill3online:
-			enemyparent.take_damage(10)
+#		if skill3online:
+#			enemyparent.take_damage(10)
 		SPEED = 30
 		AttackCombo -= 1
 		isAttacking = true
@@ -218,31 +233,33 @@ func skill1releaseactivate():
 		isDashing = true
 		Allow_jump = true
 		animated_sprite.play("dash attack")
-		enemyparent.take_damage(10)
 		$SFX/execute.play()
 		velocity = DashDirection.normalized() * dash_speed
 		animationstay = true
 		start_cooldown(1.0)
 		$SFX/charge.stop()
 		timercountdown.start(dash_duration)
+
 		
 func skill2activate():
 	if not lockskill and Allow_jump:
 		animated_sprite.play("spin")
-		enemyparent.take_damage(10)
 		push_warning("skill2 activated")
 		$SFX/spiiin.play()
 		if onair == true:
+			skill2active = true
 			animationstay = true
 		if not onair:
 			animationstay = false
+			skill2active = false
 		start_cooldown(0.5)
 
 func skill3activate():
 	if not lockskill:
+		if skill3online:
+			enemyparent.take_damage(10)
 		skill3active = true
 		push_warning("skill3 activated")
-		enemyparent.take_damage(10)
 		animated_sprite.play("upyogo")
 		animationstay = true  
 		SPEED = 0  
@@ -264,11 +281,8 @@ func _on_CooldownTimer_timeout():
 	skill3active = false
 	skill1cd.text = str("Skill Ready")
 
-func checkspin():
-	if animated_sprite.animation == "jump":
-		skill2active = true
-	else:
-		skill2active = false
+func applyknockbacktoshishi():
+	pass
 
 #--------------------------------------#
 #dash  function
@@ -280,6 +294,7 @@ func _on_Timer_timeout():
 func dashcooldownd():
 	isdashcd = false
 	SPEED = 80.0
+	
 #------------------------------------#
 # flags for applying skill damage
 func allowedskill1toapplydamage(canapplied1: bool):
