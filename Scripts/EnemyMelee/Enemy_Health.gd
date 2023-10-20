@@ -5,9 +5,13 @@ class_name enemyhealth
 signal enemyhealthchanged
 signal enemyrage(isenemyrage)
 signal enemydeathtrigger
+signal restorehealthready
+
 
 var menemycurrenthealth : int = 100
 var menemymaxpoise : int = 0
+@export var maxdamagecounterforrestorehealth : int = 100
+var currentdamagecounterforrestorehealth : int = maxdamagecounterforrestorehealth
 
 func _ready():
 	pass
@@ -26,6 +30,10 @@ func take_damage_skill1(amount: int):
 
 func take_damage(amount: int):
 	push_warning("Enemy damage taken ", menemycurrenthealth)
+	currentdamagecounterforrestorehealth -= amount
+	if currentdamagecounterforrestorehealth <= 0:
+		restorehealthready.emit()
+		currentdamagecounterforrestorehealth = maxdamagecounterforrestorehealth
 	menemycurrenthealth -= amount
 	enemy_check_health()
 	enemyhealthchanged.emit()

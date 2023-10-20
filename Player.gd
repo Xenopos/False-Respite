@@ -63,12 +63,17 @@ signal jumpon(_isbuttontrigger4)
 var resetskill2damage: bool = true
 var resetskill1damage : bool = true
 
+#hitfxtimer
+@onready var hitfxtimer : Timer = $hitfxtimer
+
 func _ready():
+	hitfxtimer.connect("timeout", Callable(self, "hitfxtimercd"))
 	skill1particles.emitting = false
 	add_to_group("Player")
 	dashParticles.emitting = false
 	shizukahealth.connect("playerkknockback", Callable(self, "applyknockbacktoshishi"))
 	#onreadysignals
+	shizukahealth.connect("healthchanged", Callable(self,"emitdamagefx"))
 	shizukahealth.connect("emitremovalofexistence", Callable(self, "playerisnowdead"))
 	dashcd.connect("timeout", Callable(self, "dashcooldownd"))
 	skill1_cd_timer.connect("timeout", Callable(self, "_on_skill1_cd_timer_timeout"))
@@ -237,7 +242,6 @@ func Skill_activation():
 			skill3on.emit(true)
 
 func skill1activate():
-	skill1particles.emitting = true
 	if not lockskill and not Allow_jump:
 		skill1on.emit(true)
 		Allow_jump = false
@@ -336,5 +340,15 @@ func playerisnowdead():
 
 func commithealing():
 	if Input.is_action_just_pressed("heal"):
-		push_warning("heal mmotherfucler")
+		skill1particles.emitting = true
 		shizukahealth.heal(20)
+	else:
+		skill1particles.emitting = false
+#-------------------------------------#
+#emit fx
+func emitdamagefx():
+	animated_sprite.material.set_shader_parameter("flash_modifier", 1)
+	hitfxtimer.start(0.1)
+func hitfxtimercd():
+	animated_sprite.material.set_shader_parameter("flash_modifier", 0)
+	

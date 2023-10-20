@@ -15,13 +15,11 @@ func _on_body_entered(body):
 		var enemy_system = body.get_node("Enemy_Health")
 		if (enemy_system):
 			applyskill2damage.emit(true)
-			push_warning("entered")
 			enemyexitedrange2 = false
 
 func _on_body_exited(body):
 	if body.name == "Melee_Enemy":
 		var enemy_system = body.get_node("Enemy_Health")
 		if (enemy_system):
-			push_warning("exited")
 			applyskill2damage.emit(false)
 			enemyexitedrange2 = true

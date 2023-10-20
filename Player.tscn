@@ -14,13 +14,13 @@
 [ext_resource type="AudioStream" uid="uid://bq4x4i3owe7nq" path="res://sfx/dash.ogg" id="10_80dqr"]
 [ext_resource type="Texture2D" uid="uid://yw51ynrvhs2x" path="res://Visuals/Animations/attack.png" id="10_s5xmi"]
 [ext_resource type="AudioStream" uid="uid://bo2c5u6r6783k" path="res://sfx/execute.wav" id="13_3nbuy"]
+[ext_resource type="Shader" path="res://Shaders/shaderforadamagefx.gdshader" id="13_6qsr3"]
 [ext_resource type="Texture2D" uid="uid://r1k8p7e7tuvk" path="res://Visuals/Animations/death.png" id="14_dgdb2"]
 [ext_resource type="AudioStream" uid="uid://uwrak6ml7ei0" path="res://sfx/spin.wav" id="14_wh54f"]
 [ext_resource type="AudioStream" uid="uid://ch5eq1crj1fc1" path="res://sfx/fly.wav" id="16_hm1w5"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Range.gd" id="17_6j0n5"]
 [ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://sfx/charging.wav" id="17_o0kfb"]
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="19_uhpr1"]
-[ext_resource type="Shader" path="res://Shaders/outlineshader.gdshader" id="23_yl614"]
 [ext_resource type="PackedScene" uid="uid://bxmw7cer0hljd" path="res://temp/UISkills.tscn" id="24_bwlk1"]
 [ext_resource type="Texture2D" uid="uid://d35g0y2744mmn" path="res://Visuals/UI/healthbar.png" id="24_okkdx"]
 [ext_resource type="Script" path="res://Visuals/UI/healtbar.gd" id="25_eimpg"]
@@ -37,6 +37,9 @@ size = Vector2(16.5, 15)
 size = Vector2(5, 15)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_engfg"]
+shader = ExtResource("13_6qsr3")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ye6e"]
 atlas = ExtResource("14_dgdb2")
@@ -349,17 +352,16 @@ animations = [{
 }]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f8mtg"]
-emission_shape = 2
-emission_sphere_radius = 30.74
 particle_flag_disable_z = true
 direction = Vector3(1, -360, 0)
-spread = 21.0
-initial_velocity_max = 83.8
+spread = 112.5
+gravity = Vector3(0, -16.605, 0)
+initial_velocity_max = 125.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-scale_min = 3.0
-scale_max = 5.0
-color = Color(0, 0.917647, 0.678431, 1)
+scale_min = 0.0
+scale_max = 10.0
+color = Color(0, 0.501961, 0.364706, 1)
 hue_variation_min = -0.33
 hue_variation_max = -0.03
 
@@ -380,14 +382,11 @@ scale_min = 0.0
 scale_max = 3.0
 color = Color(1, 0.537255, 0.521569, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u4arj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u3kns"]
 resource_local_to_scene = true
-shader = ExtResource("23_yl614")
-shader_parameter/color = Color(0, 1, 0.694118, 1)
-shader_parameter/width = 1.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
+shader = ExtResource("13_6qsr3")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer", "skill2area", "anysingepointdamage") groups=["Player"]]
 texture_filter = 1
@@ -399,14 +398,7 @@ anysingepointdamage = NodePath("Attack Range")
 [node name="HealthSystem" type="Node2D" parent="." groups=["shizukahealth"]]
 script = ExtResource("2_jp5m3")
 
-[node name="Maxhealing" type="Label" parent="HealthSystem"]
-offset_left = -205.0
-offset_top = -100.0
-offset_right = -107.0
-offset_bottom = -79.0
-scale = Vector2(0.701494, 0.701494)
-theme_override_fonts/font = ExtResource("19_uhpr1")
-theme_override_font_sizes/font_size = 19
+[node name="faderestorehealing" type="Timer" parent="HealthSystem"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.4, 1.4)
@@ -488,8 +480,9 @@ animation = &"upyogo"
 autoplay = "idle"
 
 [node name="skill1particlesready" type="GPUParticles2D" parent="."]
+position = Vector2(0, -8)
 emitting = false
-amount = 30
+amount = 76
 process_material = SubResource("ParticleProcessMaterial_f8mtg")
 
 [node name="DashParticles" type="GPUParticles2D" parent="."]
@@ -500,7 +493,6 @@ process_material = SubResource("ParticleProcessMaterial_rfsau")
 lifetime = 0.2
 
 [node name="Label" type="Label" parent="."]
-z_index = 100
 offset_left = -21.0
 offset_top = 101.0
 offset_right = 62.0
@@ -529,8 +521,9 @@ offset_bottom = -228.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+top_level = true
 texture_filter = 1
-material = SubResource("ShaderMaterial_u4arj")
+material = SubResource("ShaderMaterial_u3kns")
 offset_left = 36.0
 offset_top = 14.0
 offset_right = 237.0
@@ -539,21 +532,52 @@ value = 100.0
 nine_patch_stretch = true
 texture_under = ExtResource("24_okkdx")
 texture_progress = ExtResource("25_fpgvf")
-radial_initial_angle = 11.9
-radial_fill_degrees = 79.1
+radial_initial_angle = 142.4
 script = ExtResource("25_eimpg")
 
+[node name="healthfxtimer" type="Timer" parent="CanvasLayer/TextureProgressBar"]
+
 [node name="Label" type="Label" parent="CanvasLayer"]
+top_level = true
 texture_filter = 1
-offset_left = 161.0
+offset_left = 158.0
 offset_top = 40.0
-offset_right = 238.0
+offset_right = 235.0
 offset_bottom = 64.0
 scale = Vector2(0.955009, 0.955009)
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
 text = "Health 0 / 100"
 script = ExtResource("27_erkfk")
+
+[node name="Maxhealing" type="Label" parent="CanvasLayer"]
+top_level = true
+texture_filter = 1
+offset_left = 37.0
+offset_top = 39.0
+offset_right = 73.0
+offset_bottom = 63.0
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+
+[node name="Restoredhealing" type="Label" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -57.0
+offset_right = 18.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+
+[node name="hitfxtimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="Attack Range" to="Attack Range" method="_on_body_entered"]
 [connection signal="body_exited" from="Attack Range" to="Attack Range" method="_on_body_exited"]

@@ -1,7 +1,8 @@
+Timer
+HBoxContainer
 Label
 TextureProgressBar
 BoxContainer
-Timer
 ProgressBar
 CanvasLayer
 GPUParticles2D
@@ -10,7 +11,6 @@ HealthComponent
 GodotEssentialsHealthComponent
 Node2D
 CanvasGroup
-HBoxContainer
 VBoxContainer
 AnimatedSprite2D
 healthsys

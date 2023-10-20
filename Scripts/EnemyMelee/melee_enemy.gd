@@ -33,7 +33,7 @@ var deads : bool = false
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 var isAttackOnCooldown: bool = false
 var hasAttacked : bool = false  
-
+@onready var hitenemyfxtimerr : Timer = $hitenemyfxtimer
 func _ready():
 	detection_range_node = get_node("detectionrange")
 	detection_range_node.connect("player_found",Callable( self, "_on_player_found"))
@@ -45,6 +45,16 @@ func _ready():
 	attackcollisionrange.connect("player_ready_to_be_attacked", Callable(self, "enemynrmlattk"))
 	attack_cooldown_timer.connect("timeout", Callable(self, "_on_AttackCooldownTimer_timeout"))
 	enemychildhealth.connect("enemydeathtrigger", Callable(self, "enemyisdead"))
+	hitenemyfxtimerr.connect("timeout", Callable(self, "hitenemyfxtimer" ))
+	enemychildhealth.connect("enemyhealthchanged", Callable(self, "hitenemyfxtriggercd"))
+
+func hitenemyfxtriggercd():
+	meleeEnemyAnim.material.set_shader_parameter("flash_modifier", 1)
+	hitenemyfxtimerr.start(0.1)
+
+func hitenemyfxtimer():
+	meleeEnemyAnim.material.set_shader_parameter("flash_modifier", 0)
+
 func _on_player_found():
 	foundenemy = true
 	
@@ -156,4 +166,5 @@ func enemyisdead():
 		push_warning("death is called")
 		meleeEnemyAnim.play("death")
 		animationlock = false
+
 
