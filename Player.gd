@@ -10,8 +10,7 @@ class_name Shizuka extends CharacterBody2D
 @onready var skill1particles: GPUParticles2D = $skill1particlesready
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 #------------------------------------#
-var skill3active = true
-var skill2active  = false
+
 var lockskill : bool = false
 var animationstay: bool = false
 var direction: Vector2 = Vector2.ZERO
@@ -30,6 +29,9 @@ var skill1online : bool =  false
 var skill2online : bool =  false
 var skill3online : bool =  false
 
+var skill3active = true
+var skill2active  = false
+var skill1active = false
 #dash var
 var dash_cd : float = 0.3
 var isdashcd : bool = false
@@ -56,7 +58,9 @@ signal jumpon(_isbuttontrigger4)
 
 #skills timer sets for applying damage
 @onready var skill2_cd_timer: Timer = $skill2_cd_timer
+@onready var skill1_cd_timer : Timer = $skill1_cd_timer
 var resetskill2damage: bool = true
+var resetskill1damage : bool = true
 
 func _ready():
 	skill1particles.emitting = false
@@ -66,11 +70,11 @@ func _ready():
 	#onreadysignals
 	shizukahealth.connect("emitremovalofexistence", Callable(self, "playerisnowdead"))
 	dashcd.connect("timeout", Callable(self, "dashcooldownd"))
+	skill1_cd_timer.connect("timeout", Callable(self, "_on_skill1_cd_timer_timeout"))
 	skill2_cd_timer.connect("timeout", Callable(self, "_on_skill2_cd_timer_timeout"))
 	anysingepointdamage.connect("applydamagedash" , Callable( self, "allowedskill1toapplydamage"))
 	anysingepointdamage.connect("applydamage", Callable(self, "allowedskill3toapplydamage"))
 	skill2area.connect("applyskill2damage", Callable(self, "allowskill2toapplydamage"))
-	
 	timercountdown.connect("timeout", Callable(self, "_on_Timer_timeout"))
 	cooldown_timer.connect("timeout", Callable(self, "_on_CooldownTimer_timeout"))
 	#getparent
@@ -99,7 +103,16 @@ func _physics_process(delta):
 	Skill_activation()
 	doJump()
 	skill2()
-
+	commithealing()
+	skill1()
+	
+func skill1(): #need stop damage condition other will spam
+	if skill1online and skill1active and resetskill1damage:
+		enemyparent.take_damage(10)
+		skill1active = false
+		resetskill1damage = false
+		skill1_cd_timer.start(1)
+		
 func skill2():
 	if skill2online and resetskill2damage and skill2active:
 		enemyparent.take_damage(10)
@@ -107,8 +120,10 @@ func skill2():
 		skill2active = false  # Deactivate the skill
 		skill2_cd_timer.start(0.3)  # Start the cooldown
 
+
+func _on_skill1_cd_timer_timeout():
+	resetskill1damage = true
 func _on_skill2_cd_timer_timeout():
-	push_warning("called")
 	resetskill2damage = true  # Reactivate the skill once the cooldown ends
 
 func update_animation():
@@ -138,7 +153,6 @@ func jump():
 func _on_animated_sprite_2d_animation_finished():
 	if (
 		animated_sprite.animation == "upyogo"
-		or animated_sprite.animation == "dash attack"
 		or animated_sprite.animation == "attack"
 		or animated_sprite.animation == "attack2"
 		or animated_sprite.animation == "dash"
@@ -149,7 +163,11 @@ func _on_animated_sprite_2d_animation_finished():
 		animationstay = false
 		SPEED = 80.0
 		gravity = 480
-
+	if animated_sprite.animation == "dash attack":
+		animationstay = false
+		skill1active = false
+		SPEED = 80.0
+		gravity = 480
 
 func attack():
 	if (
@@ -230,6 +248,7 @@ func skill1activate():
 func skill1releaseactivate():
 	if not isDashing and not lockskill:
 		skill1particles.emitting = false
+		skill1active = true
 		isDashing = true
 		Allow_jump = true
 		animated_sprite.play("dash attack")
@@ -304,11 +323,18 @@ func allowskill2toapplydamage(canapplied2: bool):
 func allowedskill3toapplydamage(canapplied3: bool):
 	skill3online = canapplied3
 
-	
-#--------------------------------------#
+#--------------------------------------#d
 #check if the player is dead
 func playerisnowdead():
 	animationstay = true
 	nowdead = true
 	animated_sprite.play("Death")
 	push_warning("deads none reduced to shit")
+
+#------------------------------------------#
+#healing
+
+func commithealing():
+	if Input.is_action_just_pressed("heal"):
+		push_warning("heal mmotherfucler")
+		shizukahealth.heal(20)

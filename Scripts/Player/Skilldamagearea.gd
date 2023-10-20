@@ -5,7 +5,6 @@ class_name skill2damagearea
 signal applyskill2damage(canapplied2)
 
 var enemyexitedrange2 : bool = true
-
 func _ready():
 	pass
 func _physics_process(_delta):

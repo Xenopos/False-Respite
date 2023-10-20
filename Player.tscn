@@ -390,10 +390,19 @@ anysingepointdamage = NodePath("Attack Range")
 [node name="HealthSystem" type="Node2D" parent="." groups=["shizukahealth"]]
 script = ExtResource("2_jp5m3")
 
+[node name="Maxhealing" type="Label" parent="HealthSystem"]
+offset_left = -205.0
+offset_top = -100.0
+offset_right = -107.0
+offset_bottom = -79.0
+scale = Vector2(0.701494, 0.701494)
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.4, 1.4)
 position_smoothing_enabled = true
-position_smoothing_speed = 50.0
+position_smoothing_speed = 30.0
 drag_left_margin = 0.01
 drag_top_margin = 0.01
 drag_right_margin = 0.01
@@ -447,6 +456,8 @@ volume_db = 9.674
 stream = ExtResource("17_o0kfb")
 pitch_scale = 0.68
 
+[node name="skill1_cd_timer" type="Timer" parent="."]
+
 [node name="skill2_cd_timer" type="Timer" parent="."]
 
 [node name="dashcooldown" type="Timer" parent="."]
@@ -463,8 +474,10 @@ shape = SubResource("RectangleShape2D_p2vt5")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
 sprite_frames = SubResource("SpriteFrames_jubc4")
-animation = &"Death"
+animation = &"dash attack"
 autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="skill1particlesready" type="GPUParticles2D" parent="."]
 emitting = false

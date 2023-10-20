@@ -1,9 +1,9 @@
 Timer
+Label
 ProgressBar
 CanvasLayer
 GPUParticles2D
 CPUParticles2D
-Label
 HealthComponent
 GodotEssentialsHealthComponent
 Node2D
