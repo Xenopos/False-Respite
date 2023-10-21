@@ -175,7 +175,7 @@ func _on_animated_sprite_2d_animation_finished():
 		gravity = 480
 	if animated_sprite.animation == "upyogo":
 		if skill3online:
-			enemyparent.take_damage(10)
+			enemyparent.take_damage(5)
 			enemyairborne.emit()
 		SPEED = 80.0
 		gravity = 480
@@ -269,7 +269,6 @@ func skill1releaseactivate():
 func skill2activate():
 	if not lockskill and Allow_jump:
 		animated_sprite.play("spin")
-		push_warning("skill2 activated")
 		$SFX/spiiin.play()
 		if onair == true:
 			skill2active = true
@@ -282,7 +281,6 @@ func skill2activate():
 func skill3activate():
 	if not lockskill:
 		skill3active = true
-		push_warning("skill3 activated")
 		animated_sprite.play("upyogo")
 		animationstay = true  
 		SPEED = 0  

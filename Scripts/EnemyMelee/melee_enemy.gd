@@ -39,7 +39,7 @@ var hasAttacked : bool = false
 @onready var stunimmunduration : Timer = $timers/stunimmunity
 var stunned : bool  = false
 var stunimmunetrigger : bool = false
-var maxstuncounter : int  = 53
+var maxstuncounter : int  = 3
 var stuncounter = maxstuncounter
 func _ready():
 	stunimmunduration.connect("timeout", Callable(self, "stunimmunecd"))
@@ -80,7 +80,7 @@ func _on_player_lost():
 
 	
 func update_facing_direction_enemy():
-	if not deads :
+	if not deads:
 		if direction.x < 0:
 			meleeEnemyAnim.flip_h = false
 		elif direction.x > 0:
@@ -92,7 +92,7 @@ func update_facing_direction_enemy():
 			meleeEnemyAnim.play("run")
 		elif direction.x == 0:
 			meleeEnemyAnim.play("idle")
-			
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -196,9 +196,8 @@ func commitwarcrime(isenemyrage):
 func enemyisdead():
 		deads = true
 		velocity.x = 0
-		push_warning("death is called")
 		meleeEnemyAnim.play("death")
 		animationlock = false
-
+		push_warning(deads)
 #skill pierce timers
 

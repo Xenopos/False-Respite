@@ -20,7 +20,7 @@ func _physics_process(_delta):
 	pass
 
 func enemy_check_health():
-	if menemycurrenthealth <= 20 and menemycurrenthealth >= 20 :
+	if menemycurrenthealth <= 20 and menemycurrenthealth >= 20 and not ishedead:
 		enemyrage.emit(true)
 	if menemycurrenthealth == 0:
 		ishedead = true
@@ -35,8 +35,9 @@ func take_damage(amount: int):
 	if currentdamagecounterforrestorehealth <= 0 and not ishedead:
 		restorehealthready.emit()
 		currentdamagecounterforrestorehealth = maxdamagecounterforrestorehealth
-	menemycurrenthealth -= amount
-	enemy_check_health()
+	menemycurrenthealth = max(0, menemycurrenthealth - amount)
+	if not ishedead:
+		enemy_check_health()
 	enemyhealthchanged.emit()
 	
 func enemygoairborne():
