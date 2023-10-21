@@ -1,4 +1,7 @@
 Timer
+Sprite2D
+StaticBody2D
+AnimatedSprite2D
 Node
 GPUParticles2D
 HBoxContainer
@@ -13,10 +16,8 @@ GodotEssentialsHealthComponent
 Node2D
 CanvasGroup
 VBoxContainer
-AnimatedSprite2D
 healthsys
 AnimationPlayer
-Sprite2D
 AnimationTree
 CollisionShape2D
 Area2D
@@ -26,7 +27,6 @@ NinePatchRect
 Control
 VSplitContainer
 FlowContainer
-StaticBody2D
 Button
 meleeenemy
 AudioStreamPlayer2D

@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=76 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
@@ -21,12 +21,16 @@
 [ext_resource type="Script" path="res://Scripts/Player/Attack Range.gd" id="17_6j0n5"]
 [ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://sfx/charging.wav" id="17_o0kfb"]
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="19_uhpr1"]
+[ext_resource type="Texture2D" uid="uid://b1gcav5l1ybkk" path="res://Visuals/UI/healthbar-1.png" id="23_susnx"]
 [ext_resource type="PackedScene" uid="uid://bxmw7cer0hljd" path="res://temp/UISkills.tscn" id="24_bwlk1"]
-[ext_resource type="Texture2D" uid="uid://d35g0y2744mmn" path="res://Visuals/UI/healthbar.png" id="24_okkdx"]
+[ext_resource type="Texture2D" uid="uid://cqdtbm10jgnmj" path="res://Visuals/UI/healthbar0.png" id="24_vs5ts"]
+[ext_resource type="Texture2D" uid="uid://dqj7yhji7n2gw" path="res://Visuals/UI/healthbar1.png" id="25_23hhh"]
 [ext_resource type="Script" path="res://Visuals/UI/healtbar.gd" id="25_eimpg"]
-[ext_resource type="Texture2D" uid="uid://ib0ngubwd13f" path="res://Visuals/UI/healthbarover.png" id="25_fpgvf"]
 [ext_resource type="Script" path="res://Scripts/Player/Skilldamagearea.gd" id="26_1oknk"]
 [ext_resource type="Script" path="res://Visuals/UI/Labelhealth.gd" id="27_erkfk"]
+[ext_resource type="Shader" path="res://Shaders/outlineshader.gdshader" id="27_n4xhq"]
+[ext_resource type="Texture2D" uid="uid://xxh05feui8mv" path="res://Visuals/UI/shichan.png" id="30_68ifn"]
+[ext_resource type="Shader" path="res://Shaders/try.gdshader" id="30_rk5cc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
 size = Vector2(16.5, 15)
@@ -361,9 +365,7 @@ orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 scale_min = 0.0
 scale_max = 10.0
-color = Color(0, 0.501961, 0.364706, 1)
-hue_variation_min = -0.33
-hue_variation_max = -0.03
+color = Color(0, 0.909804, 0.670588, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c7nwk"]
 resource_local_to_scene = true
@@ -388,8 +390,24 @@ color = Color(1, 0.537255, 0.521569, 0.294118)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u3kns"]
 resource_local_to_scene = true
 shader = ExtResource("13_6qsr3")
-shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_color = Color(0.980392, 0, 0, 1)
 shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycnlf"]
+shader = ExtResource("27_n4xhq")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3mrt"]
+resource_local_to_scene = true
+shader = ExtResource("30_rk5cc")
+shader_parameter/direction = Vector2(7.52, -7.15)
+shader_parameter/offset = 0.0
+shader_parameter/fade = 1.0
+shader_parameter/strip = 4.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer", "skill2area", "anysingepointdamage") groups=["Player"]]
 texture_filter = 1
@@ -435,7 +453,7 @@ debug_color = Color(0.64295, 0.523206, 0.0190725, 0.42)
 
 [node name="attacksfx" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("8_4nyfg")
-volume_db = -3.949
+volume_db = -6.029
 
 [node name="jump" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("9_faxc4")
@@ -447,7 +465,7 @@ pitch_scale = 1.33
 
 [node name="execute" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("13_3nbuy")
-pitch_scale = 0.88
+pitch_scale = 0.8
 
 [node name="spiiin" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("14_wh54f")
@@ -458,7 +476,8 @@ volume_db = 9.674
 
 [node name="charge" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("17_o0kfb")
-pitch_scale = 0.68
+volume_db = -13.555
+pitch_scale = 0.53
 
 [node name="skill1_cd_timer" type="Timer" parent="."]
 
@@ -507,27 +526,21 @@ scale = Vector2(0.716597, 0.597274)
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
 
-[node name="UISkills" parent="." instance=ExtResource("24_bwlk1")]
-offset_left = -346.0
-offset_top = -228.0
-offset_right = -346.0
-offset_bottom = -228.0
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
 top_level = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_u3kns")
-offset_left = 36.0
-offset_top = 14.0
-offset_right = 237.0
-offset_bottom = 31.0
+offset_left = 95.0
+offset_top = 34.0
+offset_right = 251.0
+offset_bottom = 49.0
 value = 100.0
 nine_patch_stretch = true
-texture_under = ExtResource("24_okkdx")
-texture_progress = ExtResource("25_fpgvf")
-radial_initial_angle = 142.4
+texture_under = ExtResource("23_susnx")
+texture_over = ExtResource("25_23hhh")
+texture_progress = ExtResource("24_vs5ts")
 script = ExtResource("25_eimpg")
 
 [node name="healthfxtimer" type="Timer" parent="CanvasLayer/TextureProgressBar"]
@@ -535,10 +548,10 @@ script = ExtResource("25_eimpg")
 [node name="Label" type="Label" parent="CanvasLayer"]
 top_level = true
 texture_filter = 1
-offset_left = 158.0
-offset_top = 40.0
-offset_right = 235.0
-offset_bottom = 64.0
+offset_left = 95.0
+offset_top = 21.0
+offset_right = 172.0
+offset_bottom = 45.0
 scale = Vector2(0.955009, 0.955009)
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
@@ -548,13 +561,15 @@ script = ExtResource("27_erkfk")
 [node name="Maxhealing" type="Label" parent="CanvasLayer"]
 top_level = true
 texture_filter = 1
-offset_left = 37.0
-offset_top = 39.0
-offset_right = 73.0
-offset_bottom = 63.0
+offset_left = 96.0
+offset_top = 54.0
+offset_right = 142.0
+offset_bottom = 78.0
+scale = Vector2(0.813015, 0.813015)
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
+text = "totalsws"
 
 [node name="Restoredhealing" type="Label" parent="CanvasLayer"]
 top_level = true
@@ -565,9 +580,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -18.0
-offset_top = -57.0
+offset_top = -23.0
 offset_right = 18.0
-offset_bottom = -33.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("19_uhpr1")
@@ -576,15 +591,29 @@ theme_override_font_sizes/font_size = 19
 [node name="Label2" type="Label" parent="CanvasLayer"]
 top_level = true
 texture_filter = 1
-offset_left = 291.0
-offset_top = 321.0
-offset_right = 374.0
-offset_bottom = 345.0
+material = SubResource("ShaderMaterial_ycnlf")
+offset_left = 334.0
+offset_top = 316.0
+offset_right = 399.0
+offset_bottom = 340.0
 scale = Vector2(0.968827, 0.853478)
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
 text = "Skills Ready"
-horizontal_alignment = 1
+horizontal_alignment = 3
+
+[node name="UISkills" parent="CanvasLayer" instance=ExtResource("24_bwlk1")]
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = -1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+z_index = -1
+texture_filter = 1
+material = SubResource("ShaderMaterial_c3mrt")
+position = Vector2(48, 43)
+texture = ExtResource("30_68ifn")
 
 [node name="hitfxtimer" type="Timer" parent="."]
 

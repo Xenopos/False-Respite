@@ -291,7 +291,7 @@ z_index = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_urxwf")
 sprite_frames = SubResource("SpriteFrames_82n88")
-animation = &"death"
+animation = &"skill_pierce"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -304,8 +304,6 @@ script = ExtResource("8_p0v7j")
 position = Vector2(-11.5, 0)
 shape = SubResource("RectangleShape2D_2ktw3")
 debug_color = Color(0.988235, 0, 0.321569, 0.419608)
-
-[node name="attack delay" type="Timer" parent="AttackRange"]
 
 [node name="SFX" type="Node" parent="."]
 
@@ -349,6 +347,8 @@ script = ExtResource("11_camap")
 [node name="stunimmunity" type="Timer" parent="timers"]
 
 [node name="stuntime" type="Timer" parent="timers"]
+
+[node name="skillpiercecd" type="Timer" parent="timers"]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_body_entered"]

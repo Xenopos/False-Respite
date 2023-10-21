@@ -66,6 +66,9 @@ var resetskill1damage : bool = true
 #hitfxtimer
 @onready var hitfxtimer : Timer = $hitfxtimer
 
+#vulnerability handler
+signal damagevulnebarility(isvulnerable)
+
 func _ready():
 	hitfxtimer.connect("timeout", Callable(self, "hitfxtimercd"))
 	skill1particles.emitting = false
@@ -73,6 +76,7 @@ func _ready():
 	dashParticles.emitting = false
 	shizukahealth.connect("playerkknockback", Callable(self, "applyknockbacktoshishi"))
 	#onreadysignals
+	
 	shizukahealth.connect("healthchanged", Callable(self,"emitdamagefx"))
 	shizukahealth.connect("emitremovalofexistence", Callable(self, "playerisnowdead"))
 	dashcd.connect("timeout", Callable(self, "dashcooldownd"))
@@ -125,7 +129,6 @@ func skill2():
 		resetskill2damage = false
 		skill2active = false  # Deactivate the skill
 		skill2_cd_timer.start(0.1)  # Start the cooldown
-
 
 func _on_skill1_cd_timer_timeout():
 	resetskill1damage = true
@@ -180,6 +183,7 @@ func _on_animated_sprite_2d_animation_finished():
 		SPEED = 80.0
 		gravity = 480
 		animationstay = false
+		
 func attack():
 	if (Input.is_action_just_pressed("attack") and AttackCombo == 0 and isDashing == false and not nowdead):
 		if skill3online:
@@ -217,6 +221,7 @@ func dash():
 		start_dash()
 
 func start_dash():
+		damagevulnebarility.emit(true)
 		dashParticles.emitting = true
 		isDashing = true
 		$SFX/dash.play()
@@ -314,6 +319,7 @@ func _on_Timer_timeout():
 	SPEED = 80.0 # Resetting the speed to the default
 
 func dashcooldownd():
+	damagevulnebarility.emit(false)
 	isdashcd = false
 	SPEED = 80.0
 	

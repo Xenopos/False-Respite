@@ -114,49 +114,53 @@ animations = [{
 }]
 
 [node name="UISkills" type="Control" groups=["uihandlers"]]
-z_index = 100
+top_level = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = -2.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2rujr")
 
 [node name="Skill1" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(405, 334)
+position = Vector2(437, 326.001)
 sprite_frames = SubResource("SpriteFrames_okn2m")
 animation = &"Skill1"
 autoplay = "Skill1"
 
 [node name="Skill2" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(444, 334)
+position = Vector2(487, 326.001)
 sprite_frames = SubResource("SpriteFrames_5q68d")
 animation = &"Skill2"
 autoplay = "Skill2"
 
 [node name="Skill3" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(483, 335)
+position = Vector2(536, 327.001)
 sprite_frames = SubResource("SpriteFrames_hulyw")
 animation = &"Skill3"
 autoplay = "Skill3"
 
 [node name="Jump" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(522, 335)
+position = Vector2(584, 327.001)
 sprite_frames = SubResource("SpriteFrames_1pm42")
 animation = &"Jump"
 autoplay = "Jump"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 416.0
-offset_top = 299.0
-offset_right = 625.0
-offset_bottom = 339.0
+offset_left = 447.0
+offset_top = 335.0
+offset_right = 684.0
+offset_bottom = 375.0
 rotation = -6.28319
 scale = Vector2(0.751531, 0.729064)
 
@@ -165,21 +169,22 @@ texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
-text = "Q        "
+text = "down       "
 
 [node name="Label2" type="Label" parent="HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
-text = "E        "
+text = "right    "
+vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
-text = "R         "
+text = "    up         "
 
 [node name="Label4" type="Label" parent="HBoxContainer"]
 texture_filter = 1
@@ -187,3 +192,42 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
 text = "Spacebar"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 406.0
+offset_top = 296.0
+offset_right = 697.0
+offset_bottom = 320.0
+rotation = -6.28319
+scale = Vector2(0.6, 0.6)
+
+[node name="Label" type="Label" parent="HBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wccsu")
+theme_override_font_sizes/font_size = 19
+text = "Dash attack"
+
+[node name="Label2" type="Label" parent="HBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wccsu")
+theme_override_font_sizes/font_size = 19
+text = "  Brain Shred "
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="HBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wccsu")
+theme_override_font_sizes/font_size = 19
+text = "   Knockup    "
+
+[node name="Label4" type="Label" parent="HBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wccsu")
+theme_override_font_sizes/font_size = 19
+text = "   Jump"
+horizontal_alignment = 3
