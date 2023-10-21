@@ -34,10 +34,10 @@ var skill2active  = false
 var skill1active = false
 
 #dash var
-var dash_cd : float = 0.3
+@export var dash_cd : float = 0.8
 var isdashcd : bool = false
 var dash_speed: float = 600
-var dash_duration: float = 0.15
+var dash_duration: float = 0.15 # dash length
 @onready var skill1cd : Label = $CanvasLayer/Label2
 var enemyparent : enemyhealth
 #------------------------------------#
@@ -49,6 +49,7 @@ signal skill2on(_isbuttontrigger2)
 signal skill3on(_isbuttontrigger3)
 signal jumpon(_isbuttontrigger4)
 signal enemyairborne
+
 #signals used
 @export var cooldown_timer: Timer
 @onready var shizukahealth : healthsys = $HealthSystem
@@ -65,6 +66,12 @@ var resetskill1damage : bool = true
 
 #hitfxtimer
 @onready var hitfxtimer : Timer = $hitfxtimer
+
+#basic attack and skill damage
+@export var skill1damage: int = 10
+@export var skill2damage: int = 10
+@export var skill3damage: int = 10
+@export var basicatkdamage: int = 10
 
 #vulnerability handler
 signal damagevulnebarility(isvulnerable)
@@ -118,14 +125,14 @@ func _physics_process(delta):
 	
 func skill1(): #need stop damage condition other will spam
 	if skill1online and skill1active and resetskill1damage:
-		enemyparent.take_damage(10)
+		enemyparent.take_damage(skill1damage)
 		skill1active = false
 		resetskill1damage = false
 		skill1_cd_timer.start(0.9)
 		
 func skill2():
 	if skill2online and resetskill2damage and skill2active:
-		enemyparent.take_damage(10)
+		enemyparent.take_damage(skill2damage)
 		resetskill2damage = false
 		skill2active = false  # Deactivate the skill
 		skill2_cd_timer.start(0.1)  # Start the cooldown
@@ -178,7 +185,7 @@ func _on_animated_sprite_2d_animation_finished():
 		gravity = 480
 	if animated_sprite.animation == "upyogo":
 		if skill3online:
-			enemyparent.take_damage(5)
+			enemyparent.take_damage(skill3damage)
 			enemyairborne.emit()
 		SPEED = 80.0
 		gravity = 480
@@ -187,7 +194,7 @@ func _on_animated_sprite_2d_animation_finished():
 func attack():
 	if (Input.is_action_just_pressed("attack") and AttackCombo == 0 and isDashing == false and not nowdead):
 		if skill3online:
-			enemyparent.take_damage(10)
+			enemyparent.take_damage(basicatkdamage)
 		SPEED = 30
 		$SFX/attacksfx.play()
 		AttackCombo += 1
@@ -201,7 +208,7 @@ func attack():
 		and not nowdead
 	):
 		if skill3online:
-			enemyparent.take_damage(10)
+			enemyparent.take_damage(basicatkdamage)
 		SPEED = 30
 		AttackCombo -= 1
 		isAttacking = true
@@ -311,15 +318,16 @@ func _on_CooldownTimer_timeout():
 func applyknockbacktoshishi():
 	pass
 
+
 #--------------------------------------#
 #dash  function
 func _on_Timer_timeout():
+	damagevulnebarility.emit(false)
 	isDashing = false
 	dashParticles.emitting = false
 	SPEED = 80.0 # Resetting the speed to the default
 
 func dashcooldownd():
-	damagevulnebarility.emit(false)
 	isdashcd = false
 	SPEED = 80.0
 	

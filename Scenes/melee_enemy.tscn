@@ -285,6 +285,7 @@ script = ExtResource("1_rprsq")
 
 [node name="Enemy_Health" type="Node" parent="." groups=["enemyhealth"]]
 script = ExtResource("2_o6idj")
+menemycurrenthealth = 500
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2

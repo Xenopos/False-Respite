@@ -8,7 +8,7 @@ signal enemydeathtrigger
 signal restorehealthready
 
 
-var menemycurrenthealth : int = 100
+@export var menemycurrenthealth : int = 100
 var menemymaxpoise : int = 0
 @export var maxdamagecounterforrestorehealth : int = 100
 var currentdamagecounterforrestorehealth : int = maxdamagecounterforrestorehealth

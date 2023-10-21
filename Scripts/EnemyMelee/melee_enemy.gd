@@ -26,7 +26,7 @@ var enemybelow20 : bool = false
 #dash timer and such
 var dashdirection = Vector2.ZERO
 var enemyisdashing: bool = false
-var enemydash_speed: int = 1000
+@export  var enemydash_speed: int = 1000
 var deads : bool = false
 
 # Cooldown Timer and related variables
@@ -34,21 +34,24 @@ var deads : bool = false
 var isAttackOnCooldown: bool = false
 var hasAttacked : bool = false  
 
+#shader 
 @onready var hitenemyfxtimerr : Timer = $hitenemyfxtimer
 
 #skillpierce
 @onready var stunnedduration : Timer = $timers/stuntime
 @onready var stunimmunduration : Timer = $timers/stunimmunity
 
+#stun behavior
 var stunned : bool  = false
 var stunimmunetrigger : bool = false
-var maxstuncounter : int  = 3
+@export var maxstuncounter : int  = 3
 var stuncounter = maxstuncounter
 var isairborne: bool = true
 
 var chasedtohell: bool = false
 var ispierceoncooldown: bool = false
 var iskillpierce : bool = false
+
 @onready var skillpiercecooldown : Timer = $timers/skillpiercecd
 
 func _ready():

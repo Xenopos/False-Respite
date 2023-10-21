@@ -7,8 +7,8 @@ signal emitremovalofexistence
 signal playerkknockback
 
 var enemyhp : enemyhealth
-var max_health: int = 100
-var max_healing: int = 3 
+@export var max_health: int = 100
+@export var max_healing: int = 3 
 var current_healing = max_healing
 var current_health : int = 100
 @export var maxpoise: int = 100
@@ -18,12 +18,13 @@ var current_health : int = 100
 @onready var displaylabelrestoredhealing : Label = $"../CanvasLayer/Restoredhealing"
 @onready var shizuka 
 var _isvulnerable : bool = false
+
 func _physics_process(_delta):
-	pass
+	displaymaxhealing.text = str("Total heal: " ,current_healing)
+
 
 func _ready():
 	shizuka = get_tree().get_first_node_in_group("Player")
-	displaymaxhealing.text = str("Total heal: " ,current_healing)
 	enemyhp = get_tree().get_first_node_in_group("enemyhealth")
 	enemyhp.connect("restorehealthready", Callable(self, "imhigh"))
 	fadedisplay.connect("timeout", Callable(self, "displayhealoff"))
@@ -44,7 +45,7 @@ func player_take_damage(amount: int):
 
 
 func heal(amount: int):
-	if current_healing != -1 and current_health != 100 and current_health >= 1:
+	if current_healing != 0 and current_health != 100 and current_health >= 1:
 		displaymaxhealing.text = str("Total heal: " ,current_healing)
 		current_healing -= 1
 		current_health += amount
@@ -52,7 +53,7 @@ func heal(amount: int):
 	
 func imhigh():
 	displaylabelrestoredhealing.text = str("heal restored")
-	current_healing = max_healing 
+	current_healing += 1 
 	fadedisplay.start(2.0)
 	
 func displayhealoff():
