@@ -378,7 +378,7 @@ position = Vector2(-392, 135)
 scale = Vector2(0.993461, 1.00445)
 
 [node name="Melee_Enemy" parent="." instance=ExtResource("4_4364l")]
-position = Vector2(-297, 90)
+position = Vector2(-297, 136)
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 current = true

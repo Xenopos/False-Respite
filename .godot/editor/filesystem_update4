@@ -12,5 +12,3 @@ res://temp/UISkills.tscn
 res://Scenes/Mainmenu.tscn
 res://Scenes/Pause.tscn
 res://Player.gd
-res://Scripts/EnemyMelee/melee_enemy.gd
-res://Scripts/EnemyMelee/Enemy_Health.gd

@@ -271,7 +271,7 @@ size = Vector2(12, 16)
 size = Vector2(20, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xq5pf"]
-size = Vector2(118.975, 38.6341)
+size = Vector2(118.975, 71.5609)
 
 [node name="Melee_Enemy" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 100
@@ -313,7 +313,7 @@ debug_color = Color(0.988235, 0, 0.321569, 0.419608)
 script = ExtResource("9_yqu7y")
 
 [node name="detectattack" type="CollisionShape2D" parent="detectionrange"]
-position = Vector2(-0.499985, -36)
+position = Vector2(-0.499985, 1.5)
 scale = Vector2(2.27778, 2.27778)
 shape = SubResource("RectangleShape2D_xq5pf")
 debug_color = Color(0.54902, 0.403922, 1, 0.419608)
@@ -334,14 +334,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 6.0
-offset_top = -15.0
-offset_right = 71.0
-offset_bottom = 193.0
+offset_left = -9.0
+offset_top = -11.0
+offset_right = 400.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.0464845, 0.110389)
-fill_mode = 3
 show_percentage = false
 script = ExtResource("11_camap")
 

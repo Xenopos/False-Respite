@@ -124,7 +124,7 @@ func skill2():
 		enemyparent.take_damage(10)
 		resetskill2damage = false
 		skill2active = false  # Deactivate the skill
-		skill2_cd_timer.start(0.3)  # Start the cooldown
+		skill2_cd_timer.start(0.1)  # Start the cooldown
 
 
 func _on_skill1_cd_timer_timeout():
@@ -271,6 +271,7 @@ func skill2activate():
 		animated_sprite.play("spin")
 		$SFX/spiiin.play()
 		if onair == true:
+			velocity.y = -50
 			skill2active = true
 			animationstay = true
 		if not onair:

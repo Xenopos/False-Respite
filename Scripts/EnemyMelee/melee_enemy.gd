@@ -41,6 +41,9 @@ var stunned : bool  = false
 var stunimmunetrigger : bool = false
 var maxstuncounter : int  = 3
 var stuncounter = maxstuncounter
+var isairborne: bool = true
+
+
 func _ready():
 	stunimmunduration.connect("timeout", Callable(self, "stunimmunecd"))
 	detection_range_node = get_node("detectionrange")
@@ -66,8 +69,9 @@ func stunimmunecd():
 	stunimmunetrigger = false
 
 func hitenemyfxtriggercd():
-	meleeEnemyAnim.material.set_shader_parameter("flash_modifier", 1)
-	hitenemyfxtimerr.start(0.1)
+	if not deads:
+		meleeEnemyAnim.material.set_shader_parameter("flash_modifier", 1)
+		hitenemyfxtimerr.start(0.1)
 
 func hitenemyfxtimer():
 	meleeEnemyAnim.material.set_shader_parameter("flash_modifier", 0)
@@ -85,8 +89,7 @@ func update_facing_direction_enemy():
 			meleeEnemyAnim.flip_h = false
 		elif direction.x > 0:
 			meleeEnemyAnim.flip_h = true
-	
-	
+
 	if not animationlock and not deads:
 		if direction.x != 0:
 			meleeEnemyAnim.play("run")
@@ -103,7 +106,7 @@ func _physics_process(delta):
 	update_facing_direction_enemy()
 	move_and_slide()
 	emit_signal("velocity_updated", direction) 
-	
+
 func enemynrmlattk():
 	if not isAttackOnCooldown and not hasAttacked and not deads and not stunned:
 		enemySpeed = 40
@@ -136,6 +139,10 @@ func enemyhasfounplayer():
 		velocity.x = direction.x * enemySpeed
 	elif distance_to_player > 20 and enemybelow20 and not deads and not stunned:
 		enemySpeed = 100
+		direction.x = 1 if player.global_position.x > global_position.x else -1
+		velocity.x = direction.x * enemySpeed
+	elif distance_to_player > 10 and not enemybelow20 and not deads and not stunned and player.global_position.y >= 100:
+		enemyjump() 
 		direction.x = 1 if player.global_position.x > global_position.x else -1
 		velocity.x = direction.x * enemySpeed
 	else:
@@ -174,11 +181,11 @@ func enemydojump():
 
 func enemyairborned():
 	if not deads and not stunimmunetrigger:
-		stuncounter -= 1
 		if stuncounter == 0:
 			stuncounter = maxstuncounter
 			stunimmunetrigger = true
 			stunimmunduration.start(5.0)
+		stuncounter -= 1
 		stunned = true
 		velocity.y = enemyjumpvelocity
 		animationlock = true
@@ -199,5 +206,6 @@ func enemyisdead():
 		meleeEnemyAnim.play("death")
 		animationlock = false
 		push_warning(deads)
+
 #skill pierce timers
 
