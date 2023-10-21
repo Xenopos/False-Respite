@@ -158,19 +158,22 @@ func _on_animated_sprite_2d_animation_finished():
 		
 func enemyhasfounplayer():
 	var distance_to_player = player.global_position.distance_to(global_position)
-	if distance_to_player > 20 and not enemybelow20 and not deads and not stunned:
-		enemySpeed = 70
+	if distance_to_player > 20 and not deads and not stunned:
+		if enemybelow20:
+			enemySpeed = 100
+		else:
+			enemySpeed = 70
 		direction.x = 1 if player.global_position.x > global_position.x else -1
 		velocity.x = direction.x * enemySpeed
-	elif distance_to_player > 20 and enemybelow20 and not deads and not stunned:
-		enemySpeed = 100
-		direction.x = 1 if player.global_position.x > global_position.x else -1
-		velocity.x = direction.x * enemySpeed
+		if player.global_position.y < self.global_position.y - 30:
+			enemydojump()
+		if player.global_position.y > self.global_position.y - 20:  
+			position.y += 1
 	else:
 		velocity.x = 0
 		direction.x = 0
 		enemynrmlattk()
-		
+
 # Cooldown functions
 func start_attack_cooldown(duration):
 	attack_cooldown_timer.start(duration)
@@ -197,6 +200,7 @@ func enemydash():
 	animationlock = true
 	
 func enemydojump():
+	await get_tree().create_timer(0.5).timeout
 	if is_on_floor():
 		enemyjump() 
 

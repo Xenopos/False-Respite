@@ -111,7 +111,10 @@ func _physics_process(delta):
 			velocity.x = direction.x * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-
+	if Input.is_action_just_pressed("ui_down"):
+		self.position.y += 1
+		
+		
 	move_and_slide()
 	update_animation()
 	update_facing_direction()
@@ -223,7 +226,7 @@ func dash():
 		DashDirection = Vector2(-1, 0)
 	if Input.is_action_pressed("ui_right"):
 		DashDirection = Vector2(1, 0)
-
+	
 	if Input.is_action_just_pressed("dash") and not isDashing and not isdashcd and not nowdead:
 		start_dash()
 
