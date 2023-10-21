@@ -385,6 +385,14 @@ metadata/_edit_vertical_guides_ = []
 [node name="Player" parent="." instance=ExtResource("2_qk1kg")]
 position = Vector2(-392, -586)
 scale = Vector2(0.993461, 1.00445)
+SPEED = 80.0
+JUMP_VELOCITY = -230
+AttackCombo = 0
+dash_cd = 0.8
+skill1damage = 10
+skill2damage = 10
+skill3damage = 10
+basicatkdamage = 10
 
 [node name="Melee_Enemy" parent="." instance=ExtResource("4_4364l")]
 position = Vector2(-297, 136)

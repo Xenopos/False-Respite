@@ -1,3 +1,5 @@
+CollisionShape2D
+Area2D
 Label
 Timer
 Sprite2D
@@ -19,8 +21,6 @@ VBoxContainer
 healthsys
 AnimationPlayer
 AnimationTree
-CollisionShape2D
-Area2D
 Panel
 ItemList
 NinePatchRect

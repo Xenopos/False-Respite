@@ -205,7 +205,7 @@ func enemydash():
 	animationlock = true
 	
 func enemydojump():
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.3).timeout
 	if is_on_floor() and not deads:
 		enemyjump() 
 

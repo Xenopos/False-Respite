@@ -76,6 +76,8 @@ var resetskill1damage : bool = true
 #vulnerability handler
 signal damagevulnebarility(isvulnerable)
 
+#ult trigger
+
 func _ready():
 	hitfxtimer.connect("timeout", Callable(self, "hitfxtimercd"))
 	skill1particles.emitting = false
@@ -83,7 +85,6 @@ func _ready():
 	dashParticles.emitting = false
 	shizukahealth.connect("playerkknockback", Callable(self, "applyknockbacktoshishi"))
 	#onreadysignals
-	
 	shizukahealth.connect("healthchanged", Callable(self,"emitdamagefx"))
 	shizukahealth.connect("emitremovalofexistence", Callable(self, "playerisnowdead"))
 	dashcd.connect("timeout", Callable(self, "dashcooldownd"))
@@ -96,6 +97,7 @@ func _ready():
 	cooldown_timer.connect("timeout", Callable(self, "_on_CooldownTimer_timeout"))
 	#getparent
 	enemyparent = get_tree().get_first_node_in_group("enemyhealth")
+
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -125,8 +127,9 @@ func _physics_process(delta):
 	skill2()
 	commithealing()
 	skill1()
+	ultimatebull()
 	
-func skill1(): #need stop damage condition other will spam
+func skill1():
 	if skill1online and skill1active and resetskill1damage:
 		enemyparent.take_damage(skill1damage)
 		skill1active = false
@@ -187,13 +190,21 @@ func _on_animated_sprite_2d_animation_finished():
 		SPEED = 80.0
 		gravity = 480
 	if animated_sprite.animation == "upyogo":
+		animationstay = false
 		if skill3online:
 			enemyparent.take_damage(skill3damage)
 			enemyairborne.emit()
-		SPEED = 80.0
-		gravity = 480
-		animationstay = false
-		
+	if animated_sprite.animation == "bye":
+			SPEED = 80.0
+			animationstay = false
+
+func ultimatebull():
+	if Input.is_action_just_pressed("ult skill"):
+		enemyparent.take_damage(500)
+		animated_sprite.play("bye")
+		SPEED = 0
+		animationstay = true
+
 func attack():
 	if (Input.is_action_just_pressed("attack") and AttackCombo == 0 and isDashing == false and not nowdead):
 		if skill3online:
@@ -290,7 +301,6 @@ func skill2activate():
 			skill2active = true
 			animationstay = true
 		if not onair:
-			animationstay = false
 			skill2active = false
 		start_cooldown(0.5)
 
