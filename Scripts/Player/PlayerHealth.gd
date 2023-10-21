@@ -52,9 +52,11 @@ func heal(amount: int):
 		current_health = min(current_health, max_health)
 	
 func imhigh():
-	displaylabelrestoredhealing.text = str("heal restored")
-	current_healing += 1 
-	fadedisplay.start(2.0)
-	
+	current_healing += 1
+	if current_healing <= max_healing:  # Only display if not maxed out
+		displaylabelrestoredhealing.text = "heal restored"
+		fadedisplay.start(2.0)
+	current_healing = min(current_healing, max_healing)  # Ensures current_healing doesn't exceed max_healing
+
 func displayhealoff():
 	displaylabelrestoredhealing.text = str(" ")

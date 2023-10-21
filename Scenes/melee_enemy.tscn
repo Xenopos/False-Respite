@@ -292,7 +292,7 @@ z_index = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_urxwf")
 sprite_frames = SubResource("SpriteFrames_82n88")
-animation = &"skill_pierce"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

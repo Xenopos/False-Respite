@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=77 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
@@ -31,6 +31,7 @@
 [ext_resource type="Shader" path="res://Shaders/outlineshader.gdshader" id="27_n4xhq"]
 [ext_resource type="Texture2D" uid="uid://xxh05feui8mv" path="res://Visuals/UI/shichan.png" id="30_68ifn"]
 [ext_resource type="Shader" path="res://Shaders/try.gdshader" id="30_rk5cc"]
+[ext_resource type="Script" path="res://Scripts/PlaytimeTimer.gd" id="32_qm1ac"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
 size = Vector2(16.5, 15)
@@ -614,6 +615,23 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_c3mrt")
 position = Vector2(48, 43)
 texture = ExtResource("30_68ifn")
+
+[node name="PlaytimeTimer" type="Timer" parent="CanvasLayer"]
+autostart = true
+script = ExtResource("32_qm1ac")
+
+[node name="Label" type="Label" parent="CanvasLayer/PlaytimeTimer"]
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_top = 15.0
+offset_right = 0.5
+offset_bottom = 36.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("19_uhpr1")
+theme_override_font_sizes/font_size = 19
 
 [node name="hitfxtimer" type="Timer" parent="."]
 

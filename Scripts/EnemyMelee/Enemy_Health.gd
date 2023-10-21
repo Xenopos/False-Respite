@@ -12,6 +12,8 @@ signal restorehealthready
 var menemymaxpoise : int = 0
 @export var maxdamagecounterforrestorehealth : int = 100
 var currentdamagecounterforrestorehealth : int = maxdamagecounterforrestorehealth
+var combocounter : int = 0
+
 var ishedead : bool = false
 func _ready():
 	pass
@@ -20,11 +22,13 @@ func _physics_process(_delta):
 	pass
 
 func enemy_check_health():
-	if menemycurrenthealth <= 20 and menemycurrenthealth >= 20 and not ishedead:
+	var twenty_percent_health = 0.2 * 500
+	if menemycurrenthealth <= twenty_percent_health and not ishedead:
 		enemyrage.emit(true)
-	if menemycurrenthealth == 0:
+	if menemycurrenthealth <= 0 and not ishedead:
 		ishedead = true
 		enemydeathtrigger.emit()
+
 
 func take_damage_skill1(amount: int):
 	menemycurrenthealth -= amount

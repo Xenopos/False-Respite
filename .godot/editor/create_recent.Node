@@ -1,3 +1,4 @@
+Label
 Timer
 Sprite2D
 StaticBody2D
@@ -5,7 +6,6 @@ AnimatedSprite2D
 Node
 GPUParticles2D
 HBoxContainer
-Label
 TextureProgressBar
 BoxContainer
 ProgressBar

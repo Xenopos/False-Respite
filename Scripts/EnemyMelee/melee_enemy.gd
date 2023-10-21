@@ -133,6 +133,12 @@ func enemynrmlattk():
 		animationlock = true 
 		hasAttacked = true
 		start_attack_cooldown(1.2) 
+		if enemybelow20: # two attack upon low health
+			if randf() < 0.5 and not deads:
+				await get_tree().create_timer(0.5).timeout
+				meleeEnemyAnim.play("basic_attack")
+				animationlock = true 
+				playerhealth.player_take_damage(10)
 
 func enemypierceattk():
 	if (not deads and not stunned and not iskillpierce and not hasAttacked and not ispierceoncooldown):
@@ -143,9 +149,9 @@ func enemypierceattk():
 		animationlock = true
 		skillpiercecooldown.start(5.0)
 
+
 func _on_animated_sprite_2d_animation_finished():
 	if  meleeEnemyAnim.animation == "jump" or meleeEnemyAnim.animation == "basic_attack":
-		enemySpeed = 70
 		animationlock = false
 	elif meleeEnemyAnim.animation == "skill_pierce":
 		playerhealth.player_take_damage(10)
@@ -153,7 +159,6 @@ func _on_animated_sprite_2d_animation_finished():
 		animationlock = false
 	if meleeEnemyAnim.animation == "stun":
 		stunned  = false
-		enemySpeed = 70
 		animationlock = false
 		
 func enemyhasfounplayer():
@@ -201,7 +206,7 @@ func enemydash():
 	
 func enemydojump():
 	await get_tree().create_timer(0.5).timeout
-	if is_on_floor():
+	if is_on_floor() and not deads:
 		enemyjump() 
 
 func enemyairborned():
