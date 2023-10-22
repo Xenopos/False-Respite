@@ -279,14 +279,14 @@ size = Vector2(118.975, 71.5609)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bs03c"]
 
 [node name="Melee_Enemy" type="CharacterBody2D" groups=["Enemy"]]
-z_index = 100
 texture_filter = 1
 position = Vector2(235, 125)
 collision_layer = 2
 collision_mask = 2
-floor_snap_length = 2.0
+floor_snap_length = 3.0
 script = ExtResource("1_rprsq")
 enemySpeed = 75
+enemyjumpvelocity = -250
 
 [node name="hitenemyfxtimer" type="Timer" parent="."]
 

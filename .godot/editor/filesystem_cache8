@@ -1,17 +1,17 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1697967291
+::res://::1698004663
 area_2d.gd::GDScript::-1::1697214676::0::1::::<>TileMap<>::
-area_2d.tscn::PackedScene::7043692875405836508::1697967291::0::1::::<><>::uid://vvywlpf5p83y::::res://Visuals/Animations/map.png<>uid://x6ykrgfako55::::res://Player.tscn<>uid://caj8lkojakln6::::res://Scenes/melee_enemy.tscn<>res://crt_exp.gdshader<>uid://b0qkngn51vocc::::res://Visuals/Backgrounds and tilemap/Parallax back.png<>uid://jo6tyfweiytv::::res://BGM/bullshit.wav
+area_2d.tscn::PackedScene::7043692875405836508::1698004607::0::1::::<><>::uid://vvywlpf5p83y::::res://Visuals/Animations/map.png<>uid://cr0q31yyhrkqw::::res://Scenes/parallax_background.tscn<>uid://x6ykrgfako55::::res://Player.tscn<>uid://caj8lkojakln6::::res://Scenes/melee_enemy.tscn<>uid://c1u442m6b583y::::res://BGM/Distress upon the damsel demo.wav<>res://crt_exp.gdshader
 back.tscn::PackedScene::2897091630407258363::1696180047::0::1::::<><>::uid://c7maufabkf645
 crt.tscn::PackedScene::1711127681370045032::1696180019::0::1::::<><>::uid://c7maufabkf645
-crt_exp.gdshader::Shader::-1::1697967291::0::1::::<><>::
-default_bus_layout.tres::AudioBusLayout::6341054562860730906::1697962891::0::1::::<><>::
-Health System.gd::GDScript::-1::1697963862::0::1::::<>Node<>::
+crt_exp.gdshader::Shader::-1::1698004647::0::1::::<><>::
+default_bus_layout.tres::AudioBusLayout::6341054562860730906::1697994869::0::1::::<><>::
+Health System.gd::GDScript::-1::1697994887::0::1::::<>Node<>::
 icon.svg::CompressedTexture2D::3245154964638336596::1685623186::1685623194::1::::<><>::
 Mainmenu.gd::GDScript::-1::1697809482::0::1::::<>Control<>::
 Node2D.gd::GDScript::-1::1697651160::0::1::::<>healthsys<>::
-Player.gd::GDScript::-1::1697964673::0::1::::Shizuka<>CharacterBody2D<>::
-Player.tscn::PackedScene::1679815082209408322::1697967291::0::1::::<><>::res://Player.gd<>uid://d0o6wt3l5qvnh::::res://Visuals/Animations/idle.png<>res://Scripts/Player/PlayerHealth.gd<>uid://cipa3sl7tn3pn::::res://Visuals/Animations/jump.png<>uid://8ogrtqyeacau::::res://Visuals/Animations/dash.png<>uid://d0dljy5hr7kfw::::res://Visuals/Animations/run.png<>uid://ds66jmc1spcbn::::res://Visuals/Animations/dashattack.png<>uid://bxxpx77x21gwc::::res://sfx/att.ogg<>uid://bgd44t1xkvm5b::::res://Visuals/Animations/spiiin.png<>uid://cworrknv3pk1t::::res://Visuals/Animations/upyogo.png<>uid://bfq24tfvd021i::::res://sfx/jum.ogg<>uid://uwrak6ml7ei0::::res://sfx/spin.wav<>uid://bq4x4i3owe7nq::::res://sfx/dash.ogg<>uid://yw51ynrvhs2x::::res://Visuals/Animations/attack.png<>uid://cv7d3fbjoemul::::res://sfx/health regained.wav<>uid://bo2c5u6r6783k::::res://sfx/execute.wav<>res://Shaders/shaderforadamagefx.gdshader<>uid://3rhk4oblkwpo::::res://sfx/health warning.wav<>uid://r1k8p7e7tuvk::::res://Visuals/Animations/death.png<>uid://b7qqigtk7yl7d::::res://sfx/ai.wav<>uid://bonta00708fog::::res://sfx/low health.wav<>uid://cu7g6bphy3u05::::res://Visuals/UI/finalshit.png<>uid://ch5eq1crj1fc1::::res://sfx/fly.wav<>res://Scripts/Player/Attack Range.gd<>uid://hmcomoc2gp5e::::res://sfx/charging.wav<>uid://bu4ut4acw6q7n::::res://Silver.ttf<>uid://b1gcav5l1ybkk::::res://Visuals/UI/healthbar-1.png<>uid://bxmw7cer0hljd::::res://temp/UISkills.tscn<>uid://cqdtbm10jgnmj::::res://Visuals/UI/healthbar0.png<>uid://dqj7yhji7n2gw::::res://Visuals/UI/healthbar1.png<>res://Visuals/UI/healtbar.gd<>res://Scripts/Player/Skilldamagearea.gd<>res://Visuals/UI/Labelhealth.gd<>res://Shaders/outlineshader.gdshader<>uid://xxh05feui8mv::::res://Visuals/UI/shichan.png<>res://Shaders/try.gdshader<>res://Scripts/PlaytimeTimer.gd
+Player.gd::GDScript::-1::1698004599::0::1::::Shizuka<>CharacterBody2D<>::
+Player.tscn::PackedScene::1679815082209408322::1698004607::0::1::::<><>::res://Player.gd<>uid://d0o6wt3l5qvnh::::res://Visuals/Animations/idle.png<>res://Scripts/Player/PlayerHealth.gd<>uid://cipa3sl7tn3pn::::res://Visuals/Animations/jump.png<>uid://8ogrtqyeacau::::res://Visuals/Animations/dash.png<>uid://d0dljy5hr7kfw::::res://Visuals/Animations/run.png<>uid://ds66jmc1spcbn::::res://Visuals/Animations/dashattack.png<>uid://bxxpx77x21gwc::::res://sfx/att.ogg<>uid://bgd44t1xkvm5b::::res://Visuals/Animations/spiiin.png<>uid://cworrknv3pk1t::::res://Visuals/Animations/upyogo.png<>uid://bfq24tfvd021i::::res://sfx/jum.ogg<>uid://uwrak6ml7ei0::::res://sfx/spin.wav<>uid://bq4x4i3owe7nq::::res://sfx/dash.ogg<>uid://yw51ynrvhs2x::::res://Visuals/Animations/attack.png<>uid://cv7d3fbjoemul::::res://sfx/health regained.wav<>uid://bo2c5u6r6783k::::res://sfx/execute.wav<>res://Shaders/shaderforadamagefx.gdshader<>uid://3rhk4oblkwpo::::res://sfx/health warning.wav<>uid://r1k8p7e7tuvk::::res://Visuals/Animations/death.png<>uid://b7qqigtk7yl7d::::res://sfx/ai.wav<>uid://bonta00708fog::::res://sfx/low health.wav<>uid://cu7g6bphy3u05::::res://Visuals/UI/finalshit.png<>uid://ch5eq1crj1fc1::::res://sfx/fly.wav<>res://Scripts/Player/Attack Range.gd<>uid://hmcomoc2gp5e::::res://sfx/charging.wav<>uid://bu4ut4acw6q7n::::res://Silver.ttf<>uid://b1gcav5l1ybkk::::res://Visuals/UI/healthbar-1.png<>uid://bxmw7cer0hljd::::res://temp/UISkills.tscn<>uid://cqdtbm10jgnmj::::res://Visuals/UI/healthbar0.png<>uid://dqj7yhji7n2gw::::res://Visuals/UI/healthbar1.png<>res://Visuals/UI/healtbar.gd<>res://Scripts/Player/Skilldamagearea.gd<>res://Visuals/UI/Labelhealth.gd<>uid://xxh05feui8mv::::res://Visuals/UI/shichan.png<>res://Shaders/try.gdshader<>res://Scripts/PlaytimeTimer.gd<>uid://dugivcbh2hkbp::::res://Scenes/Pause.tscn
 Silver.ttf::FontFile::3851314304559666981::1685811492::1685811483::1::::<><>::
 UI.tscn::PackedScene::6917562207827417096::1696183008::0::1::::<><>::
 ::res://addons/::1697440323
@@ -167,16 +167,18 @@ bullshit.wav::AudioStreamWAV::662518307448774779::1697337516::1697337776::1::::<
 Distress upon the damsel demo.wav::AudioStreamWAV::6640852875948868660::1697426106::1697426109::1::::<><>::
 healthbar.png::CompressedTexture2D::6214380323399488449::1697814486::1697814490::1::::<><>::
 untitled.mp3::AudioStreamMP3::8933684362784539994::1697338657::1697338699::1::::<><>::
-::res://Scenes/::1697967291
+::res://Scenes/::1698004607
 ghost.tscn::PackedScene::533363973934192370::1697569817::0::1::::<><>::uid://8ogrtqyeacau
-Mainmenu.tscn::PackedScene::4027433554550138725::1697967291::0::1::::<><>::uid://bmajl2qnk0fvs::::res://Visuals/UI/Main_menu.png<>res://Mainmenu.gd<>uid://guq4b5ompm68::::res://Themes/Sample_theme.tres<>uid://d0jsqgrv4x68u::::res://BGM/untitled.mp3
+Mainmenu.tscn::PackedScene::4027433554550138725::1698004607::0::1::::<><>::uid://bmajl2qnk0fvs::::res://Visuals/UI/Main_menu.png<>res://Mainmenu.gd<>uid://guq4b5ompm68::::res://Themes/Sample_theme.tres<>uid://d0jsqgrv4x68u::::res://BGM/untitled.mp3
 melee_enemy.gd::GDScript::-1::1696642131::0::1::::<>CharacterBody2D<>::
-melee_enemy.tscn::PackedScene::4793444618937075573::1697967291::0::1::::<><>::uid://cysb84tnghojp::::res://Visuals/Spritesheets/MEnemy_basic_attack.png<>res://Scripts/EnemyMelee/melee_enemy.gd<>uid://c862cu2if06l::::res://Visuals/Spritesheets/MEnemy_idle.png<>res://Scripts/EnemyMelee/Enemy_Health.gd<>uid://bdw163caj26rx::::res://Visuals/Spritesheets/MEnemy_jump.png<>res://Shaders/shaderforadamagefx.gdshader<>uid://dd5bkig6lnpg2::::res://Visuals/Spritesheets/MEnemy_run.png<>uid://baxgqcocvlfj6::::res://Visuals/Spritesheets/MEnemy_death.png<>uid://cq2nf7lli1xdq::::res://Visuals/Spritesheets/MEnemy_thrust.png<>res://Scripts/EnemyMelee/AttackRange.gd<>res://Scripts/EnemyMelee/detectionrange.gd<>uid://cy7md0mxnub8w::::res://sfx/shizuka.wav<>res://Scripts/EnemyMelee/enemyhealthbar.gd<>uid://b43ti0qkvf1nm::::res://sfx/aaaaaa.wav<>uid://bfq24tfvd021i::::res://sfx/jum.ogg
-Pause.tscn::PackedScene::8575948534924364513::1697967291::0::1::::<><>::uid://1c722hjx0sn5::::res://Visuals/Backgrounds and tilemap/Pause.png<>uid://guq4b5ompm68::::res://Themes/Sample_theme.tres
+melee_enemy.tscn::PackedScene::4793444618937075573::1698004607::0::1::::<><>::uid://cysb84tnghojp::::res://Visuals/Spritesheets/MEnemy_basic_attack.png<>res://Scripts/EnemyMelee/melee_enemy.gd<>uid://c862cu2if06l::::res://Visuals/Spritesheets/MEnemy_idle.png<>res://Scripts/EnemyMelee/Enemy_Health.gd<>uid://bdw163caj26rx::::res://Visuals/Spritesheets/MEnemy_jump.png<>res://Shaders/shaderforadamagefx.gdshader<>uid://dd5bkig6lnpg2::::res://Visuals/Spritesheets/MEnemy_run.png<>uid://baxgqcocvlfj6::::res://Visuals/Spritesheets/MEnemy_death.png<>uid://cq2nf7lli1xdq::::res://Visuals/Spritesheets/MEnemy_thrust.png<>res://Scripts/EnemyMelee/AttackRange.gd<>res://Scripts/EnemyMelee/detectionrange.gd<>uid://cy7md0mxnub8w::::res://sfx/shizuka.wav<>res://Scripts/EnemyMelee/enemyhealthbar.gd<>uid://b43ti0qkvf1nm::::res://sfx/aaaaaa.wav<>uid://bfq24tfvd021i::::res://sfx/jum.ogg
+parallax_background.tscn::PackedScene::6018684030980742102::1698002262::0::1::::<><>::uid://daua6i8ce14aw::::res://Visuals/UI/bg/1.png<>uid://csgm5i06if5d8::::res://Visuals/UI/bg/2.png<>uid://8codnhbfoj7::::res://Visuals/UI/bg/Parallax back.png
+Pause.tscn::PackedScene::8575948534924364513::1698004607::0::1::::<><>::res://Scenes/Pausemenucontroller.gd<>uid://jbopfnbsro4::::res://Themes/Pause.png<>uid://guq4b5ompm68::::res://Themes/Sample_theme.tres
+Pausemenucontroller.gd::GDScript::-1::1698004432::0::1::::pausemenu<>CanvasLayer<>::
 pause_button.tscn::PackedScene::7368873374498724879::1697717307::0::1::::<><>::
 ::res://Scripts/::1697909329
 PlaytimeTimer.gd::GDScript::-1::1697909329::0::1::::<>Timer<>::
-::res://Scripts/EnemyMelee/::1697967025
+::res://Scripts/EnemyMelee/::1697985052
 AttackRange.gd::GDScript::-1::1697950043::0::1::::atkrng<>Area2D<>::
 detectionrange.gd::GDScript::-1::1697733892::0::1::::detection<>Area2D<>::
 enemyhealthbar.gd::GDScript::-1::1697894460::0::1::::<>ProgressBar<>::
@@ -184,7 +186,7 @@ Enemy_Damage_to_Player.gd::GDScript::-1::1697311140::0::1::::enemy_damage_to_pla
 Enemy_Health.gd::GDScript::-1::1697951569::0::1::::enemyhealth<>Node<>::
 Hurt_State.gd::GDScript::-1::1696685348::0::1::::HurtState<>State<>::
 Idle_State.gd::GDScript::-1::1696701163::0::1::::IdleState<>State<>::
-melee_enemy.gd::GDScript::-1::1697967024::0::1::::meleeenemy<>CharacterBody2D<>::
+melee_enemy.gd::GDScript::-1::1697985052::0::1::::meleeenemy<>CharacterBody2D<>::
 State.gd::GDScript::-1::1697221876::0::1::::State<>Node<>::
 ::res://Scripts/Player/::1697953567
 Attack Range.gd::GDScript::-1::1697801821::0::1::::atkrange<>Area2D<>::
@@ -213,23 +215,24 @@ jum.ogg::AudioStreamOggVorbis::2772087099402998336::1685988211::1685988216::1:::
 low health.wav::AudioStreamWAV::3397056381483403598::1697949141::1697949167::1::::<><>::
 shizuka.wav::AudioStreamWAV::6524168996808386508::1697949141::1697950948::1::::<><>::
 spin.wav::AudioStreamWAV::1450225945910618409::1686203889::1696179980::1::::<><>::
-::res://Shaders/::1697967291
-outlineshader.gdshader::Shader::-1::1697967291::0::1::::<><>::
-shaderforadamagefx.gdshader::Shader::-1::1697967291::0::1::::<><>::
-try.gdshader::Shader::-1::1697967291::0::1::::<><>::
-::res://temp/::1697967291
+::res://Shaders/::1698004647
+outlineshader.gdshader::Shader::-1::1698004647::0::1::::<><>::
+shaderforadamagefx.gdshader::Shader::-1::1698004647::0::1::::<><>::
+try.gdshader::Shader::-1::1698004647::0::1::::<><>::
+::res://temp/::1698004607
 hp.tscn::PackedScene::8663118643622444867::1697656989::0::1::::<><>::res://addons/2d_essentials/survivability/health_component.gd
 node_2d.tscn::PackedScene::3844363317732894260::1697651161::0::1::::<><>::res://Node2D.gd
 ProgressBar.gd::GDScript::-1::1697815524::0::1::::<>ProgressBar<>::
-UISkills.tscn::PackedScene::4026929651694398793::1697967291::0::1::::<><>::res://Visuals/UI/UISkills.gd<>uid://twt6fee3jeri::::res://Visuals/UI/skill1normal.png<>uid://bnxrxams43yf3::::res://Visuals/UI/skill1holdorcool.png<>uid://bu4ut4acw6q7n::::res://Silver.ttf
-::res://Themes/::1697967428
+sampeshader.tscn::PackedScene::7963996626364922515::1697999994::0::1::::<><>::res://crt_exp.gdshader
+UISkills.tscn::PackedScene::4026929651694398793::1698004607::0::1::::<><>::res://Visuals/UI/UISkills.gd<>uid://twt6fee3jeri::::res://Visuals/UI/skill1normal.png<>uid://8cwwxobn6fvi::::res://Visuals/UI/ult.png<>uid://bnxrxams43yf3::::res://Visuals/UI/skill1holdorcool.png<>uid://pnmeti7vdwf6::::res://Visuals/UI/ult0.png<>uid://bu4ut4acw6q7n::::res://Silver.ttf
+::res://Themes/::1698002688
 gbbuttonclicked.png::CompressedTexture2D::134157476998076466::1697966489::1697966489::1::::<><>::
 gbnormal.png::CompressedTexture2D::814396101891439272::1697966489::1697966489::1::::<><>::
 gnhighlighted.png::CompressedTexture2D::3805393297974216468::1697966489::1697966489::1::::<><>::
 Pause.png::CompressedTexture2D::18665914060971709::1697967428::1697967428::1::::<><>::
-Sample_theme.tres::Theme::463443976337114343::1697966758::0::1::::<><>::uid://bu4ut4acw6q7n::::res://Silver.ttf<>uid://buhmjiav68845::::res://Themes/gnhighlighted.png<>uid://luq8qpdubs1e::::res://Themes/gbnormal.png<>uid://b58s3qg7p02a::::res://Themes/gbbuttonclicked.png
+Sample_theme.tres::Theme::463443976337114343::1698002688::0::1::::<><>::uid://bu4ut4acw6q7n::::res://Silver.ttf<>uid://buhmjiav68845::::res://Themes/gnhighlighted.png<>uid://luq8qpdubs1e::::res://Themes/gbnormal.png<>uid://b58s3qg7p02a::::res://Themes/gbbuttonclicked.png
 ::res://Visuals/::1697461699
-::res://Visuals/Animations/::1697912926
+::res://Visuals/Animations/::1697987119
 attack.png::CompressedTexture2D::1731817779770236509::1696341255::1696341262::1::::<><>::
 dash.png::CompressedTexture2D::2345528812821208796::1685962076::1696179883::1::::<><>::
 dashattack.png::CompressedTexture2D::8488555880436421135::1686199099::1696179883::1::::<><>::
@@ -239,7 +242,7 @@ finalshit.png::CompressedTexture2D::2368962409798480801::1697912735::1697912926:
 idle.png::CompressedTexture2D::8944806986567327445::1685801586::1696179883::1::::<><>::
 jump.png::CompressedTexture2D::5365368748923713875::1685804427::1696179883::1::::<><>::
 Mainmenu.png::CompressedTexture2D::6367196009530720452::1686220980::1696179883::1::::<><>::
-map.png::CompressedTexture2D::1518814745723051916::1685623424::1696179883::1::::<><>::
+map.png::CompressedTexture2D::1518814745723051916::1697987118::1697987119::1::::<><>::
 particle.png::CompressedTexture2D::1117899260837961981::1686287187::1696179883::1::::<><>::
 run.png::CompressedTexture2D::8920861541604438360::1685802549::1696179883::1::::<><>::
 spiiin.png::CompressedTexture2D::2815560498764730069::1686198322::1696179883::1::::<><>::
@@ -256,10 +259,10 @@ MEnemy_idle.png::CompressedTexture2D::210432733551692181::1696339233::1696339820
 MEnemy_jump.png::CompressedTexture2D::2644039000376030653::1696339233::1696339836::1::::<><>::
 MEnemy_run.png::CompressedTexture2D::7431838920426363035::1696339233::1696339863::1::::<><>::
 MEnemy_thrust.png::CompressedTexture2D::5952401013081404866::1696339729::1696339872::1::::<><>::
-::res://Visuals/UI/::1697966474
+::res://Visuals/UI/::1697997406
 finalshit2.png::CompressedTexture2D::375877618906311412::1697913408::1697913411::1::::<><>::
 finalshit.png::CompressedTexture2D::6243098065891074112::1697913408::1697913409::1::::<><>::
-healtbar.gd::GDScript::-1::1697963862::0::1::::<>TextureProgressBar<>::
+healtbar.gd::GDScript::-1::1697994887::0::1::::<>TextureProgressBar<>::
 healthbar0.png::CompressedTexture2D::5903212079106647733::1697875588::1697875813::1::::<><>::
 healthbar1.png::CompressedTexture2D::8302849133870082934::1697875597::1697875813::1::::<><>::
 healthbar-1.png::CompressedTexture2D::4223839468661799330::1697875579::1697875813::1::::<><>::
@@ -271,5 +274,13 @@ shichan.png::CompressedTexture2D::1662295339448455153::1697875647::1697875813::1
 skill1holdorcool2.png::CompressedTexture2D::8730735983355683100::1697461691::1697461700::1::::<><>::
 skill1holdorcool.png::CompressedTexture2D::3347429620863112214::1697461691::1697461700::1::::<><>::
 skill1normal.png::CompressedTexture2D::1380213591201031394::1697461691::1697461700::1::::<><>::
-UISkills.gd::GDScript::-1::1697751269::0::1::::uiskillhandler<>Control<>::
-::res://Visuals/UI/pause menu obj/::1697427680
+UISkills.gd::GDScript::-1::1697997406::0::1::::uiskillhandler<>Control<>::
+ult0.png::CompressedTexture2D::1080406324246308233::1697994361::1697994362::1::::<><>::
+ult.png::CompressedTexture2D::2321736886598305998::1697994361::1697994362::1::::<><>::
+::res://Visuals/UI/bg/::1697983938
+0.png::CompressedTexture2D::2546375357746247958::1697974810::1697974816::1::::<><>::
+1.png::CompressedTexture2D::7200605437034168986::1697974810::1697974816::1::::<><>::
+2.png::CompressedTexture2D::6049409457351819847::1697974810::1697974816::1::::<><>::
+Parallax back.png::CompressedTexture2D::68271078956279266::1697983930::1697983938::1::::<><>::
+::res://Visuals/UI/pause menu obj/::1697998308
+pausebutt.png::CompressedTexture2D::4080869844397731157::1697998302::1697998308::1::::<><>::

@@ -1,9 +1,38 @@
-[gd_scene load_steps=17 format=3 uid="uid://bxmw7cer0hljd"]
+[gd_scene load_steps=22 format=3 uid="uid://bxmw7cer0hljd"]
 
 [ext_resource type="Script" path="res://Visuals/UI/UISkills.gd" id="1_2rujr"]
 [ext_resource type="Texture2D" uid="uid://twt6fee3jeri" path="res://Visuals/UI/skill1normal.png" id="1_ixqpu"]
+[ext_resource type="Texture2D" uid="uid://8cwwxobn6fvi" path="res://Visuals/UI/ult.png" id="2_dacox"]
 [ext_resource type="Texture2D" uid="uid://bnxrxams43yf3" path="res://Visuals/UI/skill1holdorcool.png" id="2_mew4d"]
+[ext_resource type="Texture2D" uid="uid://pnmeti7vdwf6" path="res://Visuals/UI/ult0.png" id="3_0ne0h"]
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="3_wccsu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vogsa"]
+atlas = ExtResource("2_dacox")
+region = Rect2(0, 0, 142, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcqsg"]
+atlas = ExtResource("3_0ne0h")
+region = Rect2(0, 0, 142, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h82jx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vogsa")
+}],
+"loop": false,
+"name": &"ult",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcqsg")
+}],
+"loop": false,
+"name": &"ultcooldown",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y4nth"]
 atlas = ExtResource("1_ixqpu")
@@ -119,13 +148,16 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = -2.0
-offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2rujr")
+
+[node name="ultbutt" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(97, 327)
+sprite_frames = SubResource("SpriteFrames_h82jx")
+animation = &"ultcooldown"
+autoplay = "ultcooldown"
 
 [node name="Skill1" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -155,14 +187,28 @@ sprite_frames = SubResource("SpriteFrames_1pm42")
 animation = &"Jump"
 autoplay = "Jump"
 
+[node name="ultwan" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 54.0
+offset_top = 285.0
+offset_right = 137.0
+offset_bottom = 309.0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_wccsu")
+theme_override_font_sizes/font_size = 19
+text = "Ultimate Acitve"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 447.0
-offset_top = 335.0
-offset_right = 684.0
-offset_bottom = 375.0
+offset_left = 449.0
+offset_top = 337.0
+offset_right = 693.0
+offset_bottom = 377.0
 rotation = -6.28319
-scale = Vector2(0.751531, 0.729064)
+scale = Vector2(0.722, 0.7)
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 texture_filter = 1
@@ -195,26 +241,26 @@ text = "Spacebar"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 406.0
-offset_top = 296.0
-offset_right = 697.0
-offset_bottom = 320.0
+offset_left = 402.0
+offset_top = 299.0
+offset_right = 693.0
+offset_bottom = 323.0
 rotation = -6.28319
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.5, 0.5)
 
 [node name="Label" type="Label" parent="HBoxContainer2"]
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
-text = "Dash attack"
+text = "Dash attack     "
 
 [node name="Label2" type="Label" parent="HBoxContainer2"]
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
-text = "  Brain Shred "
+text = "  Brain Shred       "
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="HBoxContainer2"]
@@ -222,7 +268,7 @@ texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
-text = "   Knockup    "
+text = "   Knockup        "
 
 [node name="Label4" type="Label" parent="HBoxContainer2"]
 texture_filter = 1

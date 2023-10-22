@@ -7,11 +7,13 @@ class_name uiskillhandler extends Control
 @onready var Skill2 : AnimatedSprite2D = $Skill2
 @onready var Skill3 : AnimatedSprite2D = $Skill3
 @onready var Jump : AnimatedSprite2D = $Jump
-
-@onready var triggerskill1button : bool = false
-@onready var triggerskill2button : bool = false
-@onready var triggerskill3button : bool = false
-@onready var triggerjumpbutton : bool = false
+@onready var ult : AnimatedSprite2D = $ultbutt
+@onready var ultacitve :  Label = $ultwan
+var triggerultbutton : bool = false
+var triggerskill1button : bool = false
+var triggerskill2button : bool = false
+var triggerskill3button : bool = false
+var triggerjumpbutton : bool = false
 
 var player
 func _ready():
@@ -20,7 +22,7 @@ func _ready():
 	player.connect("skill2on", Callable(self,("_skill2activebutton")))
 	player.connect("skill3on", Callable(self,("_skill3activebutton")))
 	player.connect("jumpon", Callable(self,("_jumpactivebutton")))
-	
+	player.connect("ulton", Callable(self, "_ultactivebutton"))
 func _physics_process(_delta):
 	if triggerskill1button:
 		Skill1.play("Skill1hold")
@@ -38,6 +40,12 @@ func _physics_process(_delta):
 		Jump.play("Jumphold")
 	else:
 		Jump.play("Jump")
+	if triggerultbutton:
+		ultacitve.text = str("Ultimate Ready")
+		ult.play("ult")
+	else:
+		ultacitve.text = str("Ultimate Inactive")
+		ult.play("ultcooldown")
 
 func _skill1activebutton(_isbuttontrigger1: bool):
 	triggerskill1button = _isbuttontrigger1
@@ -47,4 +55,5 @@ func _skill3activebutton(_isbuttontrigger3: bool):
 	triggerskill3button = _isbuttontrigger3
 func _jumpactivebutton(_isbuttontrigger4: bool):
 	triggerjumpbutton = _isbuttontrigger4
-
+func _ultactivebutton(_ibuttontriggerult: bool):
+	triggerultbutton = _ibuttontriggerult

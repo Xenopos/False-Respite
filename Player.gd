@@ -50,6 +50,7 @@ signal skill2on(_isbuttontrigger2)
 signal skill3on(_isbuttontrigger3)
 signal jumpon(_isbuttontrigger4)
 signal enemyairborne
+signal ulton(_ibuttontriggerult)
 
 #signals used
 @export var cooldown_timer: Timer
@@ -79,8 +80,19 @@ signal damagevulnebarility(isvulnerable)
 
 #ult trigger
 var ultimateactive : bool = false
-
+@onready var ulttimer : Timer = $ulttimer
+@export var ultcountdown : float = 2
+@export var ultdamage : int = 100
+#basicattacktimer
+@onready var basicatkcd: Timer = $attackcd
+var basicatkoncd : bool = false
+#pause menu
+@onready var pauses : CanvasLayer = $Pausemen
 func _ready():
+	pauses.connect("continued", Callable(self,"resumethegame"))
+	ulttimer.start(ultcountdown)
+	ulttimer.connect("timeout", Callable(self, "allowultimate"))
+	basicatkcd.connect("timeout", Callable(self, "_basicatkcd"))
 	hitfxtimer.connect("timeout", Callable(self, "hitfxtimercd"))
 	skill1particles.emitting = false
 	add_to_group("Player")
@@ -100,6 +112,17 @@ func _ready():
 	#getparent
 	enemyparent = get_tree().get_first_node_in_group("enemyhealth")
 	mainenemy1 = get_tree().get_first_node_in_group("Enemy")
+	
+func resumethegame():
+	get_tree().paused = false
+	$Pausemen.hide()
+
+func allowultimate():
+	ulton.emit(true)
+	ultimateactive = true
+
+func _basicatkcd():
+	basicatkoncd = false
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -109,16 +132,19 @@ func _physics_process(delta):
 	else:
 		onair = false
 
-	if not isDashing and not nowdead and not ultimateactive:
+	if not isDashing and not nowdead:
 		direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		if direction:
 			velocity.x = direction.x * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-	if Input.is_action_just_pressed("ui_down"):
-		self.position.y += 1
-		
-		
+		if Input.is_action_just_pressed("ui_down"):
+			self.position.y += 1
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().paused = true
+		$Pausemen.show()
+
 	move_and_slide()
 	update_animation()
 	update_facing_direction()
@@ -201,17 +227,21 @@ func _on_animated_sprite_2d_animation_finished():
 			animationstay = false
 
 func ultimatebull():
-	#mainenemy1
 	var distance_to_enemy = mainenemy1.global_position.distance_to(global_position)
 	if Input.is_action_just_pressed("ult skill") and distance_to_enemy < 200 and ultimateactive:
-		enemyparent.take_damage(450)
 		animated_sprite.play("bye")
-		velocity.x = 0
+		ulton.emit(false)
+		ulttimer.start(ultcountdown)
+		ultimatebulldelaydamage()
 		ultimateactive = false
 		animationstay = true
 
+func ultimatebulldelaydamage():
+	await get_tree().create_timer(1.5).timeout
+	enemyparent.take_damage(ultdamage)
+
 func attack():
-	if (Input.is_action_just_pressed("attack") and AttackCombo == 0 and isDashing == false and not nowdead):
+	if (Input.is_action_just_pressed("attack") and AttackCombo == 0 and isDashing == false and not nowdead and not basicatkoncd):
 		if skill3online:
 			enemyparent.take_damage(basicatkdamage)
 		SPEED = 30
@@ -225,6 +255,7 @@ func attack():
 		and AttackCombo == 1
 		and isDashing == false
 		and not nowdead
+		and not basicatkoncd
 	):
 		if skill3online:
 			enemyparent.take_damage(basicatkdamage)
@@ -234,8 +265,11 @@ func attack():
 		animated_sprite.play("attack2")
 		animationstay = true
 		$SFX/attacksfx.play()
+		basicatkoncd = true
+		basicatkcd.start(0.1)
 	else:
 		isAttacking = false
+
 
 func dash():
 	if Input.is_action_pressed("ui_left"):
@@ -281,7 +315,8 @@ func skill1activate():
 		animationstay = true
 		SPEED = 0
 		$SFX/charge.play()
-		
+
+
 func skill1releaseactivate():
 	if not isDashing and not lockskill:
 		skill1particles.emitting = false
@@ -295,7 +330,6 @@ func skill1releaseactivate():
 		start_cooldown(1.0)
 		$SFX/charge.stop()
 		timercountdown.start(dash_duration)
-
 		
 func skill2activate():
 	if not lockskill and Allow_jump:

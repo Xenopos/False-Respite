@@ -18,7 +18,7 @@ var playerhealth : healthsys
 var normalattackative : bool = false
 var pierceattackactive : bool = false
 var animationlock : bool = false
-var enemyjumpvelocity : int = -250
+@export var enemyjumpvelocity : int = -300
 
 #enemy behavior flags
 var enemybelow20 : bool = false
@@ -217,7 +217,7 @@ func enemyairborned():
 			stunimmunduration.start(5.0)
 		stuncounter -= 1
 		stunned = true
-		velocity.y = enemyjumpvelocity
+		velocity.y = -250
 		animationlock = true
 		meleeEnemyAnim.play("stun")
 

@@ -1,19 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dugivcbh2hkbp"]
+[gd_scene load_steps=5 format=3 uid="uid://dugivcbh2hkbp"]
 
+[ext_resource type="Script" path="res://Scenes/Pausemenucontroller.gd" id="1_7vila"]
 [ext_resource type="Texture2D" uid="uid://jbopfnbsro4" path="res://Themes/Pause.png" id="1_mvdgt"]
 [ext_resource type="Theme" uid="uid://guq4b5ompm68" path="res://Themes/Sample_theme.tres" id="2_gyprj"]
 
-[node name="Control" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c0h8n"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_7vila")
 metadata/_edit_horizontal_guides_ = []
 
 [node name="Pause" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_c0h8n")
 position = Vector2(320, 180)
 texture = ExtResource("1_mvdgt")
 
@@ -26,6 +25,7 @@ offset_right = 166.0
 offset_bottom = 220.0
 
 [node name="Resume" type="Button" parent="VBoxContainer"]
+z_index = 101
 layout_mode = 2
 theme = ExtResource("2_gyprj")
 text = "     Resume"
@@ -33,6 +33,7 @@ alignment = 0
 icon_alignment = 2
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
+z_index = 101
 layout_mode = 2
 theme = ExtResource("2_gyprj")
 text = "     Settings
@@ -40,13 +41,18 @@ text = "     Settings
 alignment = 0
 
 [node name="Leaderboards" type="Button" parent="VBoxContainer"]
+z_index = 101
 layout_mode = 2
 theme = ExtResource("2_gyprj")
 text = "     Leaderboard	"
 alignment = 0
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
+z_index = 101
 layout_mode = 2
 theme = ExtResource("2_gyprj")
 text = "     Quit"
 alignment = 0
+
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

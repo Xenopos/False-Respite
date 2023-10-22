@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=101 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
@@ -33,10 +33,10 @@
 [ext_resource type="Script" path="res://Visuals/UI/healtbar.gd" id="25_eimpg"]
 [ext_resource type="Script" path="res://Scripts/Player/Skilldamagearea.gd" id="26_1oknk"]
 [ext_resource type="Script" path="res://Visuals/UI/Labelhealth.gd" id="27_erkfk"]
-[ext_resource type="Shader" path="res://Shaders/outlineshader.gdshader" id="27_n4xhq"]
 [ext_resource type="Texture2D" uid="uid://xxh05feui8mv" path="res://Visuals/UI/shichan.png" id="30_68ifn"]
 [ext_resource type="Shader" path="res://Shaders/try.gdshader" id="30_rk5cc"]
 [ext_resource type="Script" path="res://Scripts/PlaytimeTimer.gd" id="32_qm1ac"]
+[ext_resource type="PackedScene" uid="uid://dugivcbh2hkbp" path="res://Scenes/Pause.tscn" id="37_ym0dx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
 size = Vector2(16.5, 15)
@@ -544,14 +544,6 @@ shader = ExtResource("13_6qsr3")
 shader_parameter/flash_color = Color(0.980392, 0, 0, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycnlf"]
-shader = ExtResource("27_n4xhq")
-shader_parameter/color = Color(0, 0, 0, 1)
-shader_parameter/width = 1.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = false
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c3mrt"]
 resource_local_to_scene = true
 shader = ExtResource("30_rk5cc")
@@ -563,14 +555,15 @@ shader_parameter/strip = 4.0
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer", "skill2area", "anysingepointdamage") groups=["Player"]]
 texture_filter = 1
 slide_on_ceiling = false
-floor_snap_length = 1.5
+floor_snap_length = 3.0
 script = ExtResource("1_0hjxu")
 cooldown_timer = NodePath("timercountdown")
 skill2area = NodePath("Skilldamagearea")
 anysingepointdamage = NodePath("Attack Range")
-skill1damage = 20
+skill1damage = 15
 skill3damage = 5
 basicatkdamage = 5
+ultcountdown = 60.0
 
 [node name="HealthSystem" type="Node2D" parent="." groups=["shizukahealth"]]
 script = ExtResource("2_jp5m3")
@@ -762,11 +755,10 @@ theme_override_font_sizes/font_size = 19
 [node name="Label2" type="Label" parent="CanvasLayer"]
 top_level = true
 texture_filter = 1
-material = SubResource("ShaderMaterial_ycnlf")
-offset_left = 334.0
-offset_top = 316.0
-offset_right = 399.0
-offset_bottom = 340.0
+offset_left = 330.0
+offset_top = 320.0
+offset_right = 395.0
+offset_bottom = 344.0
 scale = Vector2(0.968827, 0.853478)
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
@@ -804,6 +796,14 @@ theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19
 
 [node name="hitfxtimer" type="Timer" parent="."]
+
+[node name="attackcd" type="Timer" parent="."]
+
+[node name="ulttimer" type="Timer" parent="."]
+
+[node name="Pausemen" parent="." instance=ExtResource("37_ym0dx")]
+layer = 4
+visible = false
 
 [connection signal="body_entered" from="Attack Range" to="Attack Range" method="_on_body_entered"]
 [connection signal="body_exited" from="Attack Range" to="Attack Range" method="_on_body_exited"]

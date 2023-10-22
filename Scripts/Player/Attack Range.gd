@@ -28,7 +28,6 @@ func _on_body_entered(body):
 			applydamage.emit(true)
 			applydamagedash.emit(true)
 			enemyexitedrange = false
-			debug.text = str("fuck you ") + str(enemyexitedrange) 
 
 func _on_body_exited(body):
 	if body.name == "Melee_Enemy":
@@ -37,6 +36,5 @@ func _on_body_exited(body):
 			applydamage.emit(false)
 			applydamagedash.emit(false)
 			enemyexitedrange = true
-			debug.text = str(enemyexitedrange)
 
 
