@@ -1,4 +1,4 @@
-res://Player.tscn
+res://Scenes/melee_enemy.tscn
 res://Visuals/UI/healtbar.gd
 res://Health System.gd
 res://Shaders/shaderforadamagefx.gdshader
@@ -6,11 +6,11 @@ res://Shaders/outlineshader.gdshader
 res://Shaders/try.gdshader
 res://crt_exp.gdshader
 res://Themes/Sample_theme.tres
-res://Player.gd
+res://Scripts/EnemyMelee/melee_enemy.gd
 res://area_2d.tscn
-res://Scenes/melee_enemy.tscn
+res://Player.tscn
 res://temp/UISkills.tscn
 res://Scenes/Mainmenu.tscn
 res://Scenes/Pause.tscn
-res://Scripts/Player/forultskill.gd
-res://Scripts/EnemyMelee/melee_enemy.gd
+res://default_bus_layout.tres
+res://Scripts/Player/PlayerHealth.gd

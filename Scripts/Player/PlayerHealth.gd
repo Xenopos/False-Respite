@@ -19,6 +19,7 @@ var current_health : int = 100
 @onready var shizuka 
 var _isvulnerable : bool = false
 
+
 func _physics_process(_delta):
 	displaymaxhealing.text = str("Total heal: " ,current_healing)
 
@@ -38,14 +39,21 @@ func player_take_damage(amount: int):
 		if current_health != 0:
 			playerkknockback.emit()
 			healthchanged.emit()
+			$"../SFX/hitsfx".play()
 			current_health = max(0, current_health - amount)
+			if current_health <= 20:
+				$"../SFX/healthwarnign".play()
+				$"../SFX/low healthsfx".play()
+			elif current_health > 20:
+				$"../SFX/healthwarnign".stop()
 			if current_health <= 0:
 				emitremovalofexistence.emit()
-
+				$"../SFX/healthwarnign".stop
 
 
 func heal(amount: int):
 	if current_healing != 0 and current_health != 100 and current_health >= 1:
+		$"../SFX/heal".play()
 		displaymaxhealing.text = str("Total heal: " ,current_healing)
 		current_healing -= 1
 		current_health += amount

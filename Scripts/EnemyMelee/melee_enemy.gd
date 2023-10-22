@@ -163,7 +163,7 @@ func _on_animated_sprite_2d_animation_finished():
 		
 func enemyhasfounplayer():
 	var distance_to_player = player.global_position.distance_to(global_position)
-	if distance_to_player > 20 and not deads and not stunned:
+	if distance_to_player > 10 and not deads and not stunned:
 		if enemybelow20:
 			enemySpeed = 100
 		else:
@@ -225,7 +225,7 @@ func enemyjump():
 	velocity.y = enemyjumpvelocity
 	animationlock = true
 	meleeEnemyAnim.play("jump")
-
+	$SFX/jump.play()
 func commitwarcrime(isenemyrage):
 	enemybelow20 = isenemyrage
 	push_warning("now go commit warcrime")

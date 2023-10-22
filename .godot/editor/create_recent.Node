@@ -1,3 +1,6 @@
+AudioStreamPlayer2D
+AudioListener2D
+Node
 CollisionShape2D
 Area2D
 Label
@@ -5,7 +8,6 @@ Timer
 Sprite2D
 StaticBody2D
 AnimatedSprite2D
-Node
 GPUParticles2D
 HBoxContainer
 TextureProgressBar
@@ -29,4 +31,3 @@ VSplitContainer
 FlowContainer
 Button
 meleeenemy
-AudioStreamPlayer2D

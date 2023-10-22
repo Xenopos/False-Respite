@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bonta00708fog"
+path="res://.godot/imported/low health.wav-f7c364b4dde0e23684a177edb527b01f.sample"
+
+[deps]
+
+source_file="res://sfx/low health.wav"
+dest_files=["res://.godot/imported/low health.wav-f7c364b4dde0e23684a177edb527b01f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

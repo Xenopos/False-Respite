@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://caj8lkojakln6" path="res://Scenes/melee_enemy.tscn" id="4_4364l"]
 [ext_resource type="Shader" path="res://crt_exp.gdshader" id="5_20820"]
 [ext_resource type="Texture2D" uid="uid://b0qkngn51vocc" path="res://Visuals/Backgrounds and tilemap/Parallax back.png" id="5_xrode"]
-[ext_resource type="AudioStream" uid="uid://c1u442m6b583y" path="res://BGM/Distress upon the damsel demo.wav" id="6_csw8p"]
+[ext_resource type="AudioStream" uid="uid://jo6tyfweiytv" path="res://BGM/bullshit.wav" id="6_xe333"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tqige"]
 
@@ -361,7 +361,7 @@ sources/0 = SubResource("TileSetAtlasSource_i0g6t")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xevuu"]
 resource_local_to_scene = true
 shader = ExtResource("5_20820")
-shader_parameter/scanline_count = 50.0
+shader_parameter/scanline_count = 0.0
 
 [node name="Test Scene" type="TileMap"]
 texture_filter = 1
@@ -385,14 +385,6 @@ metadata/_edit_vertical_guides_ = []
 [node name="Player" parent="." instance=ExtResource("2_qk1kg")]
 position = Vector2(-392, -586)
 scale = Vector2(0.993461, 1.00445)
-SPEED = 80.0
-JUMP_VELOCITY = -230
-AttackCombo = 0
-dash_cd = 0.8
-skill1damage = 10
-skill2damage = 10
-skill3damage = 10
-basicatkdamage = 10
 
 [node name="Melee_Enemy" parent="." instance=ExtResource("4_4364l")]
 position = Vector2(-297, 136)
@@ -403,7 +395,6 @@ current = true
 [node name="Node" type="Node" parent="."]
 
 [node name="ParallaxBack" type="Sprite2D" parent="Node"]
-visible = false
 show_behind_parent = true
 z_index = -1
 texture_filter = 1
@@ -412,7 +403,6 @@ position = Vector2(286, 216)
 texture = ExtResource("5_xrode")
 
 [node name="ParallaxBack2" type="Sprite2D" parent="Node"]
-visible = false
 show_behind_parent = true
 z_index = -1
 texture_filter = 1
@@ -421,7 +411,6 @@ position = Vector2(926, 216)
 texture = ExtResource("5_xrode")
 
 [node name="ParallaxBack3" type="Sprite2D" parent="Node"]
-visible = false
 show_behind_parent = true
 z_index = -1
 texture_filter = 1
@@ -430,7 +419,6 @@ position = Vector2(1566, 216)
 texture = ExtResource("5_xrode")
 
 [node name="ParallaxBack4" type="Sprite2D" parent="Node"]
-visible = false
 show_behind_parent = true
 z_index = -1
 texture_filter = 1
@@ -439,4 +427,6 @@ position = Vector2(2666, 161)
 texture = ExtResource("5_xrode")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_csw8p")
+stream = ExtResource("6_xe333")
+volume_db = -15.0
+autoplay = true

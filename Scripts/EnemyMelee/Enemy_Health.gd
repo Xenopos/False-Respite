@@ -25,7 +25,9 @@ func enemy_check_health():
 	var twenty_percent_health = 0.2 * 500
 	if menemycurrenthealth <= twenty_percent_health and not ishedead:
 		enemyrage.emit(true)
+		$"../SFX/rage".play()
 	if menemycurrenthealth <= 0 and not ishedead:
+		$"../SFX/rage2".play()
 		ishedead = true
 		enemydeathtrigger.emit()
 

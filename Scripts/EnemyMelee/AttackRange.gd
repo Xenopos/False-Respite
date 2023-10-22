@@ -15,14 +15,12 @@ func _ready():
 		parentenemy.connect("velocity_updated", Callable(self, "_on_velocity_updated"))
 	
 	
-func _on_velocity_updated(direction):  # Callback when the velocity is updated
-	if not playerisreadytobeattacked:  # removes the flip jank
+func _on_velocity_updated(direction):  # Callback when the velocity is updated # removes the flip jank
 		if direction.x == 1:
 			scale.x = -1
 		elif direction.x == -1:
 			scale.x = 1
-	else:
-		scale.x = 0
+
 
 
 func _on_body_entered(body):
