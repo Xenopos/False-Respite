@@ -40,6 +40,7 @@ var dash_speed: float = 600
 var dash_duration: float = 0.15 # dash length
 @onready var skill1cd : Label = $CanvasLayer/Label2
 var enemyparent : enemyhealth
+var mainenemy1 : meleeenemy
 #------------------------------------#
 var nowdead : bool = false
 #------------------------------------#
@@ -77,6 +78,7 @@ var resetskill1damage : bool = true
 signal damagevulnebarility(isvulnerable)
 
 #ult trigger
+var ultimateactive : bool = false
 
 func _ready():
 	hitfxtimer.connect("timeout", Callable(self, "hitfxtimercd"))
@@ -97,7 +99,7 @@ func _ready():
 	cooldown_timer.connect("timeout", Callable(self, "_on_CooldownTimer_timeout"))
 	#getparent
 	enemyparent = get_tree().get_first_node_in_group("enemyhealth")
-
+	mainenemy1 = get_tree().get_first_node_in_group("Enemy")
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -107,7 +109,7 @@ func _physics_process(delta):
 	else:
 		onair = false
 
-	if not isDashing and not nowdead:
+	if not isDashing and not nowdead and not ultimateactive:
 		direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		if direction:
 			velocity.x = direction.x * SPEED
@@ -199,10 +201,13 @@ func _on_animated_sprite_2d_animation_finished():
 			animationstay = false
 
 func ultimatebull():
-	if Input.is_action_just_pressed("ult skill"):
-		enemyparent.take_damage(500)
+	#mainenemy1
+	var distance_to_enemy = mainenemy1.global_position.distance_to(global_position)
+	if Input.is_action_just_pressed("ult skill") and distance_to_enemy < 200 and ultimateactive:
+		enemyparent.take_damage(450)
 		animated_sprite.play("bye")
-		SPEED = 0
+		velocity.x = 0
+		ultimateactive = false
 		animationstay = true
 
 func attack():

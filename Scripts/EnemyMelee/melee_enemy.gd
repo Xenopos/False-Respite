@@ -10,7 +10,7 @@ var enemychildhealth
 @onready var attackcollisionrange = $AttackRange
 @onready var meleeEnemyAnim: AnimatedSprite2D = $AnimatedSprite2D
 
-var enemySpeed = 70
+@export var enemySpeed = 70
 var direction = Vector2.ZERO
 var foundenemy : bool = false
 var detection_range_node : Node2D
@@ -133,12 +133,12 @@ func enemynrmlattk():
 		animationlock = true 
 		hasAttacked = true
 		start_attack_cooldown(1.2) 
-		if enemybelow20: # two attack upon low health
-			if randf() < 0.5 and not deads:
+		if enemybelow20 and not deads:
+			if randf() < 0.3:
 				await get_tree().create_timer(0.5).timeout
 				meleeEnemyAnim.play("basic_attack")
 				animationlock = true 
-				playerhealth.player_take_damage(10)
+				playerhealth.player_take_damage(5)
 
 func enemypierceattk():
 	if (not deads and not stunned and not iskillpierce and not hasAttacked and not ispierceoncooldown):
@@ -170,9 +170,9 @@ func enemyhasfounplayer():
 			enemySpeed = 70
 		direction.x = 1 if player.global_position.x > global_position.x else -1
 		velocity.x = direction.x * enemySpeed
-		if player.global_position.y < self.global_position.y - 30:
+		if player.global_position.y < self.global_position.y - 10:
 			enemydojump()
-		if player.global_position.y > self.global_position.y - 20:  
+		if player.global_position.y > self.global_position.y - 40:  
 			position.y += 1
 	else:
 		velocity.x = 0

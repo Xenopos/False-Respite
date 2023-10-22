@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dugivcbh2hkbp"]
 
-[ext_resource type="Texture2D" uid="uid://1c722hjx0sn5" path="res://Visuals/Backgrounds and tilemap/Pause.png" id="1_prc8n"]
+[ext_resource type="Texture2D" uid="uid://jbopfnbsro4" path="res://Themes/Pause.png" id="1_mvdgt"]
 [ext_resource type="Theme" uid="uid://guq4b5ompm68" path="res://Themes/Sample_theme.tres" id="2_gyprj"]
 
 [node name="Control" type="Control"]
@@ -15,42 +15,38 @@ metadata/_edit_horizontal_guides_ = []
 [node name="Pause" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(320, 180)
-texture = ExtResource("1_prc8n")
+texture = ExtResource("1_mvdgt")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+top_level = true
 texture_filter = 1
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 33.0
-offset_top = -55.0
-offset_right = 233.0
-offset_bottom = 73.0
-grow_vertical = 2
-scale = Vector2(0.941839, 0.840719)
+offset_left = 20.0
+offset_top = 124.0
+offset_right = 166.0
+offset_bottom = 220.0
 
-[node name="Start" type="Button" parent="VBoxContainer2"]
+[node name="Resume" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_gyprj")
-text = "Start"
+text = "     Resume"
 alignment = 0
+icon_alignment = 2
 
-[node name="Settings" type="Button" parent="VBoxContainer2"]
+[node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_gyprj")
-text = "Settings
+text = "     Settings
 "
 alignment = 0
 
-[node name="Leaderboards" type="Button" parent="VBoxContainer2"]
+[node name="Leaderboards" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_gyprj")
-text = "Leaderboard	"
+text = "     Leaderboard	"
 alignment = 0
 
-[node name="Quit" type="Button" parent="VBoxContainer2"]
+[node name="Quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_gyprj")
-text = "Quit"
+text = "     Quit"
 alignment = 0

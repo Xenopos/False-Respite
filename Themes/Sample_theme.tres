@@ -1,9 +1,9 @@
 [gd_resource type="Theme" load_steps=11 format=3 uid="uid://guq4b5ompm68"]
 
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="1_cfpsq"]
-[ext_resource type="Texture2D" uid="uid://dwchlt52p30ey" path="res://Visuals/UI/gnhighlighted.png" id="2_quv8g"]
-[ext_resource type="Texture2D" uid="uid://b5tf7buon3qd4" path="res://Visuals/UI/gbnormal.png" id="3_lowf3"]
-[ext_resource type="Texture2D" uid="uid://dc1em4sm78riy" path="res://Visuals/UI/gbbuttonclicked.png" id="4_ltlm6"]
+[ext_resource type="Texture2D" uid="uid://buhmjiav68845" path="res://Themes/gnhighlighted.png" id="2_l1x35"]
+[ext_resource type="Texture2D" uid="uid://luq8qpdubs1e" path="res://Themes/gbnormal.png" id="3_c4it2"]
+[ext_resource type="Texture2D" uid="uid://b58s3qg7p02a" path="res://Themes/gbbuttonclicked.png" id="4_h6le5"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_oyfoi"]
 
@@ -31,13 +31,13 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2cwey"]
-texture = ExtResource("2_quv8g")
+texture = ExtResource("2_l1x35")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tgtm4"]
-texture = ExtResource("3_lowf3")
+texture = ExtResource("3_c4it2")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fnndi"]
-texture = ExtResource("4_ltlm6")
+texture = ExtResource("4_h6le5")
 
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)

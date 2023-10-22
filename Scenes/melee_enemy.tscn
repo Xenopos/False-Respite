@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://caj8lkojakln6"]
+[gd_scene load_steps=49 format=3 uid="uid://caj8lkojakln6"]
 
 [ext_resource type="Texture2D" uid="uid://cysb84tnghojp" path="res://Visuals/Spritesheets/MEnemy_basic_attack.png" id="1_axqna"]
 [ext_resource type="Script" path="res://Scripts/EnemyMelee/melee_enemy.gd" id="1_rprsq"]
@@ -268,7 +268,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t57j2"]
-size = Vector2(12, 16)
+size = Vector2(5, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ktw3"]
 size = Vector2(20, 16)
@@ -276,13 +276,17 @@ size = Vector2(20, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xq5pf"]
 size = Vector2(118.975, 71.5609)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bs03c"]
+
 [node name="Melee_Enemy" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 100
 texture_filter = 1
 position = Vector2(235, 125)
 collision_layer = 2
 collision_mask = 2
+floor_snap_length = 2.0
 script = ExtResource("1_rprsq")
+enemySpeed = 75
 
 [node name="hitenemyfxtimer" type="Timer" parent="."]
 
@@ -299,6 +303,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_t57j2")
 
 [node name="AttackRange" type="Area2D" parent="."]
@@ -343,6 +348,7 @@ debug_color = Color(0.54902, 0.403922, 1, 0.419608)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+material = SubResource("ShaderMaterial_bs03c")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -355,6 +361,8 @@ offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.0464845, 0.110389)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 6
 show_percentage = false
 script = ExtResource("11_camap")
 

@@ -562,6 +562,8 @@ shader_parameter/strip = 4.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer", "skill2area", "anysingepointdamage") groups=["Player"]]
 texture_filter = 1
+slide_on_ceiling = false
+floor_snap_length = 1.5
 script = ExtResource("1_0hjxu")
 cooldown_timer = NodePath("timercountdown")
 skill2area = NodePath("Skilldamagearea")
@@ -578,7 +580,7 @@ script = ExtResource("2_jp5m3")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.3, 1.3)
 position_smoothing_enabled = true
-position_smoothing_speed = 30.0
+position_smoothing_speed = 10.0
 drag_left_margin = 0.01
 drag_top_margin = 0.01
 drag_right_margin = 0.01
@@ -698,13 +700,13 @@ theme_override_font_sizes/font_size = 19
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
-top_level = true
+z_index = -2
 texture_filter = 1
 material = SubResource("ShaderMaterial_u3kns")
-offset_left = 95.0
-offset_top = 34.0
-offset_right = 251.0
-offset_bottom = 49.0
+offset_left = 83.0
+offset_top = 39.0
+offset_right = 239.0
+offset_bottom = 54.0
 value = 100.0
 nine_patch_stretch = true
 texture_under = ExtResource("23_susnx")
@@ -717,10 +719,10 @@ script = ExtResource("25_eimpg")
 [node name="Label" type="Label" parent="CanvasLayer"]
 top_level = true
 texture_filter = 1
-offset_left = 95.0
-offset_top = 21.0
-offset_right = 172.0
-offset_bottom = 45.0
+offset_left = 90.0
+offset_top = 27.0
+offset_right = 167.0
+offset_bottom = 51.0
 scale = Vector2(0.955009, 0.955009)
 theme_override_fonts/font = ExtResource("19_uhpr1")
 theme_override_font_sizes/font_size = 19

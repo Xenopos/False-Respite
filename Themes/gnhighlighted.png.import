@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc1em4sm78riy"
-path="res://.godot/imported/gbbuttonclicked.png-0437b1f2f869fea3194ec1fc0f9a7ca4.ctex"
+uid="uid://buhmjiav68845"
+path="res://.godot/imported/gnhighlighted.png-4b05b6ec6bac737cea373403e642719d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Visuals/UI/gbbuttonclicked.png"
-dest_files=["res://.godot/imported/gbbuttonclicked.png-0437b1f2f869fea3194ec1fc0f9a7ca4.ctex"]
+source_file="res://Themes/gnhighlighted.png"
+dest_files=["res://.godot/imported/gnhighlighted.png-4b05b6ec6bac737cea373403e642719d.ctex"]
 
 [params]
 
