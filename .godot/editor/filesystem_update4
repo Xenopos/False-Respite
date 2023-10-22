@@ -13,3 +13,5 @@ res://temp/UISkills.tscn
 res://Scenes/Pause.tscn
 res://Scenes/Mainmenu.tscn
 res://Scripts/Player/Attack Range.gd
+res://Scenes/Pausemenucontroller.gd
+res://Player.gd

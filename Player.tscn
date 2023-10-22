@@ -801,8 +801,7 @@ theme_override_font_sizes/font_size = 19
 
 [node name="ulttimer" type="Timer" parent="."]
 
-[node name="Pausemen" parent="." instance=ExtResource("37_ym0dx")]
-layer = 4
+[node name="PauseMenu" parent="." instance=ExtResource("37_ym0dx")]
 visible = false
 
 [connection signal="body_entered" from="Attack Range" to="Attack Range" method="_on_body_entered"]

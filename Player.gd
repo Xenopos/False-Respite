@@ -87,9 +87,8 @@ var ultimateactive : bool = false
 @onready var basicatkcd: Timer = $attackcd
 var basicatkoncd : bool = false
 #pause menu
-@onready var pauses : CanvasLayer = $Pausemen
 func _ready():
-	pauses.connect("continued", Callable(self,"resumethegame"))
+
 	ulttimer.start(ultcountdown)
 	ulttimer.connect("timeout", Callable(self, "allowultimate"))
 	basicatkcd.connect("timeout", Callable(self, "_basicatkcd"))
@@ -113,9 +112,7 @@ func _ready():
 	enemyparent = get_tree().get_first_node_in_group("enemyhealth")
 	mainenemy1 = get_tree().get_first_node_in_group("Enemy")
 	
-func resumethegame():
-	get_tree().paused = false
-	$Pausemen.hide()
+
 
 func allowultimate():
 	ulton.emit(true)
@@ -143,7 +140,9 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().paused = true
-		$Pausemen.show()
+	if Input.is_action_just_pressed("ui_down"):
+		get_tree().paused = false
+
 
 	move_and_slide()
 	update_animation()
