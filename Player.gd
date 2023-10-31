@@ -1,5 +1,5 @@
-class_name Shizuka extends CharacterBody2D
-
+extends CharacterBody2D
+class_name Shizuka
 #------------------------------------#
 @export var SPEED = 80.0
 @export var JUMP_VELOCITY = -230
@@ -9,7 +9,7 @@ class_name Shizuka extends CharacterBody2D
 @onready var dashParticles: GPUParticles2D = $DashParticles
 @onready var skill1particles: GPUParticles2D = $skill1particlesready
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+@onready var ultswqoosh : AnimationPlayer = $ultswqoosh
 #------------------------------------#
 
 var lockskill : bool = false
@@ -40,7 +40,7 @@ var dash_speed: float = 600
 var dash_duration: float = 0.15 # dash length
 @onready var skill1cd : Label = $CanvasLayer/Label2
 var enemyparent : enemyhealth
-var mainenemy1 : meleeenemy
+var mainenemy1
 #------------------------------------#
 var nowdead : bool = false
 #------------------------------------#
@@ -59,7 +59,6 @@ signal ulton(_ibuttontriggerult)
 @export var skill2area : Area2D 
 @export var anysingepointdamage : Area2D
 @onready var dashcd : Timer = $dashcooldown
-
 #skills timer sets for applying damage
 @onready var skill2_cd_timer: Timer = $skill2_cd_timer
 @onready var skill1_cd_timer : Timer = $skill1_cd_timer
@@ -80,15 +79,28 @@ signal damagevulnebarility(isvulnerable)
 
 #ult trigger
 var ultimateactive : bool = false
+var ultimateactiveset : bool = false
+
 @onready var ulttimer : Timer = $ulttimer
-@export var ultcountdown : float = 2
+@export var ultcountdown : float = 30
 @export var ultdamage : int = 100
+
 #basicattacktimer
 @onready var basicatkcd: Timer = $attackcd
 var basicatkoncd : bool = false
 #pause menu
-func _ready():
+#imnpale
+var impaleactive : bool = false
+var impalehit : bool = false
 
+var newenemy 
+
+signal applydamagetoenemy(amount)
+@onready var spriteult : Sprite2D = $Sprite2D
+
+func _ready():
+	spriteult.hide()
+	ultcountdown = 30
 	ulttimer.start(ultcountdown)
 	ulttimer.connect("timeout", Callable(self, "allowultimate"))
 	basicatkcd.connect("timeout", Callable(self, "_basicatkcd"))
@@ -111,7 +123,6 @@ func _ready():
 	#getparent
 	enemyparent = get_tree().get_first_node_in_group("enemyhealth")
 	mainenemy1 = get_tree().get_first_node_in_group("Enemy")
-	
 
 
 func allowultimate():
@@ -128,20 +139,20 @@ func _physics_process(delta):
 		jumpon.emit(false)
 	else:
 		onair = false
-
-	if not isDashing and not nowdead:
-		direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-		if direction:
-			velocity.x = direction.x * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-		if Input.is_action_just_pressed("ui_down"):
-			self.position.y += 1
+	
+	
+	if not ultimateactiveset:
+		if not isDashing and not nowdead:
+			direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+			if direction:
+				velocity.x = direction.x * SPEED
+			else:
+				velocity.x = move_toward(velocity.x, 0, SPEED)
+			if Input.is_action_just_pressed("ui_down"):
+				self.position.y += 1
 	
 	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().paused = true
-	if Input.is_action_just_pressed("ui_down"):
-		get_tree().paused = false
+		get_tree().change_scene_to_file("res://area_2d.tscn")
 
 
 	move_and_slide()
@@ -166,6 +177,7 @@ func skill1():
 func skill2():
 	if skill2online and resetskill2damage and skill2active:
 		enemyparent.take_damage(skill2damage)
+		velocity.y = -200
 		resetskill2damage = false
 		skill2active = false  # Deactivate the skill
 		skill2_cd_timer.start(0.1)  # Start the cooldown
@@ -208,6 +220,7 @@ func _on_animated_sprite_2d_animation_finished():
 		or animated_sprite.animation == "execute"
 		or animated_sprite.animation == "jump"
 	):
+		Allow_jump = true
 		animationstay = false
 		SPEED = 80.0
 		gravity = 480
@@ -222,22 +235,41 @@ func _on_animated_sprite_2d_animation_finished():
 			enemyparent.take_damage(skill3damage)
 			enemyairborne.emit()
 	if animated_sprite.animation == "bye":
+			Allow_jump = true
 			SPEED = 80.0
+			animationstay = false
+	if animated_sprite.animation == "impale":
 			animationstay = false
 
 func ultimatebull():
 	var distance_to_enemy = mainenemy1.global_position.distance_to(global_position)
-	if Input.is_action_just_pressed("ult skill") and distance_to_enemy < 200 and ultimateactive:
+	if Input.is_action_just_pressed("ult skill") and distance_to_enemy < 200 and ultimateactive and Allow_jump:
 		animated_sprite.play("bye")
+		Allow_jump = false
 		ulton.emit(false)
+		velocity.x = 0
+		awaitanimate()
+		velocity.y = 0
+		gravity = 0
 		ulttimer.start(ultcountdown)
 		ultimatebulldelaydamage()
+		ultimateactiveset = true
 		ultimateactive = false
 		animationstay = true
 
+func awaitanimate():
+	await get_tree().create_timer(1).timeout
+	$SFX/ultsfx.play()
+	spriteult.show()
+	ultswqoosh.play("ult")
+
 func ultimatebulldelaydamage():
 	await get_tree().create_timer(1.5).timeout
-	enemyparent.take_damage(ultdamage)
+	spriteult.hide()
+	ultswqoosh.stop()
+	ultimateactiveset = false
+	gravity = 480
+	applydamagetoenemy.emit(ultdamage)
 
 func attack():
 	if (Input.is_action_just_pressed("attack") and AttackCombo == 0 and isDashing == false and not nowdead and not basicatkoncd):
@@ -265,7 +297,7 @@ func attack():
 		animationstay = true
 		$SFX/attacksfx.play()
 		basicatkoncd = true
-		basicatkcd.start(0.1)
+		basicatkcd.start(0.2)
 	else:
 		isAttacking = false
 
@@ -291,8 +323,29 @@ func start_dash():
 		isdashcd = true
 		dashcd.start(dash_cd)
 
+func skill_impale():
+	if not lockskill and Allow_jump:
+		velocity.y = -100
+		animated_sprite.play("impale")
+		animationstay = true
+		impaleapplydamage()
+		if onair == true:
+			skill2active = true
+			animationstay = true
+		if not onair:
+			skill2active = false
+		start_cooldown(0.5)
+		impaledealaydown()
+
+func impaledealaydown():
+	await get_tree().create_timer(0.4).timeout
+	velocity.y = 500
+		
+func impaleapplydamage():
+	pass
+
 func Skill_activation():
-	if not lockskill and not nowdead:
+	if not lockskill and not nowdead and not ultimateactiveset:
 		if (Input.is_action_just_pressed("Skill1") and is_on_floor() and not isAttacking and not isDashing):
 			skill1activate()
 			skill1on.emit(true)
@@ -305,7 +358,10 @@ func Skill_activation():
 		if (Input.is_action_just_pressed("Skill3") and not isDashing):
 			skill3activate()
 			skill3on.emit(true)
-
+		if (Input.is_action_just_pressed("skillimpale") and not isDashing):
+			skill_impale()
+			skill2on.emit(true)
+			
 func skill1activate():
 	if not lockskill and not Allow_jump:
 		skill1on.emit(true)
@@ -313,6 +369,7 @@ func skill1activate():
 		animated_sprite.play("dash ready")
 		animationstay = true
 		SPEED = 0
+		Engine.time_scale = 0.05
 		$SFX/charge.play()
 
 
@@ -329,13 +386,16 @@ func skill1releaseactivate():
 		start_cooldown(1.0)
 		$SFX/charge.stop()
 		timercountdown.start(dash_duration)
-		
+
+func slowrever():
+	await get_tree().create_timer(1.5).timeout
+	Engine.time_scale = 1
+
 func skill2activate():
 	if not lockskill and Allow_jump:
 		animated_sprite.play("spin")
 		$SFX/spiiin.play()
 		if onair == true:
-			velocity.y = -50
 			skill2active = true
 			animationstay = true
 		if not onair:
@@ -354,6 +414,7 @@ func skill3activate():
 #-------------------------------------#
 #cooldown timers  
 func start_cooldown(duration):
+	impaleactive = false
 	skill1cd.text = str("Skill not ready")
 	lockskill = true
 	cooldown_timer.start(duration)
@@ -373,12 +434,15 @@ func applyknockbacktoshishi():
 #--------------------------------------#
 #dash  function
 func _on_Timer_timeout():
-	damagevulnebarility.emit(false)
 	isDashing = false
 	dashParticles.emitting = false
 	SPEED = 80.0 # Resetting the speed to the default
 
+func vtime():
+		damagevulnebarility.emit(false)
+
 func dashcooldownd():
+	vtime()
 	isdashcd = false
 	SPEED = 80.0
 	
@@ -397,7 +461,12 @@ func playerisnowdead():
 	velocity.x = 0
 	animationstay = true
 	nowdead = true
+	resetscene()
 	animated_sprite.play("Death")
+	
+func resetscene():
+	await get_tree().create_timer(1.5).timeout
+	get_tree().change_scene_to_file("res://area_2d.tscn")
 
 #------------------------------------------#
 #healing

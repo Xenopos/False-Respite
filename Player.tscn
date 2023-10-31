@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://x6ykrgfako55"]
+[gd_scene load_steps=113 format=3 uid="uid://x6ykrgfako55"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_0hjxu"]
 [ext_resource type="Texture2D" uid="uid://d0o6wt3l5qvnh" path="res://Visuals/Animations/idle.png" id="2_7gcnw"]
@@ -23,9 +23,11 @@
 [ext_resource type="AudioStream" uid="uid://bonta00708fog" path="res://sfx/low health.wav" id="15_5r3br"]
 [ext_resource type="Texture2D" uid="uid://cu7g6bphy3u05" path="res://Visuals/UI/finalshit.png" id="15_t6rl4"]
 [ext_resource type="AudioStream" uid="uid://ch5eq1crj1fc1" path="res://sfx/fly.wav" id="16_hm1w5"]
+[ext_resource type="AudioStream" uid="uid://bi7djf0ilv7hv" path="res://sfx/fxk.mp3" id="16_pvph1"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Range.gd" id="17_6j0n5"]
 [ext_resource type="AudioStream" uid="uid://hmcomoc2gp5e" path="res://sfx/charging.wav" id="17_o0kfb"]
 [ext_resource type="FontFile" uid="uid://bu4ut4acw6q7n" path="res://Silver.ttf" id="19_uhpr1"]
+[ext_resource type="Texture2D" uid="uid://bc5cm8ecddp1i" path="res://Visuals/Animations/impale.png" id="23_8l2ua"]
 [ext_resource type="Texture2D" uid="uid://b1gcav5l1ybkk" path="res://Visuals/UI/healthbar-1.png" id="23_susnx"]
 [ext_resource type="PackedScene" uid="uid://bxmw7cer0hljd" path="res://temp/UISkills.tscn" id="24_bwlk1"]
 [ext_resource type="Texture2D" uid="uid://cqdtbm10jgnmj" path="res://Visuals/UI/healthbar0.png" id="24_vs5ts"]
@@ -37,9 +39,10 @@
 [ext_resource type="Shader" path="res://Shaders/try.gdshader" id="30_rk5cc"]
 [ext_resource type="Script" path="res://Scripts/PlaytimeTimer.gd" id="32_qm1ac"]
 [ext_resource type="PackedScene" uid="uid://dugivcbh2hkbp" path="res://Scenes/Pause.tscn" id="37_ym0dx"]
+[ext_resource type="Texture2D" uid="uid://vuu2cseucmjf" path="res://Visuals/Animations/swooch.png" id="39_pbydf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2d0f"]
-size = Vector2(16.5, 15)
+size = Vector2(21, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pab3p"]
 
@@ -202,6 +205,30 @@ region = Rect2(0, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_y8j3r"]
 atlas = ExtResource("2_7gcnw")
 region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o83fb"]
+atlas = ExtResource("23_8l2ua")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfg8j"]
+atlas = ExtResource("23_8l2ua")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04iqi"]
+atlas = ExtResource("23_8l2ua")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4g74"]
+atlas = ExtResource("23_8l2ua")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnds2"]
+atlas = ExtResource("23_8l2ua")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdt1d"]
+atlas = ExtResource("23_8l2ua")
+region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qy4sr"]
 atlas = ExtResource("3_eegvr")
@@ -427,6 +454,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_o83fb")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_mfg8j")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_04iqi")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_n4g74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnds2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdt1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnds2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdt1d")
+}],
+"loop": false,
+"name": &"impale",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qy4sr")
 }, {
 "duration": 1.0,
@@ -552,6 +608,43 @@ shader_parameter/offset = 0.0
 shader_parameter/fade = 1.0
 shader_parameter/strip = 4.0
 
+[sub_resource type="Animation" id="Animation_fpdhe"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ivqul"]
+resource_name = "ult"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 6, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_68e1i"]
+_data = {
+"RESET": SubResource("Animation_fpdhe"),
+"ult": SubResource("Animation_ivqul")
+}
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cooldown_timer", "skill2area", "anysingepointdamage") groups=["Player"]]
 texture_filter = 1
 slide_on_ceiling = false
@@ -563,7 +656,6 @@ anysingepointdamage = NodePath("Attack Range")
 skill1damage = 15
 skill3damage = 5
 basicatkdamage = 5
-ultcountdown = 60.0
 
 [node name="HealthSystem" type="Node2D" parent="." groups=["shizukahealth"]]
 script = ExtResource("2_jp5m3")
@@ -572,6 +664,7 @@ script = ExtResource("2_jp5m3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.3, 1.3)
+limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 drag_left_margin = 0.01
@@ -585,7 +678,7 @@ script = ExtResource("17_6j0n5")
 debug = NodePath("../Labels")
 
 [node name="GlobalAttackRange" type="CollisionShape2D" parent="Attack Range"]
-position = Vector2(-11.25, 0.5)
+position = Vector2(-10.5, 0.5)
 shape = SubResource("RectangleShape2D_q2d0f")
 debug_color = Color(0.988235, 0, 0.321569, 0.419608)
 
@@ -643,6 +736,11 @@ pitch_scale = 1.19
 [node name="low healthsfx" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("15_5r3br")
 
+[node name="ultsfx" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("16_pvph1")
+volume_db = 8.254
+pitch_scale = 0.81
+
 [node name="skill1_cd_timer" type="Timer" parent="."]
 
 [node name="skill2_cd_timer" type="Timer" parent="."]
@@ -664,6 +762,8 @@ material = SubResource("ShaderMaterial_engfg")
 sprite_frames = SubResource("SpriteFrames_jubc4")
 animation = &"bye"
 autoplay = "idle"
+frame = 19
+frame_progress = 1.0
 
 [node name="skill1particlesready" type="GPUParticles2D" parent="."]
 position = Vector2(0, -8)
@@ -803,6 +903,22 @@ theme_override_font_sizes/font_size = 19
 
 [node name="PauseMenu" parent="." instance=ExtResource("37_ym0dx")]
 visible = false
+
+[node name="healcd" type="Timer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 100
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(0, 1)
+scale = Vector2(0.782293, 0.766667)
+texture = ExtResource("39_pbydf")
+hframes = 7
+
+[node name="ultswqoosh" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_68e1i")
+}
 
 [connection signal="body_entered" from="Attack Range" to="Attack Range" method="_on_body_entered"]
 [connection signal="body_exited" from="Attack Range" to="Attack Range" method="_on_body_exited"]

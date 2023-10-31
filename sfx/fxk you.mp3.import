@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b015xiockrvgy"
+path="res://.godot/imported/fxk you.mp3-226a87abe13ccf8b380e062630b274d7.mp3str"
+
+[deps]
+
+source_file="res://sfx/fxk you.mp3"
+dest_files=["res://.godot/imported/fxk you.mp3-226a87abe13ccf8b380e062630b274d7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

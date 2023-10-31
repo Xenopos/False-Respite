@@ -280,7 +280,7 @@ size = Vector2(118.975, 71.5609)
 
 [node name="Melee_Enemy" type="CharacterBody2D" groups=["Enemy"]]
 texture_filter = 1
-position = Vector2(235, 125)
+position = Vector2(270, 219)
 collision_layer = 2
 collision_mask = 2
 floor_snap_length = 3.0
@@ -290,9 +290,8 @@ enemyjumpvelocity = -250
 
 [node name="hitenemyfxtimer" type="Timer" parent="."]
 
-[node name="Enemy_Health" type="Node" parent="." groups=["enemyhealth"]]
+[node name="Enemy_Health" type="Node2D" parent="." groups=["enemyhealth"]]
 script = ExtResource("2_o6idj")
-menemycurrenthealth = 500
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
@@ -318,14 +317,17 @@ debug_color = Color(0.988235, 0, 0.321569, 0.419608)
 
 [node name="rage" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("11_3ik2s")
+volume_db = -13.206
 pitch_scale = 0.79
 
 [node name="rage2" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("12_6rewe")
+volume_db = -21.46
 pitch_scale = 0.37
 
 [node name="jump" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("13_3kbku")
+volume_db = -11.556
 pitch_scale = 0.85
 
 [node name="detectionrange" type="Area2D" parent="."]

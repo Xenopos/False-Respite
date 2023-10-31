@@ -203,10 +203,10 @@ vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 449.0
-offset_top = 337.0
-offset_right = 693.0
-offset_bottom = 377.0
+offset_left = 429.0
+offset_top = 343.0
+offset_right = 701.0
+offset_bottom = 374.0
 rotation = -6.28319
 scale = Vector2(0.722, 0.7)
 
@@ -222,7 +222,7 @@ texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
-text = "right    "
+text = "  up  "
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="HBoxContainer"]
@@ -230,7 +230,7 @@ texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
-text = "    up         "
+text = "       right      "
 
 [node name="Label4" type="Label" parent="HBoxContainer"]
 texture_filter = 1
@@ -243,7 +243,7 @@ text = "Spacebar"
 layout_mode = 0
 offset_left = 402.0
 offset_top = 299.0
-offset_right = 693.0
+offset_right = 748.0
 offset_bottom = 323.0
 rotation = -6.28319
 scale = Vector2(0.5, 0.5)
@@ -253,14 +253,14 @@ texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
-text = "Dash attack     "
+text = "        Dash attack     "
 
 [node name="Label2" type="Label" parent="HBoxContainer2"]
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
-text = "  Brain Shred       "
+text = " Brain Shred     "
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="HBoxContainer2"]
@@ -275,5 +275,5 @@ texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wccsu")
 theme_override_font_sizes/font_size = 19
-text = "   Jump"
+text = "    Jump"
 horizontal_alignment = 3

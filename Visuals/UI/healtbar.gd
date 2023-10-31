@@ -22,7 +22,6 @@ func _ready():
 	update()
 
 func update():
-	value = health.current_health * 100 / 100
 	self.material.set_shader_parameter("flash_modifier", 1)
 	healthfxtimer.start(0.1)
 

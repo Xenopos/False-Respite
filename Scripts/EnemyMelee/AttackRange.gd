@@ -8,6 +8,7 @@ var parentenemy = meleeenemy  # Similarly, this will cause an error if 'meleeene
 var playerisreadytobeattacked : bool = false
 
 func _ready():
+	
 	# Initialize parentenemy assuming the meleeenemy is the direct parent of this node
 	var parent_enemy = get_parent()
 	if parent_enemy and parent_enemy is meleeenemy:

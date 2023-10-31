@@ -10,9 +10,9 @@ var enemyhp : enemyhealth
 @export var max_health: int = 100
 @export var max_healing: int = 3 
 var current_healing = max_healing
-var current_health : int = 100
-@export var maxpoise: int = 100
-@export var current_poise: int = 0
+@export var current_health : int = 100
+@export var maxpoise: int = 10
+@export var current_poise: int = 0 
 @onready var displaymaxhealing : Label = $"../CanvasLayer/Maxhealing"
 @onready var fadedisplay : Timer = $faderestorehealing
 @onready var displaylabelrestoredhealing : Label = $"../CanvasLayer/Restoredhealing"
@@ -22,7 +22,7 @@ var _isvulnerable : bool = false
 
 func _physics_process(_delta):
 	displaymaxhealing.text = str("Total heal: " ,current_healing)
-
+	
 
 func _ready():
 	shizuka = get_tree().get_first_node_in_group("Player")

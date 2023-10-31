@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dugivcbh2hkbp"]
 
-[ext_resource type="Script" path="res://Scenes/Pausemenucontroller.gd" id="1_7vila"]
+[ext_resource type="Script" path="res://Pausemenucontroller.gd" id="1_7vila"]
 [ext_resource type="Texture2D" uid="uid://jbopfnbsro4" path="res://Themes/Pause.png" id="1_mvdgt"]
 [ext_resource type="Theme" uid="uid://guq4b5ompm68" path="res://Themes/Sample_theme.tres" id="2_gyprj"]
 

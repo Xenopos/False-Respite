@@ -2,8 +2,8 @@ extends CharacterBody2D
 class_name meleeenemy
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var player: Shizuka
-
+var player : Shizuka
+#
 signal velocity_updated(direction)
 var enemychildhealth
 
@@ -22,7 +22,7 @@ var animationlock : bool = false
 
 #enemy behavior flags
 var enemybelow20 : bool = false
-
+var staydead : bool  = false
 #dash timer and such
 var dashdirection = Vector2.ZERO
 var enemyisdashing: bool = false
@@ -53,9 +53,13 @@ var ispierceoncooldown: bool = false
 var iskillpierce : bool = false
 
 @onready var skillpiercecooldown : Timer = $timers/skillpiercecd
+var knockbacktrigger: bool = false
+
+
 
 func _ready():
 	randomize()
+	deads = false
 	skillpiercecooldown.connect("timeout", Callable(self, "skillpierceoncd"))
 	stunimmunduration.connect("timeout", Callable(self, "stunimmunecd"))
 	detection_range_node = get_node("detectionrange")
@@ -72,8 +76,13 @@ func _ready():
 	enemychildhealth.connect("enemyhealthchanged", Callable(self, "hitenemyfxtriggercd"))
 	stunnedduration.connect("timeout", Callable(self, "stuncd"))
 	player.connect("enemyairborne", Callable(self, "enemyairborned"))
-	
+	enemychildhealth.connect("applyknock", Callable(self, "hellow"))
 
+
+func hellow():
+	if not deads:
+		velocity.y = -150
+		
 func skillpierceoncd():
 	iskillpierce = true
 	ispierceoncooldown = false
@@ -125,11 +134,16 @@ func _physics_process(delta):
 	move_and_slide()
 	emit_signal("velocity_updated", direction) 
 
+func datkdelay():
+	var distance_to_player = player.global_position.distance_to(global_position)
+	if distance_to_player < 10:
+		playerhealth.player_take_damage(10)
+
 func enemynrmlattk():
 	if(not isAttackOnCooldown and not hasAttacked and not deads and not stunned and not iskillpierce):
-		enemySpeed = 40
+		velocity.x = 0
+		direction.x = 0
 		meleeEnemyAnim.play("basic_attack")
-		playerhealth.player_take_damage(10)
 		animationlock = true 
 		hasAttacked = true
 		start_attack_cooldown(1.2) 
@@ -151,7 +165,12 @@ func enemypierceattk():
 
 
 func _on_animated_sprite_2d_animation_finished():
-	if  meleeEnemyAnim.animation == "jump" or meleeEnemyAnim.animation == "basic_attack":
+	if  meleeEnemyAnim.animation == "jump":
+		animationlock = false
+	if  meleeEnemyAnim.animation == "basic_attack":
+		var distance_to_player = player.global_position.distance_to(global_position)
+		if distance_to_player < 10:
+			playerhealth.player_take_damage(10)
 		animationlock = false
 	elif meleeEnemyAnim.animation == "skill_pierce":
 		playerhealth.player_take_damage(10)
@@ -231,11 +250,13 @@ func commitwarcrime(isenemyrage):
 	push_warning("now go commit warcrime")
 
 func enemyisdead():
+		staydead = true
 		deads = true
 		velocity.x = 0
 		meleeEnemyAnim.play("death")
 		animationlock = false
-		push_warning(deads)
+		resetscene()
 
-#skill pierce timers
-
+func resetscene():
+	await get_tree().create_timer(1).timeout
+	get_tree().change_scene_to_file("res://area_2d.tscn")
